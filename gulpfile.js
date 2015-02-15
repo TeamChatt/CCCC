@@ -8,7 +8,7 @@ var connect    = require('gulp-connect');
 
 //Build tasks
 gulp.task('js', function() {
-  return browserify('./src/main.js')
+  return browserify({entries: './src/main.js', debug: true})
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('dist/js/'))
