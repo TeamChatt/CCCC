@@ -14,11 +14,25 @@
 
     <div class="game-container">
       <div id="stage" class="game">
-        <svg class="game_desk"></svg>
-        <div class="game_dialogue">
-          <h2 class="game_dialogue_speaker"></h2>
-          <p class="game_dialogue_text"></p>
+        
+        <div class="game_layer desk">
+          <svg class="desk_background"></svg>
         </div>
+        
+        <div class="game_layer dialogue">
+          <div class="dialogue_background">
+            <h2 class="dialogue_speaker"></h2>
+            <p class="dialogue_text"></p>
+          </div>
+        </div>
+
+        <div class="game_layer menu is-hidden">
+          <div class="menu_background">
+            <h3>Game Paused (click to resume)</h3>
+          </div>
+          <div class="menu_window"></div>
+        </div>
+
       </div>
     </div>
 

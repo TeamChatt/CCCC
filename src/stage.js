@@ -3,18 +3,24 @@
 var $ = require('../lib/engine/core/input');
 
 
-function stage($layer){
-  $layer.dialogue = dialogue($layer.find('.game_dialogue'));
-  $layer.desk     = desk($layer.find('.game_desk'));
-  return $layer;
+function stage($stage){
+  $stage.dialogue = dialogue($stage.find('.game_layer.dialogue'));
+  $stage.desk     = desk($stage.find('.game_layer.desk'));
+  $stage.menu     = menu($stage.find('.game_layer.menu'));
+  return $stage;
 }
 function dialogue($layer){
-  $layer.speaker = $layer.find('.game_dialogue_speaker');
-  $layer.text    = $layer.find('.game_dialogue_text');
+	$layer.background = $layer.find('.dialogue_background');
+  $layer.speaker    = $layer.find('.dialogue_speaker');
+  $layer.text       = $layer.find('.dialogue_text');
   return $layer;
 }
 function desk($layer){
+	$layer.background = $layer.find('.desk_background');
   return $layer;
+}
+function menu($layer){
+	return $layer;
 }
 
 module.exports = stage($('#stage'));

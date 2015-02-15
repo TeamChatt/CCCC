@@ -16,24 +16,60 @@ body {
   left:   0;
   bottom: 0;
   right:  0;
-
-  background: #FFF;
 }
 .game {
+  background: #FFF;
   -webkit-tap-highlight-color: transparent;
 }
-.game_dialogue {
+.game_layer {
+  position: absolute;
+  top:    0;
+  left:   0;
+  bottom: 0;
+  right:  0;
+  pointer-events: none;
+}
+.game_layer {
+  user-select: none;
+  cursor: default;
+}
+.game_layer.is-hidden {
+  display: none;
+}
+
+.menu_background {
+  pointer-events: all;
+  width:  100%;
+  height: 100%;
+  background: rgb(0,0,0);
+  background: rgba(0,0,0,0.75);
+}
+.menu_background {
+  display: flex;
+  align-content: center;
+}
+.menu_background h3 {
+  margin: auto;
+  color: #FFF;
+}
+
+
+.desk_background {
+  pointer-events: all;
+  width:  100%;
+  height: 100%;
+}
+
+.dialogue_background {
   position: absolute;
   height: 25%;
   left:   0;
   bottom: 0;
   right:  0;
-
-  background: #F6F6F6;
+  pointer-events: all;
 }
-.game_dialogue {
-  user-select: none;
-  cursor: default;
+.dialogue_background {
+  background: #F6F6F6;
 }
 
 
