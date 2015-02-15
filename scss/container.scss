@@ -1,0 +1,29 @@
+@import "./variables";
+@import "./mixins";
+
+body {
+  background: $lightgray;
+}
+
+.game-container {
+  position: relative;
+}
+.game-container:before {
+  display: block;
+  content: '';
+  padding-top: 100% * (2 / 3);
+}
+.game {
+  @include full-screen();
+}
+
+@media (min-width: 1200px){
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .game-container {
+    border: 1px solid $darkgray;
+    margin-top: 40px;
+  }
+}

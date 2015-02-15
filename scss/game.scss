@@ -1,0 +1,69 @@
+@import "./variables";
+@import "./mixins";
+
+.game {
+  background: $white;
+  -webkit-tap-highlight-color: transparent;
+}
+.game_layer {
+  @include full-screen();
+  pointer-events: none;
+}
+.game_layer {
+  user-select: none;
+  cursor: default;
+}
+.game_layer.is-hidden * {
+  pointer-events: none;
+}
+
+
+// Desk Layer // --------------------------------------------------------------
+
+.desk_background {
+  pointer-events: all;
+  width:  100%;
+  height: 100%;
+}
+
+
+// Dialogue Layer // ----------------------------------------------------------
+
+.dialogue_background {
+  position: absolute;
+  height: 25%;
+  left:   0;
+  bottom: 0;
+  right:  0;
+  pointer-events: all;
+}
+.dialogue_background {
+  background: $lightgray;
+}
+
+// Menu Layer // --------------------------------------------------------------
+
+.menu {
+  transition: opacity 0.25s;
+  
+  &.is-hidden {
+    opacity: 0;
+  }
+}
+
+.menu_background {
+  pointer-events: all;
+  width:  100%;
+  height: 100%;
+}
+.menu_background {
+  display: flex;
+  align-content: center;
+  
+  color:      $white;
+  background: $black;
+  background: transparentize($black, 0.25);
+}
+.menu_background h3 {
+  margin: auto;
+}

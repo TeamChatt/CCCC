@@ -4,6 +4,7 @@ var gulp         = require('gulp');
 var browserify   = require('browserify');
 var source       = require('vinyl-source-stream');
 var autoprefixer = require('gulp-autoprefixer');
+var sass         = require('gulp-sass');
 var connect      = require('gulp-connect');
 
 
@@ -23,21 +24,30 @@ gulp.task('css', function(){
     .pipe(connect.reload());
 });
 
+gulp.task('scss', function(){
+  return gulp.src('scss/main.scss')
+    .pipe(sass())
+    .pipe(autoprefixer())
+    .pipe(gulp.dest('dist/css/'))
+    .pipe(connect.reload());
+});
+
 gulp.task('html', function() {
   return gulp.src('index.html')
     .pipe(gulp.dest('dist'))
     .pipe(connect.reload());
 });
 
-gulp.task('build', ['js', 'css', 'html']);
+gulp.task('build', ['js', 'css', 'scss', 'html']);
 
 
 
 //Development tasks
 gulp.task('watch', ['build'], function(){
   gulp.watch('src/main.js', ['js']);
-  gulp.watch('css/*.css',  ['css']);
-  gulp.watch('index.html', ['html']);
+  gulp.watch('css/*.css',   ['css']);
+  gulp.watch('scss/*.scss', ['scss']);
+  gulp.watch('index.html',  ['html']);
 });
 
 gulp.task('connect', ['build'], function() {
