@@ -1,7 +1,13 @@
+body {
+  background: #F6F6F6;
+}
+
 .game-container {
   position: relative;
 }
-.game-spacer {
+.game-container:before {
+  display: block;
+  content: '';
   padding-top: 66.6666%;  
 }
 .game {
@@ -10,7 +16,22 @@
   left:   0;
   bottom: 0;
   right:  0;
+
+  background: #FFF;
 }
+.game_dialogue {
+  position: absolute;
+  height: 25%;
+  left:   0;
+  bottom: 0;
+  right:  0;
+
+  background: #F6F6F6;
+}
+.game_dialogue {
+  user-select: none;
+}
+
 
 @media (min-width: 1200px){
   .container {
