@@ -1,50 +1,40 @@
 'use strict';
 
-var Bacon = require('baconjs');
-var $     = require('../lib/engine/core/input');
-
-var XMLNS = 'http://www.w3.org/2000/svg';
 
 //Events
 function cutoutEvents(layer){
   return {
     pause:     layer.dblpressE(),
     pathStart: layer.asEventStream('mousedown'),
-    pathDrag:  layer.dragE()
+    pathDrag:  layer.dragE(),
+    pathEnd:   layer.asEventStream('mouseup')
   };
 }
 
 //Controller
 function cutoutController(events){
-  function pathString(drag){
-    return drag
-      .map(function(e){
+  function pathString(pts){
+    return 'M' + pts.map(function(e){
         return e.offsetX + ',' + e.offsetY;
       })
-      .scan([], '.concat')
-      .map(function(pts){
-        return 'M' + pts.join(' L ');
-      })
-      .skip(1);
+      .join('L');
   }
 
   events.pathDrag.onValue(function(){});
 
   var path = events
     .pathStart
-    .map(function(){
-      return $(document.createElementNS(XMLNS, 'path'));
-    })
-    .toProperty()
-    .flatMapLatest(function(p){
-      return Bacon.combineTemplate({
-          path:   Bacon.constant(p),
-          points: pathString(events.pathDrag)
-        });
+    .flatMapLatest(function(){
+      return events
+        .pathDrag
+        .scan([], '.concat')
+        .map(pathString)
+        .skip(1);
     });
 
   return {
-    path: path
+    path:    path,
+    success: events.pathEnd
   };
 }
 
@@ -52,14 +42,8 @@ function cutoutController(events){
 function cutoutView(layer, controller){
   controller
     .path
-    .onValue(function(e){
-      layer.background.append(e.path);
-    });
-
-  controller
-    .path
-    .onValue(function(evt){
-      evt.path.attr('d', evt.points);
+    .onValue(function(points){
+      layer.cut.attr('d', points);
     });
 }
 

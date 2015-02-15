@@ -17,6 +17,7 @@ function dialogue($layer){
 }
 function desk($layer){
 	$layer.background = $layer.find('.desk_background');
+  $layer.cut        = $layer.find('.card_cut');
   return $layer;
 }
 function menu($layer){
