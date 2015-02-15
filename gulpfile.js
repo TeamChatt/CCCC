@@ -33,7 +33,7 @@ gulp.task('build', ['js', 'css', 'html']);
 
 //Development tasks
 gulp.task('watch', ['build'], function(){
-  gulp.watch('js/bundle.js', ['js']);
+  gulp.watch('src/main.js', ['js']);
   gulp.watch('css/*.css',  ['css']);
   gulp.watch('index.html', ['html']);
 });
