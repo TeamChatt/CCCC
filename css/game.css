@@ -19,6 +19,9 @@ body {
 
   background: #FFF;
 }
+.game {
+  -webkit-tap-highlight-color: transparent;
+}
 .game_dialogue {
   position: absolute;
   height: 25%;
@@ -30,6 +33,7 @@ body {
 }
 .game_dialogue {
   user-select: none;
+  cursor: default;
 }
 
 

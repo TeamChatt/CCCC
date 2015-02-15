@@ -1,9 +1,10 @@
 'use strict';
 
-var gulp       = require('gulp');
-var browserify = require('browserify');
-var source     = require('vinyl-source-stream');
-var connect    = require('gulp-connect');
+var gulp         = require('gulp');
+var browserify   = require('browserify');
+var source       = require('vinyl-source-stream');
+var autoprefixer = require('gulp-autoprefixer');
+var connect      = require('gulp-connect');
 
 
 //Build tasks
@@ -17,6 +18,7 @@ gulp.task('js', function() {
 
 gulp.task('css', function(){
   return gulp.src('css/*.css')
+    .pipe(autoprefixer())
     .pipe(gulp.dest('dist/css/'))
     .pipe(connect.reload());
 });

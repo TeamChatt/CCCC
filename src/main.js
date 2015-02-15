@@ -11,7 +11,13 @@ function showLine(line){
   stage.dialogue.text.text(line.dialogue);
 }
 
-var currentLine = stage.asEventStream('click')
+var next = Bacon.mergeAll(
+    stage.dialogue.asEventStream('tap'),
+    stage.dialogue.asEventStream('click')
+  )
+  .debounceImmediate(500);
+
+var currentLine = next
   .scan(0, function(x){ return x+1; })
   .map(function(i){ return lines[i]; })
   .filter(function(x){ return x; });
