@@ -5,6 +5,8 @@ var P2 = require('../lib/engine/core/vector').P2;
 var S  = require('../lib/engine/core/vector').S;
 
 
+var WIDTH           = 960;
+var HEIGHT          = 640;
 var SMOOVE_DISTANCE = 25;
 
 //Events
@@ -21,6 +23,10 @@ function cutoutEvents(layer){
 function cutoutController(events){
   events.pathDrag.onValue(function(){});
   
+  function toPosition(e){
+    var bounds = e.currentTarget.getBoundingClientRect();
+    return P2(e.offsetX * WIDTH / bounds.width, e.offsetY * HEIGHT / bounds.height);
+  }
   function pathString(pts){
     return 'M' + pts.map(function(pt){
         return pt.x + ',' + pt.y;
@@ -41,11 +47,11 @@ function cutoutController(events){
   
   var targetPoint = events
     .pathDrag
-    .map(function(e){ return P2(e.offsetX, e.offsetY); });
+    .map(toPosition);
 
   var currentPoint = events
     .pathStart
-    .map(function(e){ return P2(e.offsetX, e.offsetY); })
+    .map(toPosition)
     .flatMapLatest(function(pt){
       return targetPoint
         .scan(pt, moveTowards)
