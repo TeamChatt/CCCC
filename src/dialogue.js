@@ -1,6 +1,8 @@
 'use strict';
 
+var Bacon = require('baconjs');
 require('../lib/engine/core/util');
+
 
 //Events
 function dialogueEvents(layer){
@@ -11,30 +13,66 @@ function dialogueEvents(layer){
 
 //Controller
 function dialogueController(events, lines){
-  var currentLine = events
-    .next
-    .count()
-    .map(function(i){ return lines[i]; })
-    .filter(function(x){ return x; });
-  var success = events
-    .next
-    .count()
-    .filter(function(x){ return x >= lines.length; })
-    .take(1);
+  //Show the next dialogue snippet after the current one has finished
+  var snippet = Bacon.tie(function(currentSnippet){
+      return currentSnippet
+        .flatMapLatest('.done')
+        .flatMapLatest(events.next)
+        .count()
+        .take(lines.length)
+        .map(function(i){ return lines[i]; })
+        .map(function(line){
+          return snippetController(events, line);
+        });
+    });
+
+  var success = snippet
+    .skip(lines.length - 1)
+    .take(1)
+    .flatMapLatest('.done');
 
   return {
-    currentLine: currentLine,
+    speaker:     snippet.flatMapLatest('.speaker'),
+    fullText:    snippet.flatMapLatest('.fullText'),
+    partialText: snippet.flatMapLatest('.partialText'),
     success:     success
   };
 }
+function snippetController(events, line){
+  var autoText = Bacon.sequentially(30, line.dialogue.split(''))
+    .scan([], '.concat')
+    .map('.join', '')
+    .changes();
+  var skipText = events
+    .next
+    .take(1)
+    .map(function(){ return line.dialogue; });
+
+  return {
+    speaker:     Bacon.constant(line.speaker),
+    fullText:    Bacon.constant(line.dialogue),
+    partialText: autoText
+      .takeUntil(skipText)
+      .merge(skipText),
+    done:        autoText
+      .endEvent()
+      .merge(events.next)
+      .take(1)
+  };
+}
+
 
 //View
 function dialogueView(layer, controller){
-  controller
-    .currentLine
-    .onValue(function(line){
-      layer.speaker.text(line.speaker);
-      layer.text.text(line.dialogue);
+  //Set speaker
+  controller.speaker
+    .onValue(function(speaker){
+      layer.speaker.text(speaker);
+    });
+  //Show text
+  controller.partialText
+    .onValue(function(text){
+      layer.text.text(text);
     });
 }
 

@@ -1,6 +1,14 @@
 @import "./variables";
 @import "./mixins";
 
+body {
+  font-family: "Open Sans", sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+}
+
 
 // Game Frame // --------------------------------------------------------------
 
@@ -59,7 +67,7 @@
   width:  17%;
   height: 100%;
 
-  background: url("/images/alma-default.svg");
+  background: url("/images/cc-default.svg");
 }
 
 
