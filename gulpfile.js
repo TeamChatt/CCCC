@@ -32,22 +32,29 @@ gulp.task('scss', function(){
     .pipe(connect.reload());
 });
 
-gulp.task('html', function() {
+gulp.task('svg', function(){
+  return gulp.src('images/*.svg')
+    .pipe(gulp.dest('dist/images'))
+    .pipe(connect.reload());
+});
+
+gulp.task('html', function(){
   return gulp.src('index.html')
     .pipe(gulp.dest('dist'))
     .pipe(connect.reload());
 });
 
-gulp.task('build', ['js', 'css', 'scss', 'html']);
+gulp.task('build', ['js', 'css', 'scss', 'svg', 'html']);
 
 
 
 //Development tasks
 gulp.task('watch', ['build'], function(){
-  gulp.watch('src/main.js', ['js']);
-  gulp.watch('css/*.css',   ['css']);
-  gulp.watch('scss/*.scss', ['scss']);
-  gulp.watch('index.html',  ['html']);
+  gulp.watch('src/main.js',  ['js']);
+  gulp.watch('css/*.css',    ['css']);
+  gulp.watch('scss/*.scss',  ['scss']);
+  gulp.watch('images/*.svg', ['svg']);
+  gulp.watch('index.html',   ['html']);
 });
 
 gulp.task('connect', ['build'], function() {
