@@ -55,8 +55,10 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: all;
 }
 .dialogue_background {
-  background: $lightgray;
+  background: url("/images/lightpaperfibers_@2X.png");
   transition: bottom 0.25s ease-in;
+
+  box-shadow: 0 0 10px transparentize($black, 0.9);
 }
 .dialogue.is-hidden .dialogue_background {
   bottom: -25%;
@@ -66,9 +68,14 @@ h1, h2, h3, h4, h5, h6 {
   float:  left;
   width:  17%;
   height: 100%;
-
+}
+.dialogue_portrait[data-speaker="Cap’n Cutout"] {
   background: url("/images/cc-default.svg");
 }
+.dialogue_portrait[data-speaker="Alma"] {
+  background: url("/images/alma-default.svg"); 
+}
+
 
 
 // Menu Layer // --------------------------------------------------------------

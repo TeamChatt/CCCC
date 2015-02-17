@@ -38,13 +38,19 @@ gulp.task('svg', function(){
     .pipe(connect.reload());
 });
 
+gulp.task('images', function(){
+  return gulp.src('images/*.png')
+    .pipe(gulp.dest('dist/images'))
+    .pipe(connect.reload());
+});
+
 gulp.task('html', function(){
   return gulp.src('index.html')
     .pipe(gulp.dest('dist'))
     .pipe(connect.reload());
 });
 
-gulp.task('build', ['js', 'css', 'scss', 'svg', 'html']);
+gulp.task('build', ['js', 'css', 'scss', 'svg', 'images', 'html']);
 
 
 

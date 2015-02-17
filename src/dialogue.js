@@ -68,6 +68,7 @@ function dialogueView(layer, controller){
   controller.speaker
     .onValue(function(speaker){
       layer.speaker.text(speaker);
+      layer.portrait.attr('data-speaker', speaker);
     });
   //Show text
   controller.partialText

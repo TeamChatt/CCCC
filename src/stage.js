@@ -11,6 +11,7 @@ function stage($stage){
 }
 function dialogue($layer){
 	$layer.background = $layer.find('.dialogue_background');
+  $layer.portrait   = $layer.find('.dialogue_portrait');
   $layer.speaker    = $layer.find('.dialogue_speaker');
   $layer.text       = $layer.find('.dialogue_text');
   return $layer;
