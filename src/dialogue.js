@@ -4,6 +4,9 @@ var Bacon = require('baconjs');
 require('../lib/engine/core/util');
 
 
+var TEXT_SPEED = 1000/40; //Letters per second
+
+
 //Events
 function dialogueEvents(layer){
   return {
@@ -14,7 +17,7 @@ function dialogueEvents(layer){
 //Controller
 function dialogueController(events, lines){
   //Show the next dialogue snippet after the current one has finished
-  var snippet = Bacon.tie(function(currentSnippet){
+  var snippet = Bacon.fix(function(currentSnippet){
       return currentSnippet
         .flatMapLatest('.done')
         .flatMapLatest(events.next)
@@ -39,7 +42,7 @@ function dialogueController(events, lines){
   };
 }
 function snippetController(events, line){
-  var autoText = Bacon.sequentially(30, line.dialogue.split(''))
+  var autoText = Bacon.sequentially(TEXT_SPEED, line.dialogue.split(''))
     .scan([], '.concat')
     .map('.join', '')
     .changes();
