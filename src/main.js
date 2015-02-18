@@ -2,15 +2,16 @@
 
 var Bacon = require('baconjs');
 
-var stage = require('./stage');
-var game  = require('./game');
+var stage    = require('./stage');
+var game     = require('./game');
+var gameView = require('./sinks/game-view');
+var autosave = require('./sinks/autosave');
 
 
-game.view(
-    stage,
-    game.controller(
-      game.events(stage)
-    )
-  );
+var controller = game.controller(game.events(stage));
+
+gameView(stage, controller);
+autosave(controller);
+
 
 window.Bacon = Bacon;

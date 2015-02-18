@@ -63,7 +63,6 @@ function cutoutController(events){
   var path = currentPoint
     .scan([], '.concat')
     .skip(1)
-    .map(pathString)
     .takeUntil(pathEnd);
 
   return {
@@ -83,12 +82,6 @@ function within(distance){
     return V2.fromTo(p1, p2).magnitude() < distance;
   };
 }
-function pathString(pts){
-  return 'M' + pts.map(function(pt){
-      return pt.x + ',' + pt.y;
-    })
-    .join('L');
-}
 function smoothPath(start, target){
   return Bacon.fix(function(current){
     return current
@@ -103,35 +96,8 @@ function smoothPath(start, target){
   });
 }
 
-//View
-function cutoutView(layer, controller){
-  controller
-    .path
-    .onValue(function(points){
-      layer.cut.attr('d', points);
-    });
-
-  controller
-    .startPoint
-    .onValue(function(point){
-      layer.cut_start
-        .attr('cx', point.x)
-        .attr('cy', point.y);
-    });
-
-  controller
-    .currentPoint
-    .onValue(function(point){
-      layer.cut_end
-        .attr('cx', point.x)
-        .attr('cy', point.y);
-    });
-
-  controller.pathEnd.log();
-}
 
 module.exports = {
   events:     cutoutEvents,
-  controller: cutoutController,
-  view:       cutoutView
+  controller: cutoutController
 };

@@ -16,16 +16,7 @@ function menuController(events){
   };
 }
 
-//View
-function menuView(layer, menu_controller){
-  menu_controller
-    .isPaused
-    .not()
-    .onValue(layer, 'toggleClass', 'is-hidden');
-}
-
 module.exports = {
   events:     menuEvents,
-  controller: menuController,
-  view:       menuView
+  controller: menuController
 };

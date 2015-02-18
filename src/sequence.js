@@ -72,27 +72,6 @@ function sequence(initial){
   return wrap(Bacon.constant(initial));
 }
 
-
-//View
-function sequenceView(stage, controller){
-  controller
-    .segment
-    .filter(function(s){ return s.type === 'dialogue'; })
-    .map('.controller')
-    .onValue(function(dialogue_controller){
-      dialogue.view(stage.dialogue, dialogue_controller);
-    });
-
-  controller
-    .segment
-    .filter(function(s){ return s.type === 'cutout'; })
-    .map('.controller')
-    .onValue(function(cutout_controller){
-      cutout.view(stage.desk, cutout_controller);
-    });  
-}
-
 module.exports = {
-  controller: sequenceController,
-  view:       sequenceView
+  controller: sequenceController
 };

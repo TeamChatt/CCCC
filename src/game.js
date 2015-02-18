@@ -47,7 +47,8 @@ function gameController(events){
     .debounceImmediate(500)
     .toProperty(false);
 
-  var sequenceController = sequence.controller(events, 0);
+  var start = parseInt(localStorage['progress'], 10);
+  var sequenceController = sequence.controller(events, start);
 
   return {
     sequence: sequenceController,
@@ -56,16 +57,8 @@ function gameController(events){
   };
 }
 
-//View
-function gameView(stage, controller){
-  sequence.view(stage,  controller.sequence);
-  menu.view(stage.menu, controller.menu);
-
-  controller.progress.log();
-}
 
 module.exports = {
   events:     gameEvents,
-  controller: gameController,
-  view:       gameView
+  controller: gameController
 };
