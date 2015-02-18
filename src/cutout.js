@@ -11,51 +11,82 @@ var S     = require('../lib/engine/core/vector').S;
 var WIDTH           = 960;
 var HEIGHT          = 640;
 var SMOOVE_DISTANCE = 15;
+var START_DISTANCE  = 15;
 
 //Events
 function cutoutEvents(layer){
+  function toPosition(e){
+    var bounds = e.currentTarget.getBoundingClientRect();
+    return P2(e.offsetX * WIDTH / bounds.width, e.offsetY * HEIGHT / bounds.height);
+  }
+
+  var start = layer.asEventStream('mousedown');
+  var drag  = layer.dragE();
+  var end   = layer.asEventStream('mouseup');
+
   return {
     pause:     layer.dblpressE(),
-    pathStart: layer.asEventStream('mousedown'),
-    pathDrag:  layer.dragE(),
-    pathEnd:   layer.asEventStream('mouseup')
+    dragStart: start.map(toPosition),
+    drag:      drag.map(toPosition),
+    dragEnd:   end.map(toPosition)
   };
 }
 
 //Controller
 function cutoutController(events){
-  events.pathDrag.onValue(function(){});
+  events.drag.onValue(function(){});
+  events.dragEnd.onValue(function(){});
   
-  function toPosition(e){
-    var bounds = e.currentTarget.getBoundingClientRect();
-    return P2(e.offsetX * WIDTH / bounds.width, e.offsetY * HEIGHT / bounds.height);
+  function within(distance){
+    return function(p1, p2){
+      return V2.fromTo(p1, p2).magnitude() < distance;
+    };
   }
+
+  var startPoint   = Bacon.constant(P2(WIDTH/2, HEIGHT/2));
+
+  var currentPoint = Bacon.fix(function(currentPoint){
+    var start = currentPoint
+      .sampledBy(events.dragStart)
+      .zip(events.dragStart, within(START_DISTANCE))
+      .filter(function(x){ return x; })
+      .map(currentPoint.toProperty());
+
+    return start
+      .flatMapLatest(function(pt){
+        return smoothPath(pt, events.drag)
+          .takeUntil(events.dragEnd);
+      })
+      .toProperty(P2(WIDTH/2, HEIGHT/2));
+  });
+
+  var pathEnd = currentPoint
+    .combine(startPoint, within(START_DISTANCE))
+    .skipDuplicates()
+    .skip(2) //Starts true, becomes false, becomes true again
+    .take(1);
+
+
   function pathString(pts){
     return 'M' + pts.map(function(pt){
         return pt.x + ',' + pt.y;
       })
       .join('L');
   }
-  
-  var targetPoint = events
-    .pathDrag
-    .map(toPosition);
-
-  var currentPoint = events
-    .pathStart
-    .map(toPosition)
-    .flatMapLatest(function(pt){
-      return smoothPath(pt, targetPoint);
-    });
-
   var path = currentPoint
     .scan([], '.concat')
-    .map(pathString)
-    .skip(1);
+    .skip(1)
+    .map(pathString);
 
   return {
-    path:    path,
-    success: events.pathEnd
+    path:         path,
+    startPoint:   startPoint,
+    currentPoint: currentPoint,
+    dragging:     Bacon.mergeAll(
+        events.dragStart.map(true),
+        events.dragEnd.map(false)
+      ),
+    pathEnd:      pathEnd
   };
 }
 function smoothPath(start, target){
@@ -79,6 +110,24 @@ function cutoutView(layer, controller){
     .onValue(function(points){
       layer.cut.attr('d', points);
     });
+
+  controller
+    .startPoint
+    .onValue(function(point){
+      layer.cut_start
+        .attr('cx', point.x)
+        .attr('cy', point.y);
+    });
+
+  controller
+    .currentPoint
+    .onValue(function(point){
+      layer.cut_end
+        .attr('cx', point.x)
+        .attr('cy', point.y);
+    });
+
+  controller.pathEnd.log();
 }
 
 module.exports = {
