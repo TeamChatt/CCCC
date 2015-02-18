@@ -74,7 +74,8 @@ function cutoutController(events){
         events.dragStart.map(true),
         events.dragEnd.map(false)
       ),
-    pathEnd:      pathEnd
+    pathEnd:      pathEnd,
+    end:          pathEnd
   };
 }
 function within(distance){

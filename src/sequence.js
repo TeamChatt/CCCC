@@ -10,29 +10,47 @@ var dialogue = require('./dialogue');
 
 
 //Controller
-function sequenceController(events){
+function sequenceController(events, start){
+  var segments = gameSequence(events).slice(start);
+
+  function runSequence(seq){
+    var head = sequence(seq[0]());
+    var tail = seq.slice(1);
+
+    return tail.reduce(function(initial, next){
+      return initial.then('.controller.end', next);
+    }, head);
+  }
+
+  var segment  = runSequence(segments);
+  var progress = segment.count()
+    .map(function(x){ return x+start-1; });
+
+  return {
+    segment:  segment,
+    progress: progress
+  };
+}
+function gameSequence(events){
   function read(ls){
-    return {
-      type:       'dialogue',
-      controller: dialogue.controller(events.layers.dialogue, ls)
+    return function(){
+      var c = dialogue.controller(events.layers.dialogue, ls);
+      return {type: 'dialogue', controller: c};
     };
   }
   function cut(){
-    return {
-      type:       'cutout',
-      controller: cutout.controller(events.layers.cutout)
+    return function(){
+      var c = cutout.controller(events.layers.desk);
+      return {type: 'cutout', controller: c};
     };
   }
-
-  var segment = sequence(read(lines0))
-    .then('.controller.end',     function(){ return cut(); })
-    .then('.controller.pathEnd', function(){ return read(lines1); })
-    .then('.controller.end',     function(){ return cut(); })
-    .then('.controller.pathEnd', function(){ return read(lines1); });
-
-  return {
-    segment: segment
-  };
+  return [
+    read(lines0),
+    cut(),
+    read(lines1),
+    cut(),
+    read(lines1)
+  ];
 }
 function sequence(initial){
   function wrap(event){

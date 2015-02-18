@@ -31,7 +31,7 @@ function gameEvents(stage){
     unpause: menu_events.resume,
 
     layers: {
-      cutout:   cutout_events,
+      desk:     cutout_events,
       dialogue: dialogue_events,
       menu:     menu_events
     }
@@ -47,9 +47,12 @@ function gameController(events){
     .debounceImmediate(500)
     .toProperty(false);
 
+  var sequenceController = sequence.controller(events, 0);
+
   return {
-    sequence: sequence.controller(events),
-    menu:     menu.controller({ isPaused: isPaused })
+    sequence: sequenceController,
+    menu:     menu.controller({ isPaused: isPaused }),
+    progress: sequenceController.progress
   };
 }
 
@@ -57,6 +60,8 @@ function gameController(events){
 function gameView(stage, controller){
   sequence.view(stage,  controller.sequence);
   menu.view(stage.menu, controller.menu);
+
+  controller.progress.log();
 }
 
 module.exports = {
