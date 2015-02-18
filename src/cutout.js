@@ -36,12 +36,6 @@ function cutoutEvents(layer){
 function cutoutController(events){
   events.drag.onValue(function(){});
   events.dragEnd.onValue(function(){});
-  
-  function within(distance){
-    return function(p1, p2){
-      return V2.fromTo(p1, p2).magnitude() < distance;
-    };
-  }
 
   var startPoint   = Bacon.constant(P2(WIDTH/2, HEIGHT/2));
 
@@ -66,17 +60,11 @@ function cutoutController(events){
     .skip(2) //Starts true, becomes false, becomes true again
     .take(1);
 
-
-  function pathString(pts){
-    return 'M' + pts.map(function(pt){
-        return pt.x + ',' + pt.y;
-      })
-      .join('L');
-  }
   var path = currentPoint
     .scan([], '.concat')
     .skip(1)
-    .map(pathString);
+    .map(pathString)
+    .takeUntil(pathEnd);
 
   return {
     path:         path,
@@ -88,6 +76,17 @@ function cutoutController(events){
       ),
     pathEnd:      pathEnd
   };
+}
+function within(distance){
+  return function(p1, p2){
+    return V2.fromTo(p1, p2).magnitude() < distance;
+  };
+}
+function pathString(pts){
+  return 'M' + pts.map(function(pt){
+      return pt.x + ',' + pt.y;
+    })
+    .join('L');
 }
 function smoothPath(start, target){
   return Bacon.fix(function(current){

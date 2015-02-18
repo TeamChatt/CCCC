@@ -16,11 +16,10 @@ function dialogueEvents(layer){
 
 //Controller
 function dialogueController(events, lines){
-  //Show the next dialogue snippet after the current one has finished
+  //Show the next dialogue snippet after the current one has finished  
   var snippet = Bacon.fix(function(currentSnippet){
       return currentSnippet
         .flatMapLatest('.done')
-        .flatMapLatest(events.next)
         .count()
         .take(lines.length)
         .map(function(i){
@@ -29,8 +28,7 @@ function dialogueController(events, lines){
     });
 
   var end = snippet
-    .skip(lines.length - 1)
-    .take(1)
+    .skip(lines.length - 1).take(1)
     .flatMapLatest('.done');
 
   return {
@@ -52,6 +50,10 @@ function snippetController(events, line){
     .next
     .take(1)
     .map(function(){ return line.dialogue; });
+  var shown    = autoText
+    .endEvent()
+    .merge(events.next)
+    .take(1);
 
   return {
     speaker:     Bacon.constant(line.speaker),
@@ -59,9 +61,9 @@ function snippetController(events, line){
     partialText: autoText
       .takeUntil(skipText)
       .merge(skipText),
-    done:        autoText
-      .endEvent()
-      .merge(events.next)
+    done:        shown
+      .delay(0)
+      .flatMapLatest(function(){ return events.next; })
       .take(1)
   };
 }

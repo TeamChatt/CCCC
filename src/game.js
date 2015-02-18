@@ -3,10 +3,10 @@
 var Bacon   = require('baconjs');
 var browser = require('../lib/engine/core/browser');
 
-var lines    = require('./script/00-intro');
 var cutout   = require('./cutout');
 var dialogue = require('./dialogue');
 var menu     = require('./menu');
+var sequence = require('./sequence');
 
 
 //Events
@@ -48,17 +48,15 @@ function gameController(events){
     .toProperty(false);
 
   return {
-    dialogue: dialogue.controller(events.layers.dialogue, lines),
-    cutout:   cutout.controller(events.layers.cutout),
+    sequence: sequence.controller(events),
     menu:     menu.controller({ isPaused: isPaused })
   };
 }
 
 //View
 function gameView(stage, controller){
-  dialogue.view(stage.dialogue, controller.dialogue);
-  cutout.view(stage.desk,       controller.cutout);
-  menu.view(stage.menu,         controller.menu);
+  sequence.view(stage,  controller.sequence);
+  menu.view(stage.menu, controller.menu);
 }
 
 module.exports = {
