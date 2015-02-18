@@ -1,12 +1,12 @@
 'use strict';
 
 var Bacon = require('baconjs');
-require('../lib/engine/core/util');
+require('../../lib/engine/core/util');
 
-var cutoutController   = require('./cutout');
-var dialogueController = require('./dialogue');
-var lines0 = require('../include/script/00-intro');
-var lines1 = require('../include/script/01-test');
+var cutoutController   = require('./cutout-controller');
+var dialogueController = require('./dialogue-controller');
+var lines0 = require('../../include/script/00-intro');
+var lines1 = require('../../include/script/01-test');
 
 
 //Controller

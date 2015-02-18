@@ -2,12 +2,12 @@
 
 var Bacon   = require('baconjs');
 
-var menuController     = require('./menu');
-var sequenceController = require('./sequence');
+var menuController     = require('./menu-controller');
+var sequenceController = require('./sequence-controller');
 
 
 //Controller
-function gameController(events){
+function gameController(events, game_state){
   var isPaused = Bacon.mergeAll(
       events.pause.map(true),
       events.unpause.map(false)
@@ -15,8 +15,7 @@ function gameController(events){
     .debounceImmediate(500)
     .toProperty(false);
 
-  var start               = parseInt(localStorage['progress'], 10);
-  var sequence_controller = sequenceController(events, start);
+  var sequence_controller = sequenceController(events, game_state);
 
   return {
     sequence: sequence_controller,

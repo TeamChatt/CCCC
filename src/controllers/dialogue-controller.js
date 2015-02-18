@@ -1,7 +1,7 @@
 'use strict';
 
 var Bacon = require('baconjs');
-require('../lib/engine/core/util');
+require('../../lib/engine/core/util');
 
 
 var TEXT_SPEED = 1000/40; //Letters per second

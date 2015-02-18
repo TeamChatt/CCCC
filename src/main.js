@@ -3,13 +3,14 @@
 var Bacon = require('baconjs');
 
 var stage          = require('./stage');
-var gameController = require('./game');
 var gameEvents     = require('./sources/game-events');
+var gameController = require('./controllers/game-controller');
 var gameView       = require('./sinks/game-view');
 var autosave       = require('./sinks/autosave');
 
 
-var controller = gameController(gameEvents(stage));
+var game_state = parseInt(localStorage.progress, 10);
+var controller = gameController(gameEvents(stage), game_state);
 
 gameView(stage, controller);
 autosave(controller);

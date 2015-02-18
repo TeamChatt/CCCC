@@ -3,7 +3,7 @@
 function autosave(controller){
 	controller.progress
 		.onValue(function(progress){
-			console.log(progress);
+			localStorage.progress = progress;
 		});
 }
 
