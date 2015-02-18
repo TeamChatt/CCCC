@@ -3,8 +3,8 @@
 var Bacon = require('baconjs');
 require('../lib/engine/core/util');
 
-var lines0   = require('./script/00-intro');
-var lines1   = require('./script/01-test');
+var lines0   = require('../include/script/00-intro');
+var lines1   = require('../include/script/01-test');
 var cutout   = require('./cutout');
 var dialogue = require('./dialogue');
 
