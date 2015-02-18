@@ -13,25 +13,6 @@ var HEIGHT          = 640;
 var SMOOVE_DISTANCE = 15;
 var START_DISTANCE  = 15;
 
-//Events
-function cutoutEvents(layer){
-  function toPosition(e){
-    var bounds = e.currentTarget.getBoundingClientRect();
-    return P2(e.offsetX * WIDTH / bounds.width, e.offsetY * HEIGHT / bounds.height);
-  }
-
-  var start = layer.asEventStream('mousedown');
-  var drag  = layer.dragE();
-  var end   = layer.asEventStream('mouseup');
-
-  return {
-    pause:     layer.dblpressE(),
-    dragStart: start.map(toPosition),
-    drag:      drag.map(toPosition),
-    dragEnd:   end.map(toPosition)
-  };
-}
-
 //Controller
 function cutoutController(events){
   events.drag.onValue(function(){});
@@ -98,6 +79,5 @@ function smoothPath(start, target){
 
 
 module.exports = {
-  events:     cutoutEvents,
   controller: cutoutController
 };

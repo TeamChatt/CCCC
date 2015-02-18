@@ -7,8 +7,6 @@ var menuView     = require('./menu-view');
 function gameView(stage, controller){
   sequenceView(stage,  controller.sequence);
   menuView(stage.menu, controller.menu);
-
-  controller.progress.log();
 }
 
 module.exports = gameView;

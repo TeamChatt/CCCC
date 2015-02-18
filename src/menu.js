@@ -2,13 +2,6 @@
 
 require('../lib/engine/core/util');
 
-//Events
-function menuEvents(layer){
-  return {
-    resume: layer.pressE()
-  };
-}
-
 //Controller
 function menuController(events){
   return {
@@ -17,6 +10,5 @@ function menuController(events){
 }
 
 module.exports = {
-  events:     menuEvents,
   controller: menuController
 };

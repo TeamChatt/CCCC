@@ -6,14 +6,6 @@ require('../lib/engine/core/util');
 
 var TEXT_SPEED = 1000/40; //Letters per second
 
-
-//Events
-function dialogueEvents(layer){
-  return {
-    next: layer.pressE()
-  };
-}
-
 //Controller
 function dialogueController(events, lines){
   //Show the next dialogue snippet after the current one has finished  
@@ -70,6 +62,5 @@ function snippetController(events, line){
 
 
 module.exports = {
-  events:     dialogueEvents,
   controller: dialogueController
 };
