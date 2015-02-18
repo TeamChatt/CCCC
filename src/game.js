@@ -3,7 +3,7 @@
 var Bacon   = require('baconjs');
 var browser = require('../lib/engine/core/browser');
 
-var lines    = require('./dialogue/00-intro');
+var lines    = require('./script/00-intro');
 var cutout   = require('./cutout');
 var dialogue = require('./dialogue');
 var menu     = require('./menu');
@@ -40,38 +40,25 @@ function gameEvents(stage){
 
 //Controller
 function gameController(events){
+  var isPaused = Bacon.mergeAll(
+      events.pause.map(true),
+      events.unpause.map(false)
+    )
+    .debounceImmediate(500)
+    .toProperty(false);
+
   return {
-    paused: Bacon.mergeAll(
-        events.pause.map(true),
-        events.unpause.map(false)
-      )
-      .debounceImmediate(500)
-      .toProperty(false)
+    dialogue: dialogue.controller(events.layers.dialogue, lines),
+    cutout:   cutout.controller(events.layers.cutout),
+    menu:     menu.controller({ isPaused: isPaused })
   };
 }
 
 //View
 function gameView(stage, controller){
-  dialogue.view(
-      stage.dialogue,
-      dialogue.controller(
-        dialogue.events(stage.dialogue),
-        lines
-      )
-    );
-  cutout.view(
-      stage.desk,
-      cutout.controller(
-        cutout.events(stage.desk)
-      )
-    );
-  menu.view(
-      stage.menu,
-      menu.controller(
-        menu.events(stage.menu)
-      ),
-      controller
-    );
+  dialogue.view(stage.dialogue, controller.dialogue);
+  cutout.view(stage.desk,       controller.cutout);
+  menu.view(stage.menu,         controller.menu);
 }
 
 module.exports = {

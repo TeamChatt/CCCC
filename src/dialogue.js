@@ -23,13 +23,12 @@ function dialogueController(events, lines){
         .flatMapLatest(events.next)
         .count()
         .take(lines.length)
-        .map(function(i){ return lines[i]; })
-        .map(function(line){
-          return snippetController(events, line);
+        .map(function(i){
+          return snippetController(events, lines[i]);
         });
     });
 
-  var success = snippet
+  var end = snippet
     .skip(lines.length - 1)
     .take(1)
     .flatMapLatest('.done');
@@ -38,7 +37,10 @@ function dialogueController(events, lines){
     speaker:     snippet.flatMapLatest('.speaker'),
     fullText:    snippet.flatMapLatest('.fullText'),
     partialText: snippet.flatMapLatest('.partialText'),
-    success:     success
+    
+    //lifecycle: 
+    start:       Bacon.constant({}),
+    end:         end
   };
 }
 function snippetController(events, line){
@@ -75,9 +77,7 @@ function dialogueView(layer, controller){
     });
   //Show text
   controller.partialText
-    .onValue(function(text){
-      layer.text.text(text);
-    });
+    .onValue(layer.text, 'html');
 }
 
 module.exports = {

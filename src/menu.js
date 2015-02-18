@@ -12,14 +12,14 @@ function menuEvents(layer){
 //Controller
 function menuController(events){
   return {
-    resume: events.resume
+    isPaused: events.isPaused
   };
 }
 
 //View
-function menuView(layer, menu_controller, game_controller){
-  game_controller
-    .paused
+function menuView(layer, menu_controller){
+  menu_controller
+    .isPaused
     .not()
     .onValue(layer, 'toggleClass', 'is-hidden');
 }
