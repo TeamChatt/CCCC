@@ -78,6 +78,4 @@ function smoothPath(start, target){
 }
 
 
-module.exports = {
-  controller: cutoutController
-};
+module.exports = cutoutController;

@@ -3,10 +3,10 @@
 var Bacon = require('baconjs');
 require('../lib/engine/core/util');
 
-var lines0   = require('../include/script/00-intro');
-var lines1   = require('../include/script/01-test');
-var cutout   = require('./cutout');
-var dialogue = require('./dialogue');
+var cutoutController   = require('./cutout');
+var dialogueController = require('./dialogue');
+var lines0 = require('../include/script/00-intro');
+var lines1 = require('../include/script/01-test');
 
 
 //Controller
@@ -34,13 +34,13 @@ function sequenceController(events, start){
 function gameSequence(events){
   function read(ls){
     return function(){
-      var c = dialogue.controller(events.layers.dialogue, ls);
+      var c = dialogueController(events.layers.dialogue, ls);
       return {type: 'dialogue', controller: c};
     };
   }
   function cut(){
     return function(){
-      var c = cutout.controller(events.layers.desk);
+      var c = cutoutController(events.layers.desk);
       return {type: 'cutout', controller: c};
     };
   }
@@ -72,6 +72,5 @@ function sequence(initial){
   return wrap(Bacon.constant(initial));
 }
 
-module.exports = {
-  controller: sequenceController
-};
+
+module.exports = sequenceController;

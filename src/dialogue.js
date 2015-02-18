@@ -61,6 +61,4 @@ function snippetController(events, line){
 }
 
 
-module.exports = {
-  controller: dialogueController
-};
+module.exports = dialogueController;

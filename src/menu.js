@@ -9,6 +9,5 @@ function menuController(events){
   };
 }
 
-module.exports = {
-  controller: menuController
-};
+
+module.exports = menuController;

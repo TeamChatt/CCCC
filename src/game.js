@@ -2,8 +2,8 @@
 
 var Bacon   = require('baconjs');
 
-var menu     = require('./menu');
-var sequence = require('./sequence');
+var menuController     = require('./menu');
+var sequenceController = require('./sequence');
 
 
 //Controller
@@ -15,17 +15,15 @@ function gameController(events){
     .debounceImmediate(500)
     .toProperty(false);
 
-  var start = parseInt(localStorage['progress'], 10);
-  var sequenceController = sequence.controller(events, start);
+  var start               = parseInt(localStorage['progress'], 10);
+  var sequence_controller = sequenceController(events, start);
 
   return {
-    sequence: sequenceController,
-    menu:     menu.controller({ isPaused: isPaused }),
-    progress: sequenceController.progress
+    sequence: sequence_controller,
+    menu:     menuController({ isPaused: isPaused }),
+    progress: sequence_controller.progress
   };
 }
 
 
-module.exports = {
-  controller: gameController
-};
+module.exports = gameController;
