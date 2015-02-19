@@ -81,10 +81,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .menu {
   transition: opacity 0.25s;
-  
-  &.is-hidden {
-    opacity: 0;
-  }
+}
+.menu.is-hidden {
+  opacity: 0;
 }
 
 .menu_background {
@@ -108,15 +107,16 @@ h1, h2, h3, h4, h5, h6 {
 // Title Layer // -------------------------------------------------------------
 
 .title {
-  background: $darkgray;
   pointer-events: all;
-  
+}
+.title {
   display:       flex;
   align-content: center;
-
-  &.is-hidden {
-    display: none;
-  }
+  
+  background: $darkgray;
+}
+.title.is-hidden {
+  display: none;
 }
 .title_buttons {
   width: 50%;
@@ -124,6 +124,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 .title_buttons .button + .button {
   margin-top: 10%;
+}
+
+
+// Credits Layer // -----------------------------------------------------------
+
+.credits {
+  pointer-events: all;
+}
+.credits {
+  display:       flex;
+  align-content: center;
+
+  color:      $white;
+  background: $black;
+}
+.credits.is-hidden {
+  display: none;
+}
+.credits_reel {
+  margin: auto;
 }
 
 

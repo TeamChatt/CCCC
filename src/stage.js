@@ -8,6 +8,7 @@ function stage($stage){
   $stage.dialogue = dialogue ($stage.find('.game_layer.dialogue'));
   $stage.menu     = menu     ($stage.find('.game_layer.menu'));
   $stage.title    = title    ($stage.find('.game_layer.title'));
+  $stage.credits  = credits  ($stage.find('.game_layer.credits'));
   return $stage;
 }
 function desk($layer){
@@ -30,6 +31,9 @@ function menu($layer){
 function title($layer){
   $layer.new_button      = $layer.find('[data-action=new-game]');
   $layer.continue_button = $layer.find('[data-action=continue]');
+  return $layer;
+}
+function credits($layer){
   return $layer;
 }
 

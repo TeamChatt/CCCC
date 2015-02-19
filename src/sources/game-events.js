@@ -7,14 +7,16 @@ var deskEvents     = require('./desk-events');
 var dialogueEvents = require('./dialogue-events');
 var menuEvents     = require('./menu-events');
 var titleEvents    = require('./title-events');
+var creditsEvents  = require('./credits-events');
 
 
 //Events
 function gameEvents(stage){
-  var desk_events     = deskEvents(stage.desk);
-  var dialogue_events = dialogueEvents(stage.dialogue);
-  var menu_events     = menuEvents(stage.menu);
-  var title_events    = titleEvents(stage.title);
+  var desk_events     = deskEvents     (stage.desk);
+  var dialogue_events = dialogueEvents (stage.dialogue);
+  var menu_events     = menuEvents     (stage.menu);
+  var title_events    = titleEvents    (stage.title);
+  var credits_events  = creditsEvents  (stage.credits);
 
   //Pause when the page loses focus too
   var blur = browser
@@ -35,7 +37,8 @@ function gameEvents(stage){
       desk:     desk_events,
       dialogue: dialogue_events,
       menu:     menu_events,
-      title:    title_events
+      title:    title_events,
+      credits:  credits_events
     }
   };
 }

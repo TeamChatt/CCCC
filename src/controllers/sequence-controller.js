@@ -5,6 +5,7 @@ require('../../lib/engine/core/util');
 
 var cutoutController   = require('./cutout-controller');
 var dialogueController = require('./dialogue-controller');
+var creditsController  = require('./credits-controller');
 var lines0 = require('../../include/script/00-intro');
 var lines1 = require('../../include/script/01-test');
 
@@ -49,12 +50,20 @@ function gameSequence(events){
       return {type: 'cutout', controller: c};
     };
   }
+  function rollCredits(){
+    return function(){
+      var c = creditsController(events.layers.credits);
+      return {type: 'credits', controller: c};
+    };
+  }
+
   return [
     read(lines0),
     cut(),
     read(lines1),
     cut(),
-    read(lines1)
+    read(lines1),
+    rollCredits()
   ];
 }
 function sequence(initial){
