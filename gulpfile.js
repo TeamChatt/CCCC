@@ -1,15 +1,21 @@
 'use strict';
 
-var gulp         = require('gulp');
-var browserify   = require('browserify');
-var source       = require('vinyl-source-stream');
-var autoprefixer = require('gulp-autoprefixer');
-var sass         = require('gulp-sass');
-var connect      = require('gulp-connect');
-
+var gulp          = require('gulp');
+var browserify    = require('browserify');
+var source        = require('vinyl-source-stream');
+var autoprefixer  = require('gulp-autoprefixer');
+var sass          = require('gulp-sass');
+var connect       = require('gulp-connect');
+var convertScript = require('./task/script');
 
 //Build tasks
-gulp.task('js', function() {
+gulp.task('script', function(){
+  return gulp.src('assets/script/*.txt')
+    .pipe(convertScript())
+    .pipe(gulp.dest('include/script'));
+});
+
+gulp.task('js', ['script'], function() {
   return browserify({entries: './src/main.js', debug: true})
     .bundle()
     .pipe(source('bundle.js'))
