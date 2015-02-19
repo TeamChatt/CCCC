@@ -31,8 +31,6 @@ function cutoutView(layer, controller){
         .attr('cx', point.x)
         .attr('cy', point.y);
     });
-
-  controller.pathEnd.log();
 }
 
 module.exports = cutoutView;

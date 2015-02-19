@@ -7,6 +7,13 @@ var cutoutView   = require('./cutout-view');
 function sequenceView(stage, controller){
   controller
     .segment
+    .map('.type')
+    .onValue(function(type){
+      stage.dialogue.toggleClass('is-hidden', type !== 'dialogue');
+    });
+
+  controller
+    .segment
     .filter(function(s){ return s.type === 'dialogue'; })
     .map('.controller')
     .onValue(function(dialogue_controller){

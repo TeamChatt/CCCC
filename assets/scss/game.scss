@@ -77,7 +77,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
 // Menu Layer // --------------------------------------------------------------
 
 .menu {
@@ -94,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
 }
 .menu_background {
-  display: flex;
+  display:       flex;
   align-content: center;
   
   color:      $white;
@@ -103,4 +102,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 .menu_background h3 {
   margin: auto;
+}
+
+
+// Title Layer // -------------------------------------------------------------
+
+.title {
+  background: $darkgray;
+  pointer-events: all;
+  
+  display:       flex;
+  align-content: center;
+
+  &.is-hidden {
+    display: none;
+  }
+}
+.title_buttons {
+  width: 50%;
+  margin: auto;
+}
+.title_buttons .button + .button {
+  margin-top: 10%;
+}
+
+
+// Buttons // -----------------------------------------------------------------
+
+.button--block {
+  display: block;
+  width: 100%;
 }

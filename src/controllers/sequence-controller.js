@@ -23,8 +23,13 @@ function sequenceController(events, start){
   }
 
   var segment  = runSequence(segments);
-  var progress = segment.count()
-    .map(function(x){ return x+start-1; });
+  var progress = segment
+    .skip(1)
+    .count()
+    .map(function(x){ return x+start; });
+
+  //Subscribe so we always get the latest value
+  progress.onValue(function(){});
 
   return {
     segment:  segment,

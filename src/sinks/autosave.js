@@ -1,7 +1,9 @@
 'use strict';
 
 function autosave(controller){
-  controller.progress
+  controller.game
+    .delay(0)
+    .flatMapLatest('.progress')
     .onValue(function(progress){
       localStorage.progress = progress;
     });

@@ -1,6 +1,6 @@
 'use strict';
 
-var Bacon   = require('baconjs');
+var Bacon = require('baconjs');
 
 var menuController     = require('./menu-controller');
 var sequenceController = require('./sequence-controller');

@@ -6,13 +6,15 @@ var browser = require('../../lib/engine/core/browser');
 var deskEvents     = require('./desk-events');
 var dialogueEvents = require('./dialogue-events');
 var menuEvents     = require('./menu-events');
+var titleEvents    = require('./title-events');
 
 
 //Events
 function gameEvents(stage){
-  var desk_events   = deskEvents(stage.desk);
+  var desk_events     = deskEvents(stage.desk);
   var dialogue_events = dialogueEvents(stage.dialogue);
   var menu_events     = menuEvents(stage.menu);
+  var title_events    = titleEvents(stage.title);
 
   //Pause when the page loses focus too
   var blur = browser
@@ -32,7 +34,8 @@ function gameEvents(stage){
     layers: {
       desk:     desk_events,
       dialogue: dialogue_events,
-      menu:     menu_events
+      menu:     menu_events,
+      title:    title_events
     }
   };
 }
