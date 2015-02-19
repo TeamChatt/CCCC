@@ -76,6 +76,18 @@ h1, h2, h3, h4, h5, h6 {
   background: url("/images/alma-default.svg"); 
 }
 
+// HUD Layer // ---------------------------------------------------------------
+
+.autosave-icon {
+  position: absolute;
+  width:    5%;
+  right:    0;
+  bottom:   0;
+}
+.autosave-icon.is-hidden {
+  display: none;
+}
+
 
 // Menu Layer // --------------------------------------------------------------
 
@@ -118,12 +130,13 @@ h1, h2, h3, h4, h5, h6 {
 .title.is-hidden {
   display: none;
 }
-.title_buttons {
+.title_menu {
   width: 50%;
   margin: auto;
+  text-align: center;
 }
-.title_buttons .button + .button {
-  margin-top: 10%;
+.title_menu .button + .button {
+  margin-top: 5%;
 }
 
 

@@ -7,6 +7,7 @@ function stage($stage){
   $stage.desk     = desk     ($stage.find('.game_layer.desk'));
   $stage.dialogue = dialogue ($stage.find('.game_layer.dialogue'));
   $stage.menu     = menu     ($stage.find('.game_layer.menu'));
+  $stage.hud      = hud      ($stage.find('.game_layer.hud'));
   $stage.title    = title    ($stage.find('.game_layer.title'));
   $stage.credits  = credits  ($stage.find('.game_layer.credits'));
   return $stage;
@@ -26,6 +27,11 @@ function dialogue($layer){
   return $layer;
 }
 function menu($layer){
+  return $layer;
+}
+function hud($layer){
+  $layer.autosave_icon = $layer.find('.autosave-icon');
+  $layer.timer         = $layer.find('.timer');
   return $layer;
 }
 function title($layer){
