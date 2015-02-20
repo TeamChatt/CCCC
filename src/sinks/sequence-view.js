@@ -5,8 +5,7 @@ var cutoutView   = require('./cutout-view');
 
 //View
 function sequenceView(stage, controller){
-  var type = controller
-    .segment
+  var type = controller.segment
     .map('.type');
 
   //Show/hide layers
@@ -21,16 +20,14 @@ function sequenceView(stage, controller){
 
 
   //Show scene
-  controller
-    .segment
+  controller.segment
     .filter(function(s){ return s.type === 'dialogue'; })
     .map('.controller')
     .onValue(function(dialogue_controller){
       dialogueView(stage.dialogue, dialogue_controller);
     });
 
-  controller
-    .segment
+  controller.segment
     .filter(function(s){ return s.type === 'cutout'; })
     .map('.controller')
     .onValue(function(cutout_controller){
