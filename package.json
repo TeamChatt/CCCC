@@ -11,7 +11,9 @@
   "dependencies": {
     "baconjs": "~0.7.48",
     "zepto-browserify": "~1.1.3-0",
-    "tocca": "~0.1.2"
+    "tocca": "~0.1.2",
+    "2d-polygon-boolean": "~1.0.0",
+    "area-polygon": "~1.0.1"
   },
   "devDependencies": {
     "gulp": "~3.8.11",

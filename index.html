@@ -23,6 +23,8 @@
               <circle r="15" class="card_cut_start"></circle>
               <circle r="15" class="card_cut_end"></circle>
               <path class="card_cut"></path>
+              <path class="card_target"></path>
+              <path class="card_overlap"></path>
             </g>
           </svg>
         </div>
@@ -41,7 +43,11 @@
           <svg class="autosave-icon is-hidden" viewBox="0 0 30 30" preserveAspectRatio"xMidYMid meet">
             <circle cx="15" cy="15" r="10"></circle>
           </svg>
-          <svg class="timer"></svg>
+          <svg class="timer" viewBox="0 0 100 100">
+            <g transform="translate(50,50)">
+              <path class="timer_fill"></path>
+            </g>
+          </svg>
         </div>
 
         <div class="game_layer menu is-hidden">
@@ -80,7 +86,7 @@
             </div>
 
             <p>with music by</p>
-            
+
             <div class="team-member">
               <img src="/images/team/tim.jpg" class="team-member_avatar">
               Tim Vaughan

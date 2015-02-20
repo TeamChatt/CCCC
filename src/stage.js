@@ -17,6 +17,8 @@ function desk($layer){
   $layer.cut        = $layer.find('.card_cut');
   $layer.cut_start  = $layer.find('.card_cut_start');
   $layer.cut_end    = $layer.find('.card_cut_end');
+  $layer.target     = $layer.find('.card_target');
+  $layer.overlap    = $layer.find('.card_overlap');
   return $layer;
 }
 function dialogue($layer){
@@ -32,6 +34,7 @@ function menu($layer){
 function hud($layer){
   $layer.autosave_icon = $layer.find('.autosave-icon');
   $layer.timer         = $layer.find('.timer');
+  $layer.timer_fill    = $layer.find('.timer_fill');
   return $layer;
 }
 function title($layer){

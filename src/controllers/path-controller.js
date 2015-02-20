@@ -50,12 +50,12 @@ function pathController(events){
     path:         path,
     startPoint:   startPoint,
     currentPoint: currentPoint,
+    
     dragging:     Bacon.mergeAll(
         events.dragStart.map(true),
         events.dragEnd.map(false)
       ),
-    pathEnd:      pathEnd,
-    end:          pathEnd
+    pathEnd:      pathEnd
   };
 }
 function within(distance){
