@@ -1,36 +1,11 @@
 'use strict';
 
-function pathString(pts){
-  return 'M' + pts.map(function(pt){
-      return pt.x + ',' + pt.y;
-    })
-    .join('L');
-}
+var pathView = require('./path-view');
+
 
 //View
 function cutoutView(layer, controller){
-  controller
-    .path
-    .map(pathString)
-    .onValue(function(points){
-      layer.cut.attr('d', points);
-    });
-
-  controller
-    .startPoint
-    .onValue(function(point){
-      layer.cut_start
-        .attr('cx', point.x)
-        .attr('cy', point.y);
-    });
-
-  controller
-    .currentPoint
-    .onValue(function(point){
-      layer.cut_end
-        .attr('cx', point.x)
-        .attr('cy', point.y);
-    });
+  pathView(layer, controller.path);
 }
 
 module.exports = cutoutView;
