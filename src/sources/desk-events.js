@@ -9,13 +9,13 @@ var HEIGHT = 640;
 //Events
 function deskEvents(layer){
   function toPosition(e){
-    var bounds = e.currentTarget.getBoundingClientRect();
-    return P2(e.offsetX * WIDTH / bounds.width, e.offsetY * HEIGHT / bounds.height);
+    var bounds = layer[0].getBoundingClientRect();
+    return P2(e.x * WIDTH / bounds.width, e.y * HEIGHT / bounds.height);
   }
 
-  var start = layer.asEventStream('mousedown');
+  var start = layer.pointerDownE();
   var drag  = layer.dragE();
-  var end   = layer.asEventStream('mouseup');
+  var end   = layer.pointerUpE();
 
   return {
     pause:     layer.dblpressE(),
