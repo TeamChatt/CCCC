@@ -74,7 +74,8 @@ function smoothPath(start, target){
         return v.normalize().times(S(magnitude - SMOOVE_DISTANCE));
       })
       .scan(start, '.offset');
-  });
+  })
+  .skipDuplicates(P2.equals);
 }
 
 
