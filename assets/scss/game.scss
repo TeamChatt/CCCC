@@ -1,6 +1,8 @@
 @import "./variables";
 @import "./mixins";
 
+// Typography // --------------------------------------------------------------
+
 body {
   font-family: "Open Sans", sans-serif;
 }
@@ -37,10 +39,16 @@ h1, h2, h3, h4, h5, h6 {
   width:  100%;
   height: 100%;
 }
-.desk_background path {
+.card_cut {
   stroke: $black;
   stroke-width: 2;
   fill:   none;
+}
+.card_target {
+  fill: transparentize($black, 0.8);
+}
+.card_overlap {
+  fill: transparentize(crimson, 0.8);
 }
 
 
@@ -75,6 +83,7 @@ h1, h2, h3, h4, h5, h6 {
 .dialogue_portrait[data-speaker="Alma"] {
   background: url("/images/alma-default.svg"); 
 }
+
 
 // HUD Layer // ---------------------------------------------------------------
 
@@ -182,10 +191,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10%;
 
   border-radius: 50%;
-}
-
-.ampersand {
-  // display: inline-block;
 }
 
 

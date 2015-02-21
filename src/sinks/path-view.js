@@ -9,23 +9,20 @@ function pathString(pts){
 
 //View
 function pathView(layer, controller){
-  controller
-    .path
+  controller.path
     .map(pathString)
     .onValue(function(points){
       layer.cut.attr('d', points);
     });
 
-  controller
-    .startPoint
+  controller.startPoint
     .onValue(function(point){
       layer.cut_start
         .attr('cx', point.x)
         .attr('cy', point.y);
     });
 
-  controller
-    .currentPoint
+  controller.currentPoint
     .onValue(function(point){
       layer.cut_end
         .attr('cx', point.x)

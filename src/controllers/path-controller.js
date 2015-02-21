@@ -50,12 +50,12 @@ function pathController(events){
     path:         path,
     startPoint:   startPoint,
     currentPoint: currentPoint,
+    
     dragging:     Bacon.mergeAll(
         events.dragStart.map(true),
         events.dragEnd.map(false)
       ),
-    pathEnd:      pathEnd,
-    end:          pathEnd
+    pathEnd:      pathEnd
   };
 }
 function within(distance){
@@ -74,7 +74,8 @@ function smoothPath(start, target){
         return v.normalize().times(S(magnitude - SMOOVE_DISTANCE));
       })
       .scan(start, '.offset');
-  });
+  })
+  .skipDuplicates(P2.equals);
 }
 
 
