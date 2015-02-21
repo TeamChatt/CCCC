@@ -1,0 +1,43 @@
+// Credits Layer // -----------------------------------------------------------
+
+.credits {
+  pointer-events: all;
+}
+.credits {
+  display:       flex;
+  align-content: center;
+  text-align:    center;
+
+  color:      $white;
+  background: $black;
+}
+.credits.is-hidden {
+  display: none;
+}
+
+.credits_reel {
+  margin: auto;
+}
+
+.credits_row {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+}
+
+.team-member {
+  display:    inline-block;
+  width:      20%;
+  text-align: center;
+}
+.team-member_homepage {
+  display: block;
+}
+.team-member_avatar {
+  display: block;
+  margin:  auto;
+  width:   80%;
+  padding: 10%;
+
+  border-radius: 50%;
+}

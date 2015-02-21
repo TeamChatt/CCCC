@@ -1,6 +1,10 @@
 @import "./variables";
 @import "./mixins";
 
+@import "./dialogue";
+@import "./credits";
+
+
 // Typography // --------------------------------------------------------------
 
 body {
@@ -48,40 +52,7 @@ h1, h2, h3, h4, h5, h6 {
   fill: transparentize($black, 0.8);
 }
 .card_overlap {
-  fill: transparentize(crimson, 0.8);
-}
-
-
-// Dialogue Layer // ----------------------------------------------------------
-
-.dialogue_background {
-  position: absolute;
-  height: 25%;
-  left:   0;
-  bottom: 0;
-  right:  0;
-  pointer-events: all;
-}
-.dialogue_background {
-  background: url("/images/lightpaperfibers_@2X.png");
-  transition: bottom 0.25s ease-in;
-
-  box-shadow: 0 0 10px transparentize($black, 0.9);
-}
-.dialogue.is-hidden .dialogue_background {
-  bottom: -25%;
-}
-
-.dialogue_portrait {
-  float:  left;
-  width:  17%;
-  height: 100%;
-}
-.dialogue_portrait[data-speaker="Cap’n Cutout"] {
-  background: url("/images/cc-default.svg");
-}
-.dialogue_portrait[data-speaker="Alma"] {
-  background: url("/images/alma-default.svg"); 
+  fill: transparentize($magenta, 0.8);
 }
 
 
@@ -146,51 +117,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .title_menu .button + .button {
   margin-top: 5%;
-}
-
-
-// Credits Layer // -----------------------------------------------------------
-
-.credits {
-  pointer-events: all;
-}
-.credits {
-  display:       flex;
-  align-content: center;
-  text-align:    center;
-
-  color:      $white;
-  background: $black;
-}
-.credits.is-hidden {
-  display: none;
-}
-
-.credits_reel {
-  margin: auto;
-}
-
-.credits_row {
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-}
-
-.team-member {
-  display:    inline-block;
-  width:      20%;
-  text-align: center;
-}
-.team-member_homepage {
-  display: block;
-}
-.team-member_avatar {
-  display: block;
-  margin:  auto;
-  width:   80%;
-  padding: 10%;
-
-  border-radius: 50%;
 }
 
 

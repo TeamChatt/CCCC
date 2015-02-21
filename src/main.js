@@ -9,7 +9,7 @@ var appView       = require('./sinks/app-view');
 var autosave      = require('./sinks/autosave');
 
 
-localStorage.progress = 1;
+localStorage.progress = 2;
 
 var events     = gameEvents(stage);
 var controller = appController(events);

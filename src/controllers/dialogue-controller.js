@@ -25,6 +25,7 @@ function dialogueController(events, lines){
 
   return {
     speaker:     snippet.flatMapLatest('.speaker'),
+    expression:  snippet.flatMapLatest('.expression'),
     fullText:    snippet.flatMapLatest('.fullText'),
     partialText: snippet.flatMapLatest('.partialText'),
     
@@ -49,6 +50,7 @@ function snippetController(events, line){
 
   return {
     speaker:     Bacon.constant(line.speaker),
+    expression:  Bacon.constant(line.expression),
     fullText:    Bacon.constant(line.dialogue),
     partialText: autoText
       .takeUntil(skipText)
