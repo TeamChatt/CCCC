@@ -7,12 +7,19 @@ var autoprefixer  = require('gulp-autoprefixer');
 var sass          = require('gulp-sass');
 var connect       = require('gulp-connect');
 var convertScript = require('./task/script');
+var convertShape  = require('./task/shape');
 
 //Build tasks
 gulp.task('script', function(){
   return gulp.src('assets/script/*.txt')
     .pipe(convertScript())
     .pipe(gulp.dest('include/script'));
+});
+
+gulp.task('shapes', function(){
+  return gulp.src('assets/shapes/*.svg')
+    .pipe(convertShape())
+    .pipe(gulp.dest('include/shapes'));
 });
 
 gulp.task('js', ['script'], function() {
