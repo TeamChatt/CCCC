@@ -1,12 +1,22 @@
 @import "./variables";
 @import "./mixins";
 
+html, body {
+  height: 100%;
+}
 body {
   background: $lightgray;
 }
 
+.container {
+  display:       flex;
+  align-content: center;
+  height:        100%;
+}
 .game-container {
   position: relative;
+  margin:   auto;
+  width:    100%;
 }
 .game-container:before {
   display: block;
@@ -24,6 +34,5 @@ body {
   }
   .game-container {
     border: 1px solid $darkgray;
-    margin-top: 40px;
   }
 }
