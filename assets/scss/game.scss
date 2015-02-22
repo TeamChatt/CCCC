@@ -16,6 +16,44 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+// Links // -------------------------------------------------------------------
+
+a {
+  color: #1EAEDB;
+}
+a:hover {
+  color: #0FA0CE;
+}
+
+
+// Buttons // -----------------------------------------------------------------
+.button {
+  $dark-melon: darken($melon, 3%);
+
+  font-family: 'Lato';
+  font-size:   1.3em;
+  font-weight: 300;
+  text-shadow: 0 -0.1ex $dark-melon;
+  color:       $white;
+  
+  padding-top:    0.8em;
+  padding-bottom: 0.8em;
+
+  background-color: $melon;
+  background:       linear-gradient(to bottom, $melon, $dark-melon);
+  box-shadow:
+    inset 0 0.1ex 0     transparentize($white, 0.5),
+          0 0.1ex 0.2ex transparentize($black, 0.85);
+
+  border:        0.1ex solid darken($dark-melon, 8%);
+  border-radius: 2em;
+}
+.button--block {
+  display: block;
+  width: 100%;
+}
+
+
 // Game Frame // --------------------------------------------------------------
 
 .game {
@@ -114,29 +152,22 @@ h1, h2, h3, h4, h5, h6 {
 .title.is-hidden {
   display: none;
 }
+.title_background {
+  @include full-screen();
+}
 .title_menu {
   width: 50%;
   margin: auto;
   text-align: center;
+  z-index: 1;
+}
+.title_menu h1 {
+  color: rgb(142, 103, 46);
+}
+.title_menu .button {
+  width: 50%;
+  margin: auto;
 }
 .title_menu .button + .button {
   margin-top: 5%;
-}
-
-
-// Links // -------------------------------------------------------------------
-
-a {
-  color: #1EAEDB;
-}
-a:hover {
-  color: #0FA0CE;
-}
-
-
-// Buttons // -----------------------------------------------------------------
-
-.button--block {
-  display: block;
-  width: 100%;
 }
