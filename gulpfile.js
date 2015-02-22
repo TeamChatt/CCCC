@@ -11,7 +11,7 @@ var convertShape  = require('./task/shape');
 
 //Preprocessor tasks
 gulp.task('script', function(){
-  return gulp.src('assets/script/*.txt')
+  return gulp.src('assets/script/**/*.txt')
     .pipe(convertScript())
     .pipe(gulp.dest('include/script'));
 });

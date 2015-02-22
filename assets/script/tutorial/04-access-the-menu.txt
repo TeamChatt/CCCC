@@ -1,0 +1,4 @@
+Alma:
+Ta-dah! You’re finished!
+
+If you need to pause at any time, double [tap/click] wherever you are, and it will bring up the menu.
