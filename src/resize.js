@@ -5,7 +5,7 @@ var browser = require('../lib/engine/core/browser');
 
 //Handle window resizing
 module.exports = function(container, intrinsicWidth, intrinsicHeight){
-  var resize      = browser.resize.merge(Bacon.once());
+  var resize      = browser.resize.merge(Bacon.later(1,{}));
   var aspectRatio = intrinsicWidth / intrinsicHeight;
 
   resize

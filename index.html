@@ -8,6 +8,8 @@
   <link rel="stylesheet" type="text/css" href="css/main.css">
 
   <link href='http://fonts.googleapis.com/css?family=Lato:400,900|Open+Sans:400italic,700,400' rel='stylesheet' type='text/css'>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 
 <body>
@@ -19,6 +21,10 @@
         
         <div class="game_layer desk">
           <svg class="desk_background" viewBox="0 0 960 640">
+            <image xlink:href="/images/desk.svg"           width="960" height="640"/>
+            <image xlink:href="/images/paper.svg"          width="820" height="512" x="70"  y="64" />
+            <image xlink:href="/images/original-stack.svg" width="200" height="180" x="0"   y="460"/>
+            <image xlink:href="/images/work-stack.svg"     width="200" height="180" x="760" y="460"/>
             <g class="card">
               <circle r="15" class="card_cut_start"></circle>
               <circle r="15" class="card_cut_end"></circle>
@@ -43,8 +49,9 @@
           <svg class="autosave-icon is-hidden" viewBox="0 0 30 30" preserveAspectRatio"xMidYMid meet">
             <circle cx="15" cy="15" r="10"></circle>
           </svg>
-          <svg class="timer" viewBox="0 0 100 100">
-            <g transform="translate(50,50)">
+          <svg class="timer is-hidden" viewBox="0 0 960 640">
+            <image class="timer_background" xlink:href="/images/timer.svg" width="140" height="140" x="810" y="10"/>
+            <g transform="translate(80,80)">
               <path class="timer_fill"></path>
             </g>
           </svg>
