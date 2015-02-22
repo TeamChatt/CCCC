@@ -1,0 +1,37 @@
+@import "./variables";
+@import "./mixins";
+
+
+// Title Layer // -------------------------------------------------------------
+
+.title {
+  pointer-events: all;
+}
+.title {
+  display:       flex;
+  align-content: center;
+  
+  background: $darkgray;
+}
+.title.is-hidden {
+  display: none;
+}
+.title_background {
+  @include full-screen();
+}
+.title_menu {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  z-index: 1;
+}
+.title_menu h1 {
+  color: rgb(142, 103, 46);
+}
+.title_menu .button {
+  width: 50%;
+  margin: auto;
+}
+.title_menu .button + .button {
+  margin-top: 5%;
+}

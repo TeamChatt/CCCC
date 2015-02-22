@@ -1,0 +1,19 @@
+@import "./variables";
+@import "./mixins";
+
+
+// HUD Layer // ---------------------------------------------------------------
+
+.autosave-icon {
+  position: absolute;
+  width:    5%;
+  right:    0;
+  bottom:   0;
+}
+.autosave-icon.is-hidden {
+  display: none;
+}
+
+.timer.is-hidden {
+  display: none;
+}

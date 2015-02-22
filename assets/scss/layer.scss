@@ -1,0 +1,23 @@
+@import "./variables";
+@import "./mixins";
+
+
+// Game Frame // --------------------------------------------------------------
+
+.game {
+  background: $white;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+
+.game_layer {
+  @include full-screen();
+  pointer-events: none;
+}
+.game_layer {
+  user-select: none;
+  cursor: default;
+}
+.game_layer.is-hidden * {
+  pointer-events: none;
+}
