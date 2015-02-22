@@ -4,6 +4,7 @@ var Bacon = require('baconjs');
 
 var menuController     = require('./menu-controller');
 var sequenceController = require('./sequence-controller');
+var gameSequence       = require('../sequences/game');
 
 
 //Controller
@@ -15,7 +16,10 @@ function gameController(events, game_state){
     .debounceImmediate(500)
     .toProperty(false);
 
-  var sequence_controller = sequenceController(events, game_state);
+  var sequence_controller = sequenceController(
+      gameSequence(events),
+      game_state
+    );
 
   return {
     sequence: sequence_controller,

@@ -3,13 +3,9 @@
 var Bacon = require('baconjs');
 require('../../lib/engine/core/util');
 
-var gameSequence = require('../sequences/game');
-
 
 //Controller
-function sequenceController(events, start){
-  var segments = gameSequence(events).slice(start);
-
+function sequenceController(segments, start){
   function runSequence(seq){
     var head = sequence(seq[0]());
     var tail = seq.slice(1);
@@ -19,7 +15,7 @@ function sequenceController(events, start){
     }, head);
   }
 
-  var segment  = runSequence(segments);
+  var segment  = runSequence(segments.slice(start));
   var progress = segment
     .skip(1)
     .count()
@@ -30,7 +26,9 @@ function sequenceController(events, start){
 
   return {
     segment:  segment,
-    progress: progress
+    progress: progress,
+    end:      progress
+      .filter(function(x){ return x === segments.length; })
   };
 }
 function sequence(initial){
