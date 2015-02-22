@@ -34,14 +34,14 @@ a:hover {
 
 // Buttons // -----------------------------------------------------------------
 
+$dark-melon: darken($melon, 3%);
 .button {
-  $dark-melon: darken($melon, 3%);
 
   font-family: 'Lato';
   font-size:   1.3em;
   font-weight: 300;
-  text-shadow: 0 -0.1ex $dark-melon;
   color:       $white;
+  text-shadow: 0 -0.2ex darken($dark-melon, 8%);
   
   padding-top:    0.8em;
   padding-bottom: 0.8em;
@@ -54,6 +54,22 @@ a:hover {
 
   border:        0.1ex solid darken($dark-melon, 8%);
   border-radius: 2em;
+}
+.button:hover,
+.button:focus {
+  background-color: lighten($melon, 5%);
+  background:       linear-gradient(to bottom, lighten($melon, 3%), $dark-melon);
+
+  outline: none;
+}
+.button:active {
+  color:       darken($dark-melon, 8%);
+  text-shadow: 0 0.1ex transparentize($white, 0.6);
+
+  background: desaturate($melon, 10%);
+  box-shadow:
+    inset 0 0.1ex 0.3ex transparentize($black, 0.8),
+          0 0.1ex 0     $white;
 }
 .button--block {
   display: block;

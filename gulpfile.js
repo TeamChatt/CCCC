@@ -9,7 +9,7 @@ var connect       = require('gulp-connect');
 var convertScript = require('./task/script');
 var convertShape  = require('./task/shape');
 
-//Build tasks
+//Preprocessor tasks
 gulp.task('script', function(){
   return gulp.src('assets/script/*.txt')
     .pipe(convertScript())
@@ -22,7 +22,10 @@ gulp.task('shapes', function(){
     .pipe(gulp.dest('include/shapes'));
 });
 
-gulp.task('js', ['script'], function() {
+gulp.task('preprocess', ['script', 'shapes']);
+
+//Build tasks
+gulp.task('js', function() {
   return browserify({entries: './src/main.js', debug: true})
     .bundle()
     .pipe(source('bundle.js'))
@@ -69,12 +72,12 @@ gulp.task('build', ['js', 'css', 'scss', 'svg', 'images', 'html']);
 
 //Development tasks
 gulp.task('watch', ['build'], function(){
-  gulp.watch('src/main.js',         ['js']);
-  gulp.watch('assets/css/*.css',    ['css']);
-  gulp.watch('assets/scss/*.scss',  ['scss']);
-  gulp.watch('assets/images/*.svg', ['svg']);
-  gulp.watch('assets/images/**/*',  ['images']);
-  gulp.watch('index.html',          ['html']);
+  gulp.watch('src/main.js',           ['js']);
+  gulp.watch('assets/css/*.css',      ['css']);
+  gulp.watch('assets/scss/**/*.scss', ['scss']);
+  gulp.watch('assets/images/*.svg',   ['svg']);
+  gulp.watch('assets/images/**/*',    ['images']);
+  gulp.watch('index.html',            ['html']);
 });
 
 gulp.task('connect', ['build'], function() {
