@@ -5,11 +5,9 @@ var pathController = require('./path-controller');
 var union          = require('../union');
 var score          = require('../score');
 
-var target         = require('../../include/shapes/nye');
-
 
 //Controller
-function cutoutController(events){
+function cutoutController(events, shape){
   var path_controller = pathController(events);
 
   var final_path = path_controller.path
@@ -17,15 +15,14 @@ function cutoutController(events){
 
   var final_score = final_path
     .map(toPolygon)
-    .map(score, target);
+    .map(score, shape);
 
   return {
-    path:   path_controller,
-    target: Bacon.constant(target),
-    overlap: final_path.map(toPolygon).map(union, target),
-
-    score:  final_score,
-    end:    path_controller.pathEnd
+    overlap: final_path.map(toPolygon).map(union, shape),
+    path:    path_controller,
+    target:  Bacon.constant(shape),
+    score:   final_score,
+    end:     path_controller.pathEnd
   };
 }
 function toPolygon(points){
