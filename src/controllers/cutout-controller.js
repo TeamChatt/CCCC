@@ -17,8 +17,7 @@ function cutoutController(events){
 
   var final_score = final_path
     .map(toPolygon)
-    .map(score, target)
-    .log('score: ');
+    .map(score, target);
 
   return {
     path:   path_controller,

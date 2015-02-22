@@ -3,11 +3,7 @@
 var Bacon = require('baconjs');
 require('../../lib/engine/core/util');
 
-var cutoutController   = require('./cutout-controller');
-var dialogueController = require('./dialogue-controller');
-var creditsController  = require('./credits-controller');
-var lines0 = require('../../include/script/00-intro');
-var lines1 = require('../../include/script/01-test');
+var gameSequence = require('../sequences/game');
 
 
 //Controller
@@ -36,35 +32,6 @@ function sequenceController(events, start){
     segment:  segment,
     progress: progress
   };
-}
-function gameSequence(events){
-  function read(ls){
-    return function(){
-      var c = dialogueController(events.layers.dialogue, ls);
-      return {type: 'dialogue', controller: c};
-    };
-  }
-  function cut(){
-    return function(){
-      var c = cutoutController(events.layers.desk);
-      return {type: 'cutout', controller: c};
-    };
-  }
-  function rollCredits(){
-    return function(){
-      var c = creditsController(events.layers.credits);
-      return {type: 'credits', controller: c};
-    };
-  }
-
-  return [
-    read(lines0),
-    cut(),
-    read(lines1),
-    cut(),
-    read(lines1),
-    rollCredits()
-  ];
 }
 function sequence(initial){
   function wrap(event){
