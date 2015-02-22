@@ -25,6 +25,6 @@
     "through2": "~0.6.3",
     "replace-ext": "0.0.1",
     "jsdom": "~3.1.2",
-    "point-at-length": "~1.0.0"
+    "point-at-length": "git://github.com/mkaemmerer/point-at-length.git"
   }
 }

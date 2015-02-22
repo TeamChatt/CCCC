@@ -5,7 +5,7 @@ var pathController = require('./path-controller');
 var union          = require('../union');
 var score          = require('../score');
 
-var target         = require('../../include/shapes/test-shape');
+var target         = require('../../include/shapes/nye');
 
 
 //Controller
