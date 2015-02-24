@@ -10,8 +10,8 @@ var score          = require('../score');
 function cutoutController(events, shape){
   var path_controller = pathController(events);
 
-  var final_path = path_controller.path
-    .sampledBy(path_controller.pathEnd);
+  var final_path = path_controller.pathEnd
+    .map(path_controller.path);
 
   var final_score = final_path
     .map(toPolygon)

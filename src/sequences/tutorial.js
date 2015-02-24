@@ -40,15 +40,15 @@ function tutorialSequence(events){
       return {type: 'fakeTask', controller: c};
     };
   }
-  function cut(){
+  function cut(shape){
     return function(){
-      var c = cutoutController(events.layers.desk);
+      var c = cutoutController(events.layers.desk, shape);
       return {type: 'cutout', controller: c};
     };
   }
   function pause(){
     return function(){
-      var c = fakeTask(events);
+      var c = resumeObjective(events);
       return {type: 'fakeTask', controller: c};
     };
   }
@@ -71,6 +71,7 @@ function tutorialSequence(events){
     cut(work_shape),
     //Task 6:
     read(lines_6),
+    dragTemplate(),
     cut(original_shape),
     //All done!
     read(lines_7)
@@ -78,7 +79,12 @@ function tutorialSequence(events){
 }
 function fakeTask(events){
   return {
-    end: events.layers.desk.dragStart
+    end: events.layers.desk.dragStart.take(1)
+  };
+}
+function resumeObjective(events){
+  return {
+    end: events.unpause.take(1)
   };
 }
 

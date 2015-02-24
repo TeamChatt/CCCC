@@ -9,15 +9,13 @@ function sequenceView(stage, controller){
     .map('.type');
 
   //Show/hide layers
-  type
-    .onValue(function(type){
-      stage.dialogue.toggleClass('is-hidden', type !== 'dialogue');
-    });
-  type
-    .onValue(function(type){
-      stage.credits.toggleClass('is-hidden', type !== 'credits');
-    });
+  var showDialogue = type.map(function(t){ return t === 'dialogue'; });
+  var showCredits  = type.map(function(t){ return t === 'credits';  });
 
+  showDialogue
+    .not().onValue(stage.dialogue, 'toggleClass', 'is-hidden');
+  showCredits
+    .not().onValue(stage.credits, 'toggleClass', 'is-hidden');
 
   //Show scene
   controller.segment
@@ -32,6 +30,13 @@ function sequenceView(stage, controller){
     .map('.controller')
     .onValue(function(cutout_controller){
       cutoutView(stage.desk, cutout_controller);
+    });
+
+  controller.segment
+    .filter(function(s){ return s.type === 'sequence'; })
+    .map('.controller')
+    .onValue(function(sequence_controller){
+      sequenceView(stage, sequence_controller);
     });
 }
 

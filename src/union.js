@@ -15,7 +15,8 @@ function union(polygon1, polygon2){
     polygon2.slice(0).reverse(),
     'or');
 
-  return (fwd.length === 1) ? fwd[0] : bkwd[0];
+  var ret = (fwd.length === 1) ? fwd[0] : bkwd[0];
+  return ret || [];
 }
 
 

@@ -18,6 +18,7 @@ function cutoutView(layer, controller){
   pathView(layer, controller.path);
 
   controller.target
+    .log('target: ')
     .map(toPath)
     .map(pathString)
     .onValue(function(path){
@@ -25,6 +26,7 @@ function cutoutView(layer, controller){
     });
 
   controller.overlap
+    .log('overlap: ')
     .map(toPath)
     .map(pathString)
     .onValue(function(path){

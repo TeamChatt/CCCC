@@ -1,18 +1,30 @@
 'use strict';
 
+var sequenceController = require('../controllers/sequence-controller');
 var cutoutController   = require('../controllers/cutout-controller');
 var dialogueController = require('../controllers/dialogue-controller');
 var creditsController  = require('../controllers/credits-controller');
 
-var lines0 = require('../../include/script/00-intro');
-var lines1 = require('../../include/script/01-test');
+var tutorialSequence   = require('./tutorial');
 
-var original_shape_01 = require('../../include/shapes/original_01');
-var original_shape_03 = require('../../include/shapes/original_03');
-var original_shape_06 = require('../../include/shapes/original_06');
+var intro_lines        = require('../../include/script/00-intro');
+var fake_lines         = require('../../include/script/01-test');
+
+var original_shape_03  = require('../../include/shapes/original_03');
+var original_shape_06  = require('../../include/shapes/original_06');
 
 
 function gameSequence(events){
+  function tutorial(){
+    return function(){
+      var segments = tutorialSequence(events);
+      var c        = sequenceController(segments, 0);
+      c.segment.log('tutorial segment:');
+      c.progress.log('tutorial progress:');
+      c.end.log('tutorial end:');
+      return {type: 'sequence', controller: c};
+    };
+  }
   function read(lines){
     return function(){
       var c = dialogueController(events.layers.dialogue, lines);
@@ -33,12 +45,17 @@ function gameSequence(events){
   }
 
   return [
-    read(lines0),
-    cut(original_shape_01),
-    read(lines1),
+    //Introduction
+    read(intro_lines),
+    //Tutorial
+    tutorial(),
+    //Cut original card
+    read(fake_lines),
     cut(original_shape_03),
-    read(lines1),
+    //Cut original card
+    read(fake_lines),
     cut(original_shape_06),
+    //All done!
     rollCredits()
   ];
 }
