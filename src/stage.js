@@ -14,7 +14,7 @@ function stage($stage){
 }
 function desk($layer){
   $layer.background = $layer.find('.desk_background');
-  $layer.cut        = $layer.find('.card_cut');
+  $layer.cut        = $layer.find('.cut_path');
   $layer.cut_start  = $layer.find('.card_cut_start');
   $layer.cut_end    = $layer.find('.card_cut_end');
   $layer.target     = $layer.find('.card_target');

@@ -16,9 +16,12 @@ function pathString(pts){
 //View
 function cutoutView(layer, controller){
   pathView(layer, controller.path);
+  //Reset shapes
+  layer.target.attr('d',  '');
+  layer.overlap.attr('d', '');
+
 
   controller.target
-    .log('target: ')
     .map(toPath)
     .map(pathString)
     .onValue(function(path){
@@ -26,7 +29,6 @@ function cutoutView(layer, controller){
     });
 
   controller.overlap
-    .log('overlap: ')
     .map(toPath)
     .map(pathString)
     .onValue(function(path){

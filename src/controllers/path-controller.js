@@ -12,6 +12,7 @@ var WIDTH           = 960;
 var HEIGHT          = 640;
 var SMOOVE_DISTANCE = 15;
 var START_DISTANCE  = 15;
+var CLOSE_DISTANCE  = 100;
 
 //Controller
 function pathController(events){
@@ -35,6 +36,13 @@ function pathController(events){
       .toProperty(P2(WIDTH/2, HEIGHT/2));
   });
 
+  var isClose = currentPoint
+    .combine(startPoint, within(CLOSE_DISTANCE))
+    .changes()
+    .skipDuplicates()
+    .skip(1)
+    .toProperty(false);
+
   var pathEnd = currentPoint
     .combine(startPoint, within(START_DISTANCE))
     .skipDuplicates()
@@ -49,12 +57,17 @@ function pathController(events){
   return {
     path:         path,
     startPoint:   startPoint,
-    currentPoint: currentPoint,
+    currentPoint: currentPoint
+      .takeUntil(pathEnd),
     
-    dragging:     Bacon.mergeAll(
+    isClose:      isClose
+      .takeUntil(pathEnd),
+    isDragging:   Bacon.mergeAll(
         events.dragStart.map(true),
         events.dragEnd.map(false)
-      ),
+      )
+      .toProperty(false)
+      .takeUntil(pathEnd),
     pathEnd:      pathEnd
   };
 }

@@ -10,6 +10,7 @@ var appView       = require('./sinks/app-view');
 var autosave      = require('./sinks/autosave');
 
 
+localStorage.progress = 3;
 var container  = document.querySelector('.game-container');
 resize(container, 960, 640);
 

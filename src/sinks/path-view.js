@@ -9,6 +9,9 @@ function pathString(pts){
 
 //View
 function pathView(layer, controller){
+  //Reset path
+  layer.cut.attr('d',  '');
+
   controller.path
     .map(pathString)
     .onValue(function(points){
@@ -26,6 +29,12 @@ function pathView(layer, controller){
       layer.cut_end
         .attr('transform', 'translate(' + point.x + ',' + point.y + ')');
     });
+
+  controller.isDragging
+    .onValue(layer, 'toggleClass', 'is-dragging');
+
+  controller.isClose
+    .onValue(layer, 'toggleClass', 'is-close');
 }
 
 module.exports = pathView;
