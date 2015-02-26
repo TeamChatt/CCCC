@@ -25,10 +25,34 @@
             <image xlink:href="/images/paper.svg"          width="820" height="512" x="70"  y="64" />
             <image xlink:href="/images/original-stack.svg" width="200" height="180" x="0"   y="460"/>
             <image xlink:href="/images/work-stack.svg"     width="200" height="180" x="760" y="460"/>
+  
+            <filter id="drop-shadow">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="1" />
+              <feOffset dx="0" dy="2" />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="0.3"/>
+              </feComponentTransfer>
+              <feMerge>
+                  <feMergeNode />
+                  <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+  
+            <mask id="cut" width="960" height="640">
+              <rect class="cut_background" width="960" height="640"></rect>
+              <path class="cut_path" d="M0,0L60,60"></path>
+            </mask>
+
             <g class="card">
-              <circle r="15" class="card_cut_start"></circle>
-              <circle r="15" class="card_cut_end"></circle>
-              <path class="card_cut"></path>
+              <g class="card_paper">
+                <rect class="paper" width="600" height="400" x="180" y="120"></rect>
+              </g>
+              <g class="card_cut_start">
+                <circle r="15"></circle>
+              </g>
+              <g class="card_cut_end">
+                <circle r="15"></circle>
+              </g>
               <path class="card_target"></path>
               <path class="card_overlap"></path>
             </g>

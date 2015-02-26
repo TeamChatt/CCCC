@@ -14,9 +14,63 @@
   stroke-width: 2;
   fill:   none;
 }
+.card_cut_start {
+  fill: none;
+  opacity: 0.2;
+  
+  circle {
+    shape-rendering:  geometricPrecision;
+    stroke:           $black;
+    stroke-dasharray: 5;
+    stroke-width:     3;
+  } 
+}
+.card_cut_end {
+  fill: black;
+  opacity: 0.2;
+  
+  circle {
+    shape-rendering: geometricPrecision;
+    animation: 1s pulse infinite alternate;
+    animation-timing-function: ease-in-out;
+  }
+}
 .card_target {
-  fill: transparentize($black, 0.8);
+  fill:             none;
+  opacity: 0.2;
+
+  stroke:           $black;
+  stroke-dasharray: 10;
+  stroke-width:     3;
 }
 .card_overlap {
   fill: transparentize($magenta, 0.8);
+}
+
+#cut .cut_background {
+  fill: $white;
+}
+#cut .cut_path {
+  fill: none;
+  stroke: $black;
+  stroke-width: 4;
+}
+
+.card_paper {
+  filter: url('#drop-shadow');
+}
+.paper {
+  fill: $pistachio;
+  mask: url('#cut');
+}
+
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1.20, 1.20);
+  }
 }

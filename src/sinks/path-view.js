@@ -18,15 +18,13 @@ function pathView(layer, controller){
   controller.startPoint
     .onValue(function(point){
       layer.cut_start
-        .attr('cx', point.x)
-        .attr('cy', point.y);
+        .attr('transform', 'translate(' + point.x + ',' + point.y + ')');
     });
 
   controller.currentPoint
     .onValue(function(point){
       layer.cut_end
-        .attr('cx', point.x)
-        .attr('cy', point.y);
+        .attr('transform', 'translate(' + point.x + ',' + point.y + ')');
     });
 }
 
