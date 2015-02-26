@@ -6,14 +6,30 @@
 
 .autosave-icon {
   position: absolute;
-  width:    5%;
+  width:    10%;
   right:    0;
   bottom:   0;
+
+  transition: opacity 0.25s;
+
+  animation: 1s pulse infinite alternate;
+  animation-timing-function: ease-in-out;
 }
 .autosave-icon.is-hidden {
-  display: none;
+  opacity: 0;
+}
+.autosave-icon_text {
+  // animation: 1s spin infinite;
+  // animation-timing-function: linear;
 }
 
 .timer.is-hidden {
   display: none;
+}
+
+
+@keyframes spin {
+  0%   { transform: rotate(0   35 35); }
+  50%  { transform: rotate(180 35 35); }
+  100% { transform: rotate(360 35 35); }
 }

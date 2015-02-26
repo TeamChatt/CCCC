@@ -5,6 +5,7 @@ var pathController = require('./path-controller');
 var union          = require('../union');
 var score          = require('../score');
 
+var SUCCESS_THRESHOLD = 0.5;
 
 //Controller
 function cutoutController(events, shape){
@@ -17,11 +18,17 @@ function cutoutController(events, shape){
     .map(toPolygon)
     .map(score, shape);
 
+
   return {
     overlap: final_path.map(toPolygon).map(union, shape),
     path:    path_controller,
     target:  Bacon.constant(shape),
+    
     score:   final_score,
+    success: final_score
+      .filter(function(s){ return s > SUCCESS_THRESHOLD; }),
+    failure: final_score
+      .filter(function(s){ return s < SUCCESS_THRESHOLD; }),
     end:     path_controller.pathEnd
   };
 }
