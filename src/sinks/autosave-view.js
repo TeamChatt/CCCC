@@ -13,4 +13,5 @@ function autosaveView(layer, progress){
     });
 }
 
+
 module.exports = autosaveView;

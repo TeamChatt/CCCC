@@ -2,6 +2,7 @@
 
 var pathView = require('./path-view');
 
+
 function toPath(polygon){
   return polygon.map(function(v){
     return {x: v[0], y: v[1]};
@@ -35,5 +36,6 @@ function cutoutView(layer, controller){
       layer.overlap.attr('d', path);
     });
 }
+
 
 module.exports = cutoutView;

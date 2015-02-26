@@ -1,7 +1,7 @@
 'use strict';
 
 var sequenceController = require('../controllers/sequence-controller');
-var cutoutController   = require('../controllers/cutout-controller');
+var cardController     = require('../controllers/card-controller');
 var dialogueController = require('../controllers/dialogue-controller');
 var creditsController  = require('../controllers/credits-controller');
 
@@ -29,10 +29,10 @@ function gameSequence(events){
       return {type: 'dialogue', controller: c};
     };
   }
-  function cut(shape){
+  function card(shape){
     return function(){
-      var c = cutoutController(events.layers.desk, shape);
-      return {type: 'cutout', controller: c};
+      var c = cardController(events.layers.desk, shape);
+      return {type: 'card', controller: c};
     };
   }
   function rollCredits(){
@@ -49,10 +49,10 @@ function gameSequence(events){
     tutorial(),
     //Cut original card
     read(fake_lines),
-    cut(original_shape_03),
+    card(original_shape_03),
     //Cut original card
     read(fake_lines),
-    cut(original_shape_06),
+    card(original_shape_06),
     //All done!
     rollCredits()
   ];

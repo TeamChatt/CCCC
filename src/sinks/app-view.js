@@ -2,6 +2,7 @@
 
 var gameView = require('./game-view');
 
+
 //View
 function appView(stage, controller){
   controller.game
@@ -14,5 +15,6 @@ function appView(stage, controller){
       gameView(stage, game_controller);
     });
 }
+
 
 module.exports = appView;

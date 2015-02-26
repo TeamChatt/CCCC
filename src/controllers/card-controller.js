@@ -7,7 +7,7 @@ var cutoutController = require('./cutout-controller');
 //Controller
 function cardController(events, shape){
   var cutout_controller = retry(function(){
-      return cutoutController(events, shape);
+      return Bacon.once(cutoutController(events, shape));
     })
     .toProperty();
 
@@ -16,8 +16,9 @@ function cardController(events, shape){
     end:     cutout_controller.endEvent()
   };
 }
+//Retry until the player gets a good-enough score
 function retry(event){
-  var first = event();
+  var first = event().delay(0);
   var next  = first
     .flatMapLatest(function(c){
       var success = c.success
@@ -28,6 +29,7 @@ function retry(event){
         });
       return success.merge(failure);
     });
+  next.onValue(function(){});
 
   return first.concat(next);
 }

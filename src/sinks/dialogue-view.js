@@ -18,4 +18,5 @@ function dialogueView(layer, controller){
     .onValue(layer.text, 'html');
 }
 
+
 module.exports = dialogueView;

@@ -2,6 +2,8 @@
 
 var dialogueView = require('./dialogue-view');
 var cutoutView   = require('./cutout-view');
+var cardView     = require('./card-view');
+
 
 //View
 function sequenceView(stage, controller){
@@ -31,6 +33,13 @@ function sequenceView(stage, controller){
     .onValue(function(cutout_controller){
       cutoutView(stage.desk, cutout_controller);
     });
+  
+  controller.segment
+    .filter(function(s){ return s.type === 'card'; })
+    .map('.controller')
+    .onValue(function(card_controller){
+      cardView(stage.desk, card_controller);
+    });
 
   controller.segment
     .filter(function(s){ return s.type === 'sequence'; })
@@ -39,5 +48,6 @@ function sequenceView(stage, controller){
       sequenceView(stage, sequence_controller);
     });
 }
+
 
 module.exports = sequenceView;

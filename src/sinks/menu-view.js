@@ -7,4 +7,5 @@ function menuView(layer, menu_controller){
     .onValue(layer, 'toggleClass', 'is-hidden');
 }
 
+
 module.exports = menuView;

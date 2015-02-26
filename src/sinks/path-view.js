@@ -37,4 +37,5 @@ function pathView(layer, controller){
     .onValue(layer, 'toggleClass', 'is-close');
 }
 
+
 module.exports = pathView;
