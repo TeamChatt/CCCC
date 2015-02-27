@@ -1,7 +1,7 @@
 'use strict';
 
 var Bacon            = require('baconjs');
-var cutoutController = require('./cutout-controller');
+var cutoutController = require('./tasks/cutout-controller');
 
 
 //Controller

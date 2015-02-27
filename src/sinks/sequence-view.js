@@ -3,6 +3,7 @@
 var dialogueView = require('./dialogue-view');
 var cutoutView   = require('./cutout-view');
 var cardView     = require('./card-view');
+var creditsView  = require('./credits-view');
 
 
 //View
@@ -19,31 +20,31 @@ function sequenceView(stage, controller){
   showCredits
     .not().onValue(stage.credits, 'toggleClass', 'is-hidden');
 
+
   //Show scene
-  controller.segment
-    .filter(function(s){ return s.type === 'dialogue'; })
-    .map('.controller')
+  function scene(type){
+    return controller.segment
+      .filter(function(s){ return s.type === type; })
+      .map('.controller');
+  }
+
+  scene('dialogue')
     .onValue(function(dialogue_controller){
       dialogueView(stage.dialogue, dialogue_controller);
     });
-
-  controller.segment
-    .filter(function(s){ return s.type === 'cutout'; })
-    .map('.controller')
+  scene('credits')
+    .onValue(function(credits_controller){
+      creditsView(stage.credits, credits_controller);
+    });
+  scene('cutout')
     .onValue(function(cutout_controller){
       cutoutView(stage.desk, cutout_controller);
     });
-  
-  controller.segment
-    .filter(function(s){ return s.type === 'card'; })
-    .map('.controller')
+  scene('card')
     .onValue(function(card_controller){
       cardView(stage.desk, card_controller);
     });
-
-  controller.segment
-    .filter(function(s){ return s.type === 'sequence'; })
-    .map('.controller')
+  scene('sequence')
     .onValue(function(sequence_controller){
       sequenceView(stage, sequence_controller);
     });

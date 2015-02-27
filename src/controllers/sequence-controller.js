@@ -20,9 +20,10 @@ function sequenceController(segments, start){
     .skip(1)
     .count()
     .map(function(x){ return x+start; });
-  var end      = progress
-    .filter(function(x){ return x === segments.length; })
-    .take(1);
+  var end      = segment
+    .skip(segments.length - start - 1)
+    .take(1)
+    .flatMapLatest('.controller.end');
 
   //Subscribe so we always get the latest value
   progress.onValue(function(){});

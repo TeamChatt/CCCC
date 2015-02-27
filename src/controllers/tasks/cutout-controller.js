@@ -2,8 +2,8 @@
 
 var Bacon          = require('baconjs');
 var pathController = require('./path-controller');
-var union          = require('../union');
-var score          = require('../score');
+var union          = require('../../union');
+var score          = require('../../score');
 
 var SUCCESS_THRESHOLD = 0.5;
 

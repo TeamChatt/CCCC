@@ -1,6 +1,6 @@
 'use strict';
 
-var cutoutController   = require('../controllers/cutout-controller');
+var cutoutController   = require('../controllers/tasks/cutout-controller');
 var dialogueController = require('../controllers/dialogue-controller');
 
 var lines_1 = require('../../include/script/tutorial/01-drag-template');

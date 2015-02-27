@@ -1,11 +1,11 @@
 'use strict';
 
 var Bacon = require('baconjs');
-require('../../lib/engine/core/util');
+require('../../../lib/engine/core/util');
 
-var V2    = require('../../lib/engine/core/vector').V2;
-var P2    = require('../../lib/engine/core/vector').P2;
-var S     = require('../../lib/engine/core/vector').S;
+var V2    = require('../../../lib/engine/core/vector').V2;
+var P2    = require('../../../lib/engine/core/vector').P2;
+var S     = require('../../../lib/engine/core/vector').S;
 
 
 var WIDTH           = 960;
