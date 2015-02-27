@@ -3,7 +3,6 @@
 var dialogueView = require('./dialogue-view');
 var cutoutView   = require('./cutout-view');
 var cardView     = require('./card-view');
-var creditsView  = require('./credits-view');
 
 
 //View
@@ -31,10 +30,6 @@ function sequenceView(stage, controller){
   scene('dialogue')
     .onValue(function(dialogue_controller){
       dialogueView(stage.dialogue, dialogue_controller);
-    });
-  scene('credits')
-    .onValue(function(credits_controller){
-      creditsView(stage.credits, credits_controller);
     });
   scene('cutout')
     .onValue(function(cutout_controller){

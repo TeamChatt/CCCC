@@ -4,7 +4,7 @@
 //Controller
 function creditsController(events){
   return {
-    next: events.next
+    end: events.next
   };
 }
 

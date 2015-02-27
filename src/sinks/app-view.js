@@ -9,6 +9,12 @@ function appView(stage, controller){
     .onValue(function(){
       stage.title.toggleClass('is-hidden', true);
     });
+  controller.game
+    .flatMapLatest('.end')
+    .onValue(function(){
+      stage.reset();
+    });
+
 
   controller.game
     .onValue(function(game_controller){

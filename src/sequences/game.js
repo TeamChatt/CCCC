@@ -19,7 +19,6 @@ function gameSequence(events){
     return function(){
       var segments = tutorialSequence(events);
       var c        = sequenceController(segments, 0);
-      c.end.log('tutorial end:');
       return {type: 'sequence', controller: c};
     };
   }
