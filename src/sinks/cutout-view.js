@@ -12,7 +12,7 @@ function pathString(pts){
   return 'M' + pts.map(function(pt){
       return pt.x + ',' + pt.y;
     })
-    .join('L');
+    .join('L') + 'Z';
 }
 //View
 function cutoutView(layer, controller){

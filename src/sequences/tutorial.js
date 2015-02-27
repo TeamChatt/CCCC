@@ -49,7 +49,7 @@ function tutorialSequence(events){
   function pause(){
     return function(){
       var c = resumeObjective(events);
-      return {type: 'fakeTask', controller: c};
+      return {type: 'pauseTask', controller: c};
     };
   }
 
