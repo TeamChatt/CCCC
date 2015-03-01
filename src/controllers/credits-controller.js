@@ -1,10 +1,14 @@
 'use strict';
 
+var Bacon = require('baconjs');
+
 
 //Controller
 function creditsController(events){
   return {
-    end: events.next
+    end: Bacon.later(1000, {})
+      .flatMap(function(){ return events.next; })
+      .take(1)
   };
 }
 
