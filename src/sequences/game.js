@@ -4,7 +4,12 @@ var sequenceController = require('../controllers/sequence-controller');
 
 var ch01 = require('./ch01-intro');
 var ch02 = require('./ch02-tutorial');
-var ch03 = require('./fakechapter');
+var ch03 = require('./ch03-valentines-day');
+var ch04 = require('./ch04-spring');
+var ch05 = require('./ch05-summer');
+var ch06 = require('./ch06-fall');
+var ch07 = require('./ch07-winter');
+var ch08 = require('./ch08-visit');
 
 
 function gameSequence(events){
@@ -19,7 +24,12 @@ function gameSequence(events){
   return [
     chapter(ch01),
     chapter(ch02),
-    chapter(ch03)
+    chapter(ch03),
+    chapter(ch04),
+    chapter(ch05),
+    chapter(ch06),
+    chapter(ch07),
+    chapter(ch08)
   ];
 }
 
