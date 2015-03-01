@@ -25,7 +25,12 @@ function gameController(events, game_state){
     .takeUntil(end);
 
   return {
-    sequence: sequence_controller,
+    sequence: {
+      segment: sequence_controller.segment
+        .delay(0)
+        .flatMapLatest('.controller.segment')
+        .toProperty()
+    },
     menu:     menuController({ isPaused: isPaused }),
     progress: sequence_controller.progress,
     end:      end

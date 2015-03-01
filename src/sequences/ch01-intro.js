@@ -13,7 +13,7 @@ function introSequence(events){
     //Task 1:
     t.read(lines_01),
     t.cutscene(),
-    t.read(lines_02),
+    t.read(lines_02)
   ];
 }
 

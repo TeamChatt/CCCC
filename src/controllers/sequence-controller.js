@@ -15,7 +15,7 @@ function sequenceController(segments, start){
     }, head);
   }
 
-  var segment  = runSequence(segments.slice(start));
+  var segment  = runSequence(segments.slice(start)).toProperty();
   var progress = segment
     .skip(1)
     .count()
@@ -35,23 +35,20 @@ function sequenceController(segments, start){
   };
 }
 function sequence(initial){
-  function wrap(event){
-    event.then = function(when, next){
-      var becomes = event
+  function wrap(first, last){
+    first.then = function(when, next){
+      var becomes = last
         .take(1)
         .flatMap(when)
         .map(function(){ return next(); });
 
-      return wrap(event
-        .toEventStream()
-        .concat(becomes)
-        .toProperty()
-      );
+      return wrap(first.merge(becomes), becomes);
     };
-    return event;
+    return first;
   }
 
-  return wrap(Bacon.constant(initial));
+  var first = Bacon.once(initial).delay(0);
+  return wrap(first, first);
 }
 
 

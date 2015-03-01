@@ -21,11 +21,6 @@
         
         <div class="game_layer desk">
           <svg class="desk_background" viewBox="0 0 960 640">
-            <image xlink:href="/images/desk.svg"           width="960" height="640"/>
-            <image xlink:href="/images/paper.svg"          width="820" height="512" x="70"  y="64" />
-            <image xlink:href="/images/original-stack.svg" width="200" height="180" x="0"   y="460"/>
-            <image xlink:href="/images/work-stack.svg"     width="200" height="180" x="760" y="460"/>
-  
             <filter id="drop-shadow">
               <feGaussianBlur in="SourceAlpha" stdDeviation="1" />
               <feOffset dx="0" dy="2" />
@@ -42,10 +37,12 @@
               <rect class="cut_background" width="960" height="640"></rect>
               <path class="cut_path" d="M0,0L60,60"></path>
             </mask>
+            
+            <image xlink:href="/images/desk.svg" width="960" height="640"/>
 
             <g class="card">
               <g class="card_paper">
-                <rect class="paper" width="600" height="400" x="180" y="120"></rect>
+                <image class="paper" xlink:href="/images/paper.svg" width="820" height="512" x="70"  y="64" />
               </g>
               <g class="card_cut_start">
                 <circle r="15"></circle>
@@ -56,6 +53,10 @@
               <path class="card_target"></path>
               <path class="card_overlap"></path>
             </g>
+            
+            <image xlink:href="/images/original-stack.svg" width="200" height="180" x="0"   y="460"/>
+            <image xlink:href="/images/work-stack.svg"     width="200" height="180" x="760" y="460"/>
+
           </svg>
         </div>
         
