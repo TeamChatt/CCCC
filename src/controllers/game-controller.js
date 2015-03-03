@@ -24,6 +24,18 @@ function gameController(events, game_state){
     .toProperty(false)
     .takeUntil(end);
 
+
+  var enrollment  = sequence_controller.segment
+    .delay(0)
+    .flatMapLatest('.controller.segment')
+    .filter(function(s){ return s.type === 'enroll'; })
+    .map('.controller');
+  
+  var player_info = enrollment
+    .flatMapLatest('.player_info')
+    .sampledBy(enrollment.flatMapLatest('.end'))
+    .log();
+
   return {
     sequence: {
       segment: sequence_controller.segment
@@ -31,9 +43,10 @@ function gameController(events, game_state){
         .flatMapLatest('.controller.segment')
         .toProperty()
     },
-    menu:     menuController({ isPaused: isPaused }),
-    progress: sequence_controller.progress,
-    end:      end
+    menu:        menuController({ isPaused: isPaused }),
+    player_info: player_info,
+    progress:    sequence_controller.progress,
+    end:         end
   };
 }
 

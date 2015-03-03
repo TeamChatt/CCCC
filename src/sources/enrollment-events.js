@@ -16,10 +16,13 @@ function enrollmentEvents(layer){
 
   var name = layer.name.asEventStream('keyup input')
     .merge(layer.name.asEventStream('cut paste').delay(1))
-    .merge(autofill());
+    .merge(autofill())
+    .map('.target.value');
 
-  var pronoun  = layer.pronoun.asEventStream('change');
-  var interest = layer.interest.asEventStream('change');
+  var pronoun  = layer.pronoun.asEventStream('change')
+    .map('.target.value');
+  var interest = layer.interest.asEventStream('change')
+    .map('.target.value');
   var submit   = layer.button.asEventStream('click')
     .doAction('.preventDefault')
     .filter(function(){ return !layer.button.is(':disabled'); });

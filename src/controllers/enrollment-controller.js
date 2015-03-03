@@ -16,10 +16,14 @@ function enrollmentController(events){
       return info.name && info.pronoun && info.interest;
     });
 
+  var end = events.submit;
+
   return {
-    player_info: player_info,
-    done:        done,
-    end:         events.submit
+    player_info: player_info
+      .takeUntil(end),
+    done:        done
+      .takeUntil(end),
+    end:         end
   };
 }
 
