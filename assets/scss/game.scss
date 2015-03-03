@@ -5,6 +5,7 @@
 
 @import "./layers/desk";
 @import "./layers/dialogue";
+@import "./layers/enrollment";
 @import "./layers/hud";
 @import "./layers/menu";
 @import "./layers/title";
@@ -36,7 +37,6 @@ a:hover {
 
 $dark-melon: darken($melon, 3%);
 .button {
-
   font-family: 'Lato';
   font-size:   1.3em;
   color:       $white;
@@ -70,7 +70,26 @@ $dark-melon: darken($melon, 3%);
     inset 0 0.1ex 0.3ex transparentize($black, 0.8),
           0 0.1ex 0     $white;
 }
+.button:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+
 .button--block {
   display: block;
   width: 100%;
+}
+
+.button--flat,
+.button--flat:hover,
+.button--flat:focus,
+.button--flat:active {
+  text-shadow: none;
+  background: none;
+  box-shadow: none;
+}
+.button--flat {
+  border: 0.3ex solid $dark-melon;
+  color: $dark-melon;
 }

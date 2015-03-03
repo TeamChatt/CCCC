@@ -23,6 +23,9 @@ function tasks(events){
 
 
   return {
+    //Intro Objectives
+    enroll:       taggedTask('enroll', fakeTask),
+
     //Tutorial Objectives
     dragTemplate: taggedTask('fakeTask', fakeTask),
     startCut:     taggedTask('fakeTask', fakeTask),

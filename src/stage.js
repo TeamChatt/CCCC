@@ -4,12 +4,13 @@ var $ = require('../lib/engine/core/input');
 
 
 function stage($stage){
-  $stage.desk     = desk     ($stage.find('.game_layer.desk'));
-  $stage.dialogue = dialogue ($stage.find('.game_layer.dialogue'));
-  $stage.menu     = menu     ($stage.find('.game_layer.menu'));
-  $stage.hud      = hud      ($stage.find('.game_layer.hud'));
-  $stage.title    = title    ($stage.find('.game_layer.title'));
-  $stage.credits  = credits  ($stage.find('.game_layer.credits'));
+  $stage.desk       = desk       ($stage.find('.game_layer.desk'));
+  $stage.enrollment = enrollment ($stage.find('.game_layer.enrollment'));
+  $stage.dialogue   = dialogue   ($stage.find('.game_layer.dialogue'));
+  $stage.menu       = menu       ($stage.find('.game_layer.menu'));
+  $stage.hud        = hud        ($stage.find('.game_layer.hud'));
+  $stage.title      = title      ($stage.find('.game_layer.title'));
+  $stage.credits    = credits    ($stage.find('.game_layer.credits'));
 
   $stage.reset = function(){
     $stage.desk     .reset();
@@ -35,6 +36,13 @@ function desk($layer){
     $layer.cut     .attr('d', '');
     $layer.target  .attr('d', '');
     $layer.overlap .attr('d', '');
+  };
+
+  return $layer;
+}
+function enrollment($layer){
+  $layer.reset = function(){
+    //???
   };
 
   return $layer;

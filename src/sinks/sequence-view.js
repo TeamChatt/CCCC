@@ -11,13 +11,16 @@ function sequenceView(stage, controller){
     .map('.type');
 
   //Show/hide layers
-  var showDialogue = type.map(function(t){ return t === 'dialogue'; });
-  var showCredits  = type.map(function(t){ return t === 'credits';  });
+  var showEnrollment = type.map(function(t){ return t === 'enroll';   });
+  var showDialogue   = type.map(function(t){ return t === 'dialogue'; });
+  var showCredits    = type.map(function(t){ return t === 'credits';  });
 
+  showEnrollment
+    .not().onValue(stage.enrollment, 'toggleClass', 'is-hidden');
   showDialogue
-    .not().onValue(stage.dialogue, 'toggleClass', 'is-hidden');
+    .not().onValue(stage.dialogue,   'toggleClass', 'is-hidden');
   showCredits
-    .not().onValue(stage.credits, 'toggleClass', 'is-hidden');
+    .not().onValue(stage.credits,    'toggleClass', 'is-hidden');
 
 
   //Show scene

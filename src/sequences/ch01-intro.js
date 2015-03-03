@@ -12,7 +12,7 @@ function introSequence(events){
   return [
     //Task 1:
     t.read(lines_01),
-    t.cutscene(),     //TODO: enrollment form
+    t.enroll(),
     t.read(lines_02)
   ];
 }
