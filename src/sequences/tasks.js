@@ -1,9 +1,10 @@
 'use strict';
 
-var dialogueController = require('../controllers/dialogue-controller');
-var cardController     = require('../controllers/card-controller');
-var cutoutController   = require('../controllers/tasks/cutout-controller');
-var creditsController  = require('../controllers/credits-controller');
+var dialogueController   = require('../controllers/dialogue-controller');
+var enrollmentController = require('../controllers/enrollment-controller');
+var cardController       = require('../controllers/card-controller');
+var cutoutController     = require('../controllers/tasks/cutout-controller');
+var creditsController    = require('../controllers/credits-controller');
 
 
 function tasks(events){
@@ -24,7 +25,9 @@ function tasks(events){
 
   return {
     //Intro Objectives
-    enroll:       taggedTask('enroll', fakeTask),
+    enroll:       taggedTask('enroll', function(){
+        return enrollmentController(events.layers.enrollment);
+      }),
 
     //Tutorial Objectives
     dragTemplate: taggedTask('fakeTask', fakeTask),

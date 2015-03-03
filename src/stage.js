@@ -13,12 +13,13 @@ function stage($stage){
   $stage.credits    = credits    ($stage.find('.game_layer.credits'));
 
   $stage.reset = function(){
-    $stage.desk     .reset();
-    $stage.dialogue .reset();
-    $stage.menu     .reset();
-    $stage.hud      .reset();
-    $stage.title    .reset();
-    $stage.credits  .reset();
+    $stage.desk       .reset();
+    $stage.enrollment .reset();
+    $stage.dialogue   .reset();
+    $stage.menu       .reset();
+    $stage.hud        .reset();
+    $stage.title      .reset();
+    $stage.credits    .reset();
   };
 
   return $stage;
@@ -41,8 +42,15 @@ function desk($layer){
   return $layer;
 }
 function enrollment($layer){
+  $layer.name     = $layer.find('#enrollment_name');
+  $layer.pronoun  = $layer.find('input[name="pronoun"]');
+  $layer.interest = $layer.find('input[name="interest"]');
+  $layer.button   = $layer.find('button');
+  
   $layer.reset = function(){
-    //???
+    $layer.pronoun.prop ('checked', false);
+    $layer.interest.prop('checked', false);
+    $layer.button.prop('disabled', true);
   };
 
   return $layer;

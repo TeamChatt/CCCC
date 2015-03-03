@@ -1,8 +1,9 @@
 'use strict';
 
-var dialogueView = require('./dialogue-view');
-var cutoutView   = require('./cutout-view');
-var cardView     = require('./card-view');
+var dialogueView   = require('./dialogue-view');
+var enrollmentView = require('./enrollment-view');
+var cutoutView     = require('./cutout-view');
+var cardView       = require('./card-view');
 
 
 //View
@@ -33,6 +34,10 @@ function sequenceView(stage, controller){
   scene('dialogue')
     .onValue(function(dialogue_controller){
       dialogueView(stage.dialogue, dialogue_controller);
+    });
+  scene('enroll')
+    .onValue(function(enrollment_controller){
+      enrollmentView(stage.enrollment, enrollment_controller);
     });
   scene('cutout')
     .onValue(function(cutout_controller){
