@@ -17,8 +17,8 @@ var work_shape     = require('../../include/shapes/nye');
 var original_shape = require('../../include/shapes/original_01');
 
 
-function tutorialSequence(events){
-  var t = tasks(events);
+function tutorialSequence(events, env){
+  var t = tasks(events, env);
 
   return [
     //Task 1:

@@ -6,8 +6,8 @@ var lines_01 = require('../../include/script/ch01-intro/pt01');
 var lines_02 = require('../../include/script/ch01-intro/pt02');
 
 
-function introSequence(events){
-  var t = tasks(events);
+function introSequence(events, env){
+  var t = tasks(events, env);
 
   return [
     //Task 1:

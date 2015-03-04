@@ -12,10 +12,10 @@ var ch07 = require('./ch07-winter');
 var ch08 = require('./ch08-visit');
 
 
-function gameSequence(events){
+function gameSequence(events, env){
   function chapter(sequence){
     return function(){
-      var segments = sequence(events);
+      var segments = sequence(events, env);
       var c        = sequenceController(segments, 0);
       return {type: 'sequence', controller: c};
     };

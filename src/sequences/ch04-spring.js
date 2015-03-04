@@ -7,8 +7,8 @@ var lines_02 = require('../../include/script/ch04-spring/pt02');
 var lines_03 = require('../../include/script/ch04-spring/pt03');
 
 
-function springSequence(events){
-  var t = tasks(events);
+function springSequence(events, env){
+  var t = tasks(events, env);
 
   return [
     t.read(lines_01),

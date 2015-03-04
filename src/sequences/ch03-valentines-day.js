@@ -10,8 +10,8 @@ var lines_05 = require('../../include/script/ch03-valentines-day/pt05');
 var lines_06 = require('../../include/script/ch03-valentines-day/pt06');
 
 
-function valentinesSequence(events){
-  var t = tasks(events);
+function valentinesSequence(events, env){
+  var t = tasks(events, env);
 
   return [
     t.read(lines_01),

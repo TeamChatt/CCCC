@@ -6,8 +6,8 @@ var lines_01 = require('../../include/script/ch07-winter/pt01');
 var lines_02 = require('../../include/script/ch07-winter/pt02');
 
 
-function winterSequence(events){
-  var t = tasks(events);
+function winterSequence(events, env){
+  var t = tasks(events, env);
 
   return [
     t.read(lines_01),

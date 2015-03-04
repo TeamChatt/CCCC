@@ -9,11 +9,21 @@ var appController = require('./controllers/app-controller');
 var appView       = require('./sinks/app-view');
 var autosave      = require('./sinks/autosave');
 
+//Saved game
+localStorage.progress = {
+	chapter: 7,
+	player_info: {
+		name:     'Matt',
+		pronoun:  'm',
+		interest: 'n'
+	}
+};
 
-localStorage.progress = 7;
+//Make the game resize to fit the screen
 var container  = document.querySelector('.game-container');
 resize(container, 960, 640);
 
+//Start the game
 var controller = appController(gameEvents(stage));
 appView(stage, controller);
 autosave(controller);

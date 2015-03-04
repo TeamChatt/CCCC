@@ -7,7 +7,7 @@ var cutoutController     = require('../controllers/tasks/cutout-controller');
 var creditsController    = require('../controllers/credits-controller');
 
 
-function tasks(events){
+function tasks(events, env){
   function fakeTask(){
     return {
       end: events.layers.desk.dragStart.take(1)
@@ -43,7 +43,7 @@ function tasks(events){
 
     //Game Objectives
     read: taggedTask('dialogue', function(lines){
-        return dialogueController(events.layers.dialogue, lines);
+        return dialogueController(events.layers.dialogue, env, lines);
       }),
     cutscene: taggedTask('fakeTask', fakeTask),
     card:     taggedTask('card', function(shape){

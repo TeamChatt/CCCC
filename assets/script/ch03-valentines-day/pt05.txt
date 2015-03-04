@@ -14,4 +14,4 @@ Cap’n Cutout [questioning]:
 Yer makin’ me blush!
 
 Alma:
-Well, what are you waiting for? Write [her/him/them] a card back!
+Well, what are you waiting for? Write {her/him/them} a card back!

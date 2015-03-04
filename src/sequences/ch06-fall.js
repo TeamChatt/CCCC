@@ -8,8 +8,8 @@ var lines_03 = require('../../include/script/ch06-fall/pt03');
 var lines_04 = require('../../include/script/ch06-fall/pt04');
 
 
-function fallSequence(events){
-  var t = tasks(events);
+function fallSequence(events, env){
+  var t = tasks(events, env);
 
   return [
     t.read(lines_01),
