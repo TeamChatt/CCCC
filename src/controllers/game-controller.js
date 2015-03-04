@@ -23,8 +23,8 @@ function gameController(events, game_state){
     .filter(function(s){ return s.type === 'enroll'; })
     .map('.controller');
   var player_info = enrollment
-    .flatMapLatest('.player_info')
-    .sampledBy(enrollment.flatMapLatest('.end'))
+    .flatMap('.player_info')
+    .sampledBy(enrollment.flatMap('.end'))
     .toProperty(game_state.player_info);
 
   var sequence_controller = sequenceController(
@@ -46,8 +46,10 @@ function gameController(events, game_state){
       segment: segment.toProperty()
     },
     menu:        menuController({ isPaused: isPaused.takeUntil(end) }),
-    player_info: player_info,
-    progress:    sequence_controller.progress,
+    progress:    Bacon.combineTemplate({
+      chapter:     sequence_controller.progress,
+      player_info: player_info
+    }),
     end:         end
   };
 }

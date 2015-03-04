@@ -23,7 +23,7 @@ function enrollmentEvents(layer){
     .map('.target.value');
   var interest = layer.interest.asEventStream('change')
     .map('.target.value');
-  var submit   = layer.button.asEventStream('click')
+  var submit   = layer.button.clickE()
     .doAction('.preventDefault')
     .filter(function(){ return !layer.button.is(':disabled'); });
 

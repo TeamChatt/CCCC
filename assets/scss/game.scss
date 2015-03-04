@@ -40,7 +40,7 @@ $dark-melon: darken($melon, 3%);
   font-family: 'Lato';
   font-size:   1.3em;
   color:       $white;
-  text-shadow: 0 -0.2ex darken($dark-melon, 8%);
+  text-shadow: 0 -2px darken($dark-melon, 8%);
   
   padding-top:    0.8em;
   padding-bottom: 0.8em;
@@ -48,8 +48,8 @@ $dark-melon: darken($melon, 3%);
   background-color: $melon;
   background:       linear-gradient(to bottom, $melon, $dark-melon);
   box-shadow:
-    inset 0 0.1ex 0     transparentize($white, 0.5),
-          0 0.1ex 0.2ex transparentize($black, 0.85);
+    inset 0 1px 0   transparentize($white, 0.5),
+          0 1px 2px transparentize($black, 0.85);
 
   border:        0.1ex solid darken($dark-melon, 8%);
   border-radius: 2em;
@@ -63,12 +63,12 @@ $dark-melon: darken($melon, 3%);
 }
 .button:active {
   color:       darken($dark-melon, 8%);
-  text-shadow: 0 0.1ex transparentize($white, 0.6);
+  text-shadow: 0 1px transparentize($white, 0.6);
 
   background: desaturate($melon, 10%);
   box-shadow:
-    inset 0 0.1ex 0.3ex transparentize($black, 0.8),
-          0 0.1ex 0     $white;
+    inset 0 1px 3px transparentize($black, 0.8),
+          0 1px 0   $white;
 }
 .button:disabled {
   opacity: 0.2;

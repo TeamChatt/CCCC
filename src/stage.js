@@ -68,6 +68,10 @@ function dialogue($layer){
   return $layer;
 }
 function menu($layer){
+  $layer.resume  = $layer.find('[data-action=resume]');
+  $layer.restart = $layer.find('[data-action=restart]');
+  $layer.quit    = $layer.find('[data-action=quit]');
+
   $layer.reset = function(){
     $layer.toggleClass('is-hidden', true);
   };

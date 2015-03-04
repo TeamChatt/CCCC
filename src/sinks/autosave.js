@@ -5,7 +5,7 @@ function autosave(controller){
     .delay(0)
     .flatMapLatest('.progress')
     .onValue(function(progress){
-      localStorage.progress = progress;
+      localStorage.progress = JSON.stringify(progress);
     });
 }
 

@@ -64,7 +64,7 @@ function snippetController(events, line){
       .merge(skipText),
     done:        shown
       .delay(0)
-      .flatMapLatest(function(){ return events.next; })
+      .flatMap(function(){ return events.next; })
       .take(1)
   };
 }

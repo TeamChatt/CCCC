@@ -10,14 +10,14 @@ var appView       = require('./sinks/app-view');
 var autosave      = require('./sinks/autosave');
 
 //Saved game
-localStorage.progress = {
+localStorage.progress = JSON.stringify({
 	chapter: 7,
 	player_info: {
 		name:     'Matt',
 		pronoun:  'm',
 		interest: 'n'
 	}
-};
+});
 
 //Make the game resize to fit the screen
 var container  = document.querySelector('.game-container');

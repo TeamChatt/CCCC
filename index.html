@@ -19,185 +19,19 @@
     <div class="game-container">
       <div id="stage" class="game">
         
-        <div class="game_layer desk">
-          <svg class="desk_background" viewBox="0 0 960 640">
-            <filter id="drop-shadow">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="1" />
-              <feOffset dx="0" dy="2" />
-              <feComponentTransfer>
-                <feFuncA type="linear" slope="0.3"/>
-              </feComponentTransfer>
-              <feMerge>
-                  <feMergeNode />
-                  <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-  
-            <mask id="cut" width="960" height="640">
-              <rect class="cut_background" width="960" height="640"></rect>
-              <path class="cut_path" d="M0,0L60,60"></path>
-            </mask>
-            
-            <image xlink:href="/images/desk.svg" width="960" height="640"/>
+        {% include "./include/layers/desk.html" %}
 
-            <g class="card">
-              <g class="card_paper">
-                <image class="paper" xlink:href="/images/paper.svg" width="820" height="512" x="70"  y="64" />
-              </g>
-              <g class="card_cut_start">
-                <circle r="15"></circle>
-              </g>
-              <g class="card_cut_end">
-                <circle r="15"></circle>
-              </g>
-              <path class="card_target"></path>
-              <path class="card_overlap"></path>
-            </g>
-            
-            <image xlink:href="/images/original-stack.svg" width="200" height="180" x="0"   y="460"/>
-            <image xlink:href="/images/work-stack.svg"     width="200" height="180" x="760" y="460"/>
+        {% include "./include/layers/enrollment.html" %}
+        
+        {% include "./include/layers/dialogue.html" %}
 
-          </svg>
-        </div>
+        {% include "./include/layers/hud.html" %}
 
-        <div class="game_layer enrollment is-hidden">
-          <form class="enrollment-form">
-            <div class="enrollment_title">
-              <h1>Captain Cutout&rsquo;s Card Creations</h1>
-              <h3>New Employee Form</h3>
-            </div>
+        {% include "./include/layers/menu.html" %}
 
-            <div class="enrollment_form-field">
-              <label for="enrollment_name">What's your name?</label>
-              <div class="enrollment_form-controls">
-                <input id="enrollment_name" type="text" autofill="false" autocomplete="off" />
-              </div>
-            </div>
-            
-            <div class="enrollment_form-field">
-              <label>What pronouns do you use to refer to yourself?</label>
+        {% include "./include/layers/title.html" %}
 
-              <div class="enrollment_form-controls">
-                <label class="enrollment_radio-button-label" for="enrollment_pronoun-m">
-                  He Him His
-                  <input id="enrollment_pronoun-m" name="pronoun" type="radio" value="m" />
-                  <div class="enrollment_radio-button"></div>
-                </label>
-
-                <label class="enrollment_radio-button-label" for="enrollment_pronoun-f">
-                  She Her Hers
-                  <input id="enrollment_pronoun-f" name="pronoun" type="radio" value="f" />
-                  <div class="enrollment_radio-button"></div>
-                </label>
-
-                <label class="enrollment_radio-button-label" for="enrollment_pronoun-n">
-                  They Them Their
-                  <input id="enrollment_pronoun-n" name="pronoun" type="radio" value="n" />
-                  <div class="enrollment_radio-button"></div>
-                </label>
-              </div>
-            </div>
-            
-            <div class="enrollment_form-field">
-              <label>Who do you like the most?</label>
-
-              <div class="enrollment_form-controls">
-                <label class="enrollment_radio-button-label" for="enrollment_interest-m">
-                  Boys
-                  <input id="enrollment_interest-m" name="interest" type="radio" value="m" />
-                  <div class="enrollment_radio-button"></div>
-                </label>
-
-                <label class="enrollment_radio-button-label" for="enrollment_interest-f">
-                  Girls
-                  <input id="enrollment_interest-f" name="interest" type="radio" value="f" />
-                  <div class="enrollment_radio-button"></div>
-                </label>
-
-                <label class="enrollment_radio-button-label" for="enrollment_interest-n">
-                  Everyone
-                  <input id="enrollment_interest-n" name="interest" type="radio" value="n" />
-                  <div class="enrollment_radio-button"></div>
-                </label>
-              </div>
-            </div>
-            
-            <button class="button button--block button--flat" disabled>Done</button>
-          </form>
-        </div>
-
-        <div class="game_layer dialogue">
-          <div class="dialogue_background">
-            <div class="dialogue_portrait"></div>
-            <div class="dialogue_body">
-              <h2 class="dialogue_speaker"></h2>
-              <p class="dialogue_text"></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="game_layer hud">
-          <svg class="autosave-icon is-hidden" viewBox="0 0 80 80" preserveAspectRatio"xMidYMid meet">
-            <image
-              xlink:href="/images/autosave.svg"       x="8" y="19" width="63" height="42.3"/>
-            <image class="autosave-icon_text"
-              xlink:href="/images/autosave-text.svg"  x="10" y="0" width="55.6" height="17.2"/>
-          </svg>
-          <svg class="timer is-hidden" viewBox="0 0 960 640">
-            <image class="timer_background" xlink:href="/images/timer.svg" width="140" height="140" x="810" y="10"/>
-            <g transform="translate(80,80)">
-              <path class="timer_fill"></path>
-            </g>
-          </svg>
-        </div>
-
-        <div class="game_layer menu is-hidden">
-          <div class="menu_background">
-            <h3>Game Paused (click to resume)</h3>
-          </div>
-          <div class="menu_window"></div>
-        </div>
-
-        <div class="game_layer title">
-          <svg class="title_background" viewBox="0 0 960 640">
-            <image xlink:href="/images/desk.svg" width="960" height="640"/>
-          </svg>
-          <div class="title_menu">
-            <h1>Cap&rsquo;n Cutout&rsquo;s Card Creations</h1>
-            <button class="button button--block" data-action="new-game">New Game</button>
-            <button class="button button--block" data-action="continue">Continue</button>
-          </div>
-        </div>
-
-        <div class="game_layer credits is-hidden">
-          <div class="credits_reel">
-            <h2>Thank you for playing Cap&rsquo;n Cutout&rsquo;s Card Creations</h2>
-
-            <p>Made with love by</p>
-
-            <div class="credits_row">
-              <div class="team-member">
-                <img src="/images/team/chelsea.jpg" class="team-member_avatar">
-                Chelsea Hostetter
-                <a class="team-member_homepage" href="https://twitter.com/chostett">@chostett</a>
-              </div>
-              <span class="ampersand">&amp;</span>
-              <div class="team-member">
-                <img src="/images/team/matt.jpg" class="team-member_avatar">
-                Matt Kaemmerer
-                <a class="team-member_homepage" href="https://twitter.com/sinceretopology">@sinceretopology</a>
-              </div>
-            </div>
-
-            <p>with music by</p>
-
-            <div class="team-member">
-              <img src="/images/team/tim.jpg" class="team-member_avatar">
-              Tim Vaughan
-              <a class="team-member_homepage" href="https://twitter.com/eps_tvaughan">@eps_tvaughan</a>
-            </div>
-          </div>
-        </div>
+        {% include "./include/layers/credits.html" %}
 
       </div>
     </div>

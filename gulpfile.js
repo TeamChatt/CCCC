@@ -6,6 +6,7 @@ var source        = require('vinyl-source-stream');
 var autoprefixer  = require('gulp-autoprefixer');
 var sass          = require('gulp-sass');
 var connect       = require('gulp-connect');
+var swig          = require('gulp-swig');
 var convertScript = require('./task/script');
 var convertShape  = require('./task/shape');
 
@@ -62,9 +63,11 @@ gulp.task('images', function(){
 
 gulp.task('html', function(){
   return gulp.src('index.html')
-    .pipe(gulp.dest('dist'))
+    .pipe(swig({defaults: {cache: false}}))
+    .pipe(gulp.dest('dist/'))
     .pipe(connect.reload());
 });
+
 
 gulp.task('build', ['js', 'css', 'scss', 'svg', 'images', 'html']);
 
@@ -78,6 +81,7 @@ gulp.task('watch', ['build'], function(){
   gulp.watch('assets/images/*.svg',   ['svg']);
   gulp.watch('assets/images/**/*',    ['images']);
   gulp.watch('index.html',            ['html']);
+  gulp.watch('include/layers/*.html', ['html']);
 });
 
 gulp.task('connect', ['build'], function() {

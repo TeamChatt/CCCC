@@ -47,11 +47,11 @@ function validateState(state){
   assert(typeof state === 'object');
   //Chapter should be a number in bounds
   assert(typeof state.chapter === 'number');
-  assert(state.chapter < 0 && state.chapter > 7);
+  assert(state.chapter >= 0 && state.chapter <= 7);
   //Name, pronoun, and interest should be strings
-  assert(state.player_info.name     === 'string');
-  assert(state.player_info.pronoun  === 'string');
-  assert(state.player_info.interest === 'string');
+  assert(typeof state.player_info.name     === 'string');
+  assert(typeof state.player_info.pronoun  === 'string');
+  assert(typeof state.player_info.interest === 'string');
 }
 function assert(prop){
   if(!prop){
