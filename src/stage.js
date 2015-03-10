@@ -32,9 +32,10 @@ function desk($layer){
   $layer.target     = $layer.find('.card_target');
   $layer.overlap    = $layer.find('.card_overlap');
 
+  $layer.paper             = $layer.find('.card_paper');
   $layer.template_target   = $layer.find('.template_target');
-  $layer.template_original = $layer.find('.template--original');
-  $layer.template_work     = $layer.find('.template--work');
+  $layer.original_template = $layer.find('.template--original');
+  $layer.work_template     = $layer.find('.template--work');
 
   $layer.reset = function(){
     //???
@@ -42,9 +43,10 @@ function desk($layer){
     $layer.target  .attr('d', '');
     $layer.overlap .attr('d', '');
 
+    $layer.paper             .toggleClass('is-hidden', true);
     $layer.template_target   .toggleClass('is-hidden', true);
-    $layer.template_original .toggleClass('is-hidden', true);
-    $layer.template_work     .toggleClass('is-hidden', true);
+    $layer.original_template .toggleClass('is-hidden', true);
+    $layer.work_template     .toggleClass('is-hidden', true);
   };
 
   return $layer;

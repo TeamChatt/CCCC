@@ -6,18 +6,25 @@ require('../../../lib/engine/core/util');
 var V2    = require('../../../lib/engine/core/vector').V2;
 var P2    = require('../../../lib/engine/core/vector').P2;
 
+var WORK_RECT   = {
+  x: 778,
+  y: 480,
+  w: 172,
+  h: 158
+};
+var TARGET_RECT = {
+  x: 280,
+  y: 120,
+  w: 400,
+  h: 400
+};
 
 //Controller
 function dragTemplateController(events){
   events.drag.onValue(function(){});
   events.dragEnd.onValue(function(){});
 
-  var startPosition = Bacon.constant({
-    x: 760,
-    y: 460,
-    w: 200,
-    h: 180
-  });
+  var startPosition = Bacon.constant(WORK_RECT);
   
   var currentPosition = Bacon.fix(function(currentPosition){
     var start = currentPosition
@@ -31,29 +38,32 @@ function dragTemplateController(events){
         return dragRect(rect, events.drag)
           .takeUntil(events.dragEnd);
       })
-      .toProperty({
-        x: 760,
-        y: 460,
-        w: 200,
-        h: 180
-      });
+      .toProperty(WORK_RECT);
   });
 
-  var templatePlaced = Bacon.never();
+  var templatePlaced = events.dragEnd
+    .map(TARGET_RECT)
+    .zip(currentPosition.map(centerPoint).sampledBy(events.dragEnd), withinRect)
+    .filter(function(x){ return x; })
+    .take(1);
 
   return {
     startPosition:   startPosition,
-    currentPosition: currentPosition,
+    currentPosition: currentPosition
+      .takeUntil(templatePlaced),
     
     isDragging:   Bacon.mergeAll(
         events.dragStart.map(true),
         events.dragEnd.map(false)
       )
       .toProperty(false)
-      .takeUntil(templatePlaced),
+      .takeUntil(templatePlaced.delay(0)),
 
     end:             templatePlaced
   };
+}
+function centerPoint(rect){
+  return P2(rect.x + rect.w/2, rect.y + rect.h/2);
 }
 function withinRect(rect, pt){
   var x_min = rect.x;

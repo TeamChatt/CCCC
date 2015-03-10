@@ -71,6 +71,9 @@
 
 
 //Template
+.template {
+  fill: $white;
+}
 .template.is-hidden {
   display: none;
 }
@@ -107,7 +110,9 @@
   fill: $pistachio;
   mask: url('#cut');
 }
-
+.card_paper.is-hidden {
+  display: none;
+}
 
 
 @keyframes pulse {
