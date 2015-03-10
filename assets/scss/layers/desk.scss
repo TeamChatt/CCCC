@@ -69,6 +69,27 @@
   fill: transparentize($magenta, 0.8);
 }
 
+
+//Template
+.template.is-hidden {
+  display: none;
+}
+.template_target {
+  fill:       none;
+  opacity:    0;
+  transition: opacity 0.75s;
+
+  stroke:           $black;
+  stroke-dasharray: 5;
+  stroke-width:     3;
+}
+.desk.is-dragging {
+  .template_target {
+    opacity: 0.2;
+  }
+}
+
+
 //Masking
 #cut .cut_background {
   fill: $white;

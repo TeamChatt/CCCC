@@ -2,11 +2,20 @@
 
 //View
 function dragTemplateView(layer, controller){
+  layer.template_work
+    .toggleClass('is-hidden', false)
+    .attr('x', 760)
+    .attr('y', 460);
+
   controller.currentPosition
     .onValue(function(rect){
-      layer.cut_end
-        .attr('transform', 'translate(' + rect.x + ',' + rect.y + ')');
+      layer.template_work
+        .attr('x', rect.x)
+        .attr('y', rect.y);
     });
+
+  controller.isDragging
+    .onValue(layer, 'toggleClass', 'is-dragging');
 }
 
 

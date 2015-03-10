@@ -39,10 +39,20 @@ function dragTemplateController(events){
       });
   });
 
+  var templatePlaced = Bacon.never();
+
   return {
     startPosition:   startPosition,
     currentPosition: currentPosition,
-    end:             Bacon.never()
+    
+    isDragging:   Bacon.mergeAll(
+        events.dragStart.map(true),
+        events.dragEnd.map(false)
+      )
+      .toProperty(false)
+      .takeUntil(templatePlaced),
+
+    end:             templatePlaced
   };
 }
 function withinRect(rect, pt){
