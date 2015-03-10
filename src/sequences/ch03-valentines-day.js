@@ -14,6 +14,7 @@ function valentinesSequence(events, env){
   var t = tasks(events, env);
 
   return [
+    t.dragTemplate(),
     t.read(lines_01),
     t.cutscene(),      //TODO: Work card
     t.read(lines_02),

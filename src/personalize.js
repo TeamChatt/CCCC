@@ -20,7 +20,7 @@ function setPronoun(pronoun, text){
     case 'm': flag = '$2'; break;
     default:  flag = '$3'; break;
   }
-  return text.replace(/\[(.*)\/(.*)\/(.*)\]/, flag);
+  return text.replace(/\[([^\[\]]*)\/([^\[\]]*)\/([^\[\]]*)\]/, flag);
 }
 function setInterest(interest, text){
   /* jshint indent: false */
@@ -30,7 +30,7 @@ function setInterest(interest, text){
     case 'm': flag = '$2'; break;
     default:  flag = '$3'; break;
   }
-  return text.replace(/\{(.*)\/(.*)\/(.*)\}/, flag);
+  return text.replace(/\{([^\[\]]*)\/([^\[\]]*)\/([^\[\]]*)\}/, flag);
 }
 
 

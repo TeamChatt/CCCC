@@ -1,10 +1,11 @@
 'use strict';
 
-var dialogueController   = require('../controllers/dialogue-controller');
-var enrollmentController = require('../controllers/enrollment-controller');
-var cardController       = require('../controllers/card-controller');
-var cutoutController     = require('../controllers/tasks/cutout-controller');
-var creditsController    = require('../controllers/credits-controller');
+var dialogueController     = require('../controllers/dialogue-controller');
+var enrollmentController   = require('../controllers/enrollment-controller');
+var cardController         = require('../controllers/card-controller');
+var cutoutController       = require('../controllers/tasks/cutout-controller');
+var dragTemplateController = require('../controllers/tasks/drag-template-controller');
+var creditsController      = require('../controllers/credits-controller');
 
 
 function tasks(events, env){
@@ -30,7 +31,9 @@ function tasks(events, env){
       }),
 
     //Tutorial Objectives
-    dragTemplate: taggedTask('fakeTask', fakeTask),
+    dragTemplate: taggedTask('dragTemplate', function(){
+        return dragTemplateController(events.layers.desk);
+      }),
     startCut:     taggedTask('fakeTask', fakeTask),
     finishCut:    taggedTask('fakeTask', fakeTask),
     
