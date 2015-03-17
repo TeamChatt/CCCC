@@ -10,7 +10,7 @@ function summerSequence(events, env){
 
   return [
     t.read(lines_01),
-    t.cutscene()      //TODO: mail
+    t.mail()          //TODO: import message
   ];
 }
 

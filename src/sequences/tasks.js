@@ -3,9 +3,9 @@
 var dialogueController     = require('../controllers/dialogue-controller');
 var enrollmentController   = require('../controllers/enrollment-controller');
 var cardController         = require('../controllers/card-controller');
+var mailController         = require('../controllers/mail-controller');
 var cutoutController       = require('../controllers/tasks/cutout-controller');
 var dragTemplateController = require('../controllers/tasks/drag-template-controller');
-var lineController         = require('../controllers/tasks/line-controller');
 var creditsController      = require('../controllers/credits-controller');
 
 
@@ -49,8 +49,8 @@ function tasks(events, env){
     read:        taggedTask('dialogue', function(lines){
         return dialogueController(events.layers.dialogue, env, lines);
       }),
-    line:        taggedTask('line', function(line){
-        return lineController(events.layers.desk, line);
+    mail:        taggedTask('mail', function(){
+        return mailController(events.layers.desk);
       }),
     cutscene:    taggedTask('fakeTask', fakeTask),
     card:        taggedTask('card', function(shape){

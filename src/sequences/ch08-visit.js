@@ -11,7 +11,7 @@ function visitSequence(events, env){
 
   return [
     t.read(lines_01),
-    t.cutscene(),      //TODO: mail
+    t.mail(),          //TODO: import message
     t.read(lines_02),
     t.cutscene(),      //TODO: cutscene
     t.rollCredits()

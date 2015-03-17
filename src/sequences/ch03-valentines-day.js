@@ -24,7 +24,7 @@ function valentinesSequence(events, env){
     t.read(lines_03),
     t.cutscene(),      //TODO: Work card
     t.read(lines_04),
-    t.cutscene(),      //TODO: Mail
+    t.mail(),          //TODO: import the message
     t.read(lines_05),
     t.cutscene(),      //TODO: Mail (response)
     t.read(lines_06)
