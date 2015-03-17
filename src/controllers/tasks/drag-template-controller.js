@@ -6,13 +6,19 @@ require('../../../lib/engine/core/util');
 var V2    = require('../../../lib/engine/core/vector').V2;
 var P2    = require('../../../lib/engine/core/vector').P2;
 
-var WORK_RECT   = {
+var WORK_RECT     = {
   x: 778,
   y: 480,
   w: 172,
   h: 158
 };
-var TARGET_RECT = {
+var ORIGINAL_RECT = {
+  x: 10,
+  y: 480,
+  w: 172,
+  h: 158
+};
+var TARGET_RECT   = {
   x: 280,
   y: 120,
   w: 400,

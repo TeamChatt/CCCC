@@ -6,6 +6,8 @@ function dragTemplateView(layer, controller){
     .toggleClass('is-hidden', false)
     .attr('x', 760)
     .attr('y', 460);
+  layer.template_target
+    .toggleClass('is-hidden', false);
 
   controller.currentPosition
     .onValue(function(rect){
@@ -19,8 +21,9 @@ function dragTemplateView(layer, controller){
 
   controller.end
     .onValue(function(){
-      layer.work_template.toggleClass('is-hidden', true);
-      layer.paper.toggleClass('is-hidden', false);
+      layer.template_target .toggleClass('is-hidden', true);
+      layer.work_template   .toggleClass('is-hidden', true);
+      layer.paper           .toggleClass('is-hidden', false);
     });
 }
 
