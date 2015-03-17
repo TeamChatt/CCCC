@@ -1,37 +1,51 @@
 'use strict';
 
-var Bacon            = require('baconjs');
-var cutoutController = require('./tasks/cutout-controller');
+var Bacon                  = require('baconjs');
+var dragTemplateController = require('./tasks/drag-template-controller');
+var cutoutController       = require('./tasks/cutout-controller');
 
 
 //Controller
 function cardController(events, shape){
-  var cutout_controller = retry(function(){
-      return Bacon.once(cutoutController(events, shape));
-    })
-    .toProperty();
+  var task = dragTemplate(3).toProperty();
+
+  //Drag template, then cutout shape, rinse, repeat
+  function dragTemplate(n){
+    var initial = {type: 'dragTemplate', controller: dragTemplateController(events)};
+    return transition(initial)
+      .then('.controller.end', function(){ return cutout(n); });
+  }
+  function cutout(n){
+    var initial = {type: 'cutout', controller: cutoutController(events, shape)};
+    var next    = (n === 1)                     ?
+      function(){ return Bacon.never(); }       :
+      function(){ return dragTemplate(n-1); };
+
+    return transition(initial)
+      .then('.controller.success', next)
+      .then('.controller.failure', function(){ return cutout(n); });
+  }
 
   return {
-    cutout:  cutout_controller,
-    end:     cutout_controller.endEvent()
+    task: task,
+    end:  task.endEvent()
   };
 }
-//Retry until the player gets a good-enough score
-function retry(event){
-  var first = event().delay(0);
-  var next  = first
-    .flatMapLatest(function(c){
-      var success = c.success
-        .flatMap(Bacon.never());
-      var failure = c.failure
-        .flatMap(function(){
-          return retry(event);
-        });
-      return success.merge(failure);
-    });
-  next.onValue(function(){});
+function transition(initial){
+  function wrap(start, current){
+    current.then = function(when, next){
+      var becomes = start
+        .flatMap(when)
+        .flatMap(next);
 
-  return first.concat(next);
+      return wrap(start, current.merge(becomes));
+    };
+    return current;
+  }
+
+  var first = Bacon.once(initial).delay(0);
+  return wrap(first, first);
 }
+
 
 module.exports = cardController;

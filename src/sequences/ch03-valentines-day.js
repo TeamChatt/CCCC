@@ -9,16 +9,18 @@ var lines_04 = require('../../include/script/ch03-valentines-day/pt04');
 var lines_05 = require('../../include/script/ch03-valentines-day/pt05');
 var lines_06 = require('../../include/script/ch03-valentines-day/pt06');
 
+var work_shape     = require('../../include/shapes/original_01'); //TODO
+var original_shape = require('../../include/shapes/original_01'); //TODO
+
 
 function valentinesSequence(events, env){
   var t = tasks(events, env);
 
   return [
-    t.dragTemplate(),
     t.read(lines_01),
-    t.cutscene(),      //TODO: Work card
+    t.card(work_shape),
     t.read(lines_02),
-    t.cutscene(),      //TODO: Original card
+    t.card(original_shape),
     t.read(lines_03),
     t.cutscene(),      //TODO: Work card
     t.read(lines_04),

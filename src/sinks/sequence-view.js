@@ -2,8 +2,8 @@
 
 var dialogueView     = require('./dialogue-view');
 var enrollmentView   = require('./enrollment-view');
-var cutoutView       = require('./cutout-view');
-var dragTemplateView = require('./drag-template-view');
+var cutoutView       = require('./tasks/cutout-view');
+var dragTemplateView = require('./tasks/drag-template-view');
 var cardView         = require('./card-view');
 
 
