@@ -4,6 +4,7 @@ var dialogueView     = require('./dialogue-view');
 var enrollmentView   = require('./enrollment-view');
 var cutoutView       = require('./tasks/cutout-view');
 var dragTemplateView = require('./tasks/drag-template-view');
+var lineView         = require('./tasks/line-view');
 var cardView         = require('./card-view');
 
 
@@ -43,6 +44,10 @@ function sequenceView(stage, controller){
   scene('dragTemplate')
     .onValue(function(drag_template_controller){
       dragTemplateView(stage.desk, drag_template_controller);
+    });
+  scene('line')
+    .onValue(function(line_controller){
+      lineView(stage.desk, line_controller);
     });
   scene('cutout')
     .onValue(function(cutout_controller){

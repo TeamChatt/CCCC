@@ -5,6 +5,7 @@ var enrollmentController   = require('../controllers/enrollment-controller');
 var cardController         = require('../controllers/card-controller');
 var cutoutController       = require('../controllers/tasks/cutout-controller');
 var dragTemplateController = require('../controllers/tasks/drag-template-controller');
+var lineController         = require('../controllers/tasks/line-controller');
 var creditsController      = require('../controllers/credits-controller');
 
 
@@ -45,11 +46,14 @@ function tasks(events, env){
       }),
 
     //Game Objectives
-    read: taggedTask('dialogue', function(lines){
+    read:        taggedTask('dialogue', function(lines){
         return dialogueController(events.layers.dialogue, env, lines);
       }),
-    cutscene: taggedTask('fakeTask', fakeTask),
-    card:     taggedTask('card', function(shape){
+    line:        taggedTask('line', function(line){
+        return lineController(events.layers.desk, line);
+      }),
+    cutscene:    taggedTask('fakeTask', fakeTask),
+    card:        taggedTask('card', function(shape){
         return cardController(events.layers.desk, shape);
       }),
     rollCredits: taggedTask('credits', function(){

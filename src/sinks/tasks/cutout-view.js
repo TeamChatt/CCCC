@@ -17,10 +17,13 @@ function pathString(pts){
 //View
 function cutoutView(layer, controller){
   pathView(layer, controller.path);
+  
   //Reset shapes
   layer.target.attr('d',  '');
   layer.overlap.attr('d', '');
 
+  //Set task type
+  layer.attr('data-task', 'cutout');
 
   controller.target
     .map(toPath)

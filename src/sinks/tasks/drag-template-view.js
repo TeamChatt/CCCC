@@ -2,6 +2,9 @@
 
 //View
 function dragTemplateView(layer, controller){
+  //Set task type
+  layer.attr('data-task', 'drag-template');
+
   layer.work_template
     .toggleClass('is-hidden', false)
     .attr('x', 760)
