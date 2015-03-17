@@ -9,10 +9,10 @@ var cardView         = require('./card-view');
 
 //View
 function sequenceView(stage, controller){
+  //Show/hide layers
   var type = controller.segment
     .map('.type');
 
-  //Show/hide layers
   var showEnrollment = type.map(function(t){ return t === 'enroll';   });
   var showDialogue   = type.map(function(t){ return t === 'dialogue'; });
   var showCredits    = type.map(function(t){ return t === 'credits';  });

@@ -38,7 +38,8 @@ function desk($layer){
   $layer.work_template     = $layer.find('.template--work');
 
   $layer.reset = function(){
-    //???
+    $layer.attr('data-task', '');
+
     $layer.cut     .attr('d', '');
     $layer.target  .attr('d', '');
     $layer.overlap .attr('d', '');

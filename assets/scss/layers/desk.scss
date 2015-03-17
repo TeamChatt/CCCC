@@ -13,7 +13,8 @@
 //UI-Hints
 .card_cut_start {
   fill: none;
-  opacity: 0.2;
+  opacity: 0;
+  transition: opacity 0.75s;
   
   circle {
     transform:  scale(0,0);
@@ -26,8 +27,9 @@
   }
 }
 .card_cut_end {
-  fill: black;
-  opacity: 0.2;
+  fill: $black;
+  opacity: 0;
+  transition: opacity 0.75s;
   
   circle {
     transform:  scale(1,1);
@@ -39,18 +41,26 @@
   }
 }
 
-.desk.is-dragging {
-  .card_cut_end {    
-    circle {
-      animation: 0.25s shrink 1 forwards;
-      animation-timing-function: ease-in;
+.desk[data-task="cutout"]{
+  .card_cut_start,
+  .card_cut_end {
+    opacity: 0.2;
+  }
+
+  &.is-dragging {
+    .card_cut_end {
+      circle {
+        animation: 0.25s shrink 1 forwards;
+        animation-timing-function: ease-in;
+      }
     }
   }
-}
-.desk.is-close {
-  .card_cut_start {
-    circle {
-      transform: scale(1,1);
+
+  &.is-close {
+    .card_cut_start {
+      circle {
+        transform: scale(1,1);
+      }
     }
   }
 }
@@ -59,7 +69,8 @@
 //Target Shape
 .card_target {
   fill:    none;
-  opacity: 0.2;
+  opacity: 0;
+  transition: opacity 0.75s;
 
   stroke:           $black;
   stroke-dasharray: 10;
@@ -67,6 +78,12 @@
 }
 .card_overlap {
   fill: transparentize($magenta, 0.8);
+}
+
+.desk[data-task="cutout"]{
+  .card_target {
+    opacity: 0.2;
+  }
 }
 
 
@@ -87,9 +104,12 @@
   stroke-dasharray: 5;
   stroke-width:     3;
 }
-.desk.is-dragging {
-  .template_target {
-    opacity: 0.2;
+
+.desk[data-task="drag-template"]{
+  &.is-dragging {
+    .template_target {
+      opacity: 0.2;
+    }
   }
 }
 
