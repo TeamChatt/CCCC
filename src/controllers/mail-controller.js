@@ -1,13 +1,13 @@
 'use strict';
 
 var Bacon          = require('baconjs');
-var lineController = require('./tasks/cutout-controller');
+var lineController = require('./tasks/line-controller');
 
 var P2 = require('../../lib/engine/core/vector').P2;
 
 var ENVELOPE_LINE = {
   start: P2(100,100),
-  end: P2(500,100)
+  end:   P2(500,100)
 };
 
 //Controller

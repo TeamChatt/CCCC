@@ -12,9 +12,7 @@ function mailView(layer, controller){
   }
 
   task('line')
-    .onValue(function(line_controller){
-      lineView(layer, line_controller);
-    });
+    .onValue(lineView, layer);
 }
 
 

@@ -6,6 +6,7 @@ var cutoutView       = require('./tasks/cutout-view');
 var dragTemplateView = require('./tasks/drag-template-view');
 var lineView         = require('./tasks/line-view');
 var cardView         = require('./card-view');
+var mailView         = require('./mail-view');
 
 
 //View
@@ -34,33 +35,21 @@ function sequenceView(stage, controller){
   }
 
   scene('dialogue')
-    .onValue(function(dialogue_controller){
-      dialogueView(stage.dialogue, dialogue_controller);
-    });
+    .onValue(dialogueView, stage.dialogue);
   scene('enroll')
-    .onValue(function(enrollment_controller){
-      enrollmentView(stage.enrollment, enrollment_controller);
-    });
+    .onValue(enrollmentView, stage.enrollment);
   scene('dragTemplate')
-    .onValue(function(drag_template_controller){
-      dragTemplateView(stage.desk, drag_template_controller);
-    });
+    .onValue(dragTemplateView, stage.desk);
   scene('line')
-    .onValue(function(line_controller){
-      lineView(stage.desk, line_controller);
-    });
+    .onValue(lineView, stage.desk);
   scene('cutout')
-    .onValue(function(cutout_controller){
-      cutoutView(stage.desk, cutout_controller);
-    });
+    .onValue(cutoutView, stage.desk);
   scene('card')
-    .onValue(function(card_controller){
-      cardView(stage.desk, card_controller);
-    });
+    .onValue(cardView, stage.desk);
+  scene('mail')
+    .onValue(mailView, stage.desk);
   scene('sequence')
-    .onValue(function(sequence_controller){
-      sequenceView(stage, sequence_controller);
-    });
+    .onValue(sequenceView, stage);
 }
 
 

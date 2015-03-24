@@ -13,14 +13,10 @@ function cardView(layer, controller){
   }
 
   task('dragTemplate')
-    .onValue(function(drag_template_controller){
-      dragTemplateView(layer, drag_template_controller);
-    });
+    .onValue(dragTemplateView, layer);
 
   task('cutout')
-    .onValue(function(cutout_controller){
-      cutoutView(layer, cutout_controller);
-    });
+    .onValue(cutoutView, layer);
 
 
   task('cutout')
@@ -33,9 +29,7 @@ function cardView(layer, controller){
   //Clean up when we're done
   controller
     .end
-    .onValue(function(){
-      layer.reset();
-    });
+    .onValue(layer.reset);
 }
 
 

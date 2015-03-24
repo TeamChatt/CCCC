@@ -28,16 +28,12 @@ function cutoutView(layer, controller){
   controller.target
     .map(toPath)
     .map(pathString)
-    .onValue(function(path){
-      layer.target.attr('d', path);
-    });
+    .onValue(layer.target, 'attr', 'd');
 
   controller.overlap
     .map(toPath)
     .map(pathString)
-    .onValue(function(path){
-      layer.overlap.attr('d', path);
-    });
+    .onValue(layer.overlap, 'attr', 'd');
 }
 
 

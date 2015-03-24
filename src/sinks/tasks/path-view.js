@@ -14,9 +14,7 @@ function pathView(layer, controller){
 
   controller.path
     .map(pathString)
-    .onValue(function(points){
-      layer.cut.attr('d', points);
-    });
+    .onValue(layer.cut, 'attr', 'd');
 
   controller.startPoint
     .onValue(function(point){

@@ -11,15 +11,11 @@ function appView(stage, controller){
     });
   controller.game
     .flatMapLatest('.end')
-    .onValue(function(){
-      stage.reset();
-    });
+    .onValue(stage.reset);
 
 
   controller.game
-    .onValue(function(game_controller){
-      gameView(stage, game_controller);
-    });
+    .onValue(gameView, stage);
 }
 
 
