@@ -114,6 +114,48 @@
 }
 
 
+//Card flip
+.desk {
+  perspective: 80em;
+}
+.card_shape {
+  transform-style: preserve-3d;
+  transform-origin: 480px;
+  transform: rotateY(0deg);
+  visibility: hidden;
+}
+.card-face--front {
+  transform-origin: 480px;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+.card-face--back {
+  transform-origin: 480px;
+  transform: rotateY(180deg);
+  visibility: hidden;
+}
+
+.desk[data-task="finished"]{
+  .card_shape {
+    visibility: visible;
+    animation: flip 1.5s 1 forwards;
+  }
+  .card-face--front {
+    animation: flip-front 1.5s 1 forwards;
+  }
+  .card-face--back {
+    animation: flip-back 1.5s 1 forwards;
+  }
+}
+
+.card_shape {
+  filter: url('#drop-shadow');
+}
+.card-face--front {
+  filter: url('#silhouette');
+}
+
+
+
 //Masking
 #cut .cut_background {
   fill: $white;
@@ -143,4 +185,39 @@
 @keyframes shrink {
   0%   { transform: scale(1, 1);     }
   100% { transform: scale(0.2, 0.2); }
+}
+@keyframes flip {
+  0%   {
+    transform: translateY(0)    translateZ(0)    rotateY(0deg);
+    animation-timing-function: ease-in;
+  }
+  50%  {
+    transform: translateY(-3em) translateZ(10em) rotateY(90deg);
+  }
+  100% {
+    transform: translateY(0)    translateZ(0)    rotateY(180deg);
+    animation-timing-function: ease-out;
+  }
+}
+@keyframes flip-front {
+  0%   {
+    visibility: visible;
+  }
+  50%  {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes flip-back {
+  0%   {
+    visibility: hidden;
+  }
+  50%  {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
 }

@@ -1,5 +1,6 @@
 <div class="game_layer desk">
   <svg class="desk_background" viewBox="0 0 960 640">
+    
     <filter id="drop-shadow">
       <feGaussianBlur in="SourceAlpha" stdDeviation="1" />
       <feOffset dx="0" dy="2" />
@@ -11,6 +12,15 @@
           <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
+    <filter id="silhouette">
+      <feColorMatrix in="SourceGraphic"
+        type="matrix"
+        values="0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 1 0" />
+    </filter>
+
 
     <mask id="cut" width="960" height="640">
       <rect class="cut_background" width="960" height="640"></rect>
@@ -31,6 +41,11 @@
       </g>
       <path class="card_target"></path>
       <path class="card_overlap"></path>
+
+      <g class="card_shape">
+        <image class="card-face card-face--front" xlink:href="/images/card-original_06.svg" width="960" height="640" x="0" y="0"/>
+        <image class="card-face card-face--back"  xlink:href="/images/card-original_06.svg" width="960" height="640" x="0" y="0"/>
+      </g>
     </g>
     
 
