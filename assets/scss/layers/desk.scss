@@ -134,7 +134,7 @@
   visibility: hidden;
 }
 
-.desk[data-task="finished"]{
+.desk[data-task="card-reveal"]{
   .card_shape {
     visibility: visible;
     animation: flip 1.5s 1 forwards;
@@ -200,24 +200,12 @@
   }
 }
 @keyframes flip-front {
-  0%   {
-    visibility: visible;
-  }
-  50%  {
-    visibility: hidden;
-  }
-  100% {
-    visibility: hidden;
-  }
+  0%   { visibility: visible; }
+  50%  { visibility: hidden;  }
+  100% { visibility: hidden;  }
 }
 @keyframes flip-back {
-  0%   {
-    visibility: hidden;
-  }
-  50%  {
-    visibility: hidden;
-  }
-  100% {
-    visibility: visible;
-  }
+  0%   { visibility: hidden;  }
+  50%  { visibility: hidden;  }
+  100% { visibility: visible; }
 }

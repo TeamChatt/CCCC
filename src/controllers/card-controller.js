@@ -3,6 +3,7 @@
 var Bacon                  = require('baconjs');
 var dragTemplateController = require('./tasks/drag-template-controller');
 var cutoutController       = require('./tasks/cutout-controller');
+var cardRevealController   = require('./tasks/card-reveal-controller');
 
 
 //Controller
@@ -18,12 +19,17 @@ function cardController(events, shape){
   function cutout(n){
     var initial = {type: 'cutout', controller: cutoutController(events, shape)};
     var next    = (n === 1)                     ?
-      function(){ return Bacon.never(); }       :
+      function(){ return cardReveal(); }        :
       function(){ return dragTemplate(n-1); };
 
     return transition(initial)
       .then('.controller.success', next)
       .then('.controller.failure', function(){ return cutout(n); });
+  }
+  function cardReveal(){
+    var initial = {type: 'cardReveal', controller: cardRevealController(events)};
+    return transition(initial)
+      .then('.controller.end', function(){ return Bacon.never(); });
   }
 
   return {

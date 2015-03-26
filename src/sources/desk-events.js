@@ -13,12 +13,14 @@ function deskEvents(layer){
     return P2(e.x * WIDTH / bounds.width, e.y * HEIGHT / bounds.height);
   }
 
-  var start = layer.pointerDownE();
-  var drag  = layer.dragE();
-  var end   = layer.pointerUpE();
+  var start     = layer.pointerDownE();
+  var drag      = layer.dragE();
+  var end       = layer.pointerUpE();
+  var cardClick = layer.card.pressE();
 
   return {
     pause:     layer.dblpressE(),
+    cardClick: cardClick,
     dragStart: start.map(toPosition),
     drag:      drag.map(toPosition),
     dragEnd:   end.map(toPosition)

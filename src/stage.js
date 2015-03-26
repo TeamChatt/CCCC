@@ -33,6 +33,7 @@ function desk($layer){
   $layer.overlap    = $layer.find('.card_overlap');
 
   $layer.paper             = $layer.find('.card_paper');
+  $layer.card              = $layer.find('.card_shape');
   $layer.template_target   = $layer.find('.template_target');
   $layer.original_template = $layer.find('.template--original');
   $layer.work_template     = $layer.find('.template--work');

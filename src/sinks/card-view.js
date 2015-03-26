@@ -2,6 +2,7 @@
 
 var dragTemplateView = require('./tasks/drag-template-view');
 var cutoutView       = require('./tasks/cutout-view');
+var cardRevealView   = require('./tasks/card-reveal-view');
 
 
 //View
@@ -17,6 +18,9 @@ function cardView(layer, controller){
 
   task('cutout')
     .onValue(cutoutView, layer);
+
+  task('cardReveal')
+    .onValue(cardRevealView, layer);
 
 
   task('cutout')
