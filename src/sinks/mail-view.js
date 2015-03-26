@@ -1,6 +1,7 @@
 'use strict';
 
-var lineView = require('./tasks/line-view');
+var lineView         = require('./tasks/line-view');
+var letterRevealView = require('./tasks/letter-reveal-view');
 
 
 //View
@@ -13,6 +14,9 @@ function mailView(layer, controller){
 
   task('line')
     .onValue(lineView, layer);
+
+  task('letterReveal')
+    .onValue(letterRevealView, layer);
 }
 
 

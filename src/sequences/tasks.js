@@ -40,28 +40,28 @@ function tasks(events, env){
     startCut:     taggedTask('fakeTask', fakeTask),
     finishCut:    taggedTask('fakeTask', fakeTask),
     
-    cut: taggedTask('cutout', function(shape_name){
+    cut:          taggedTask('cutout', function(shape_name){
         var shape = shapes[shape_name];
         return cutoutController(events.layers.desk, shape);
       }),
-    pause: taggedTask('pauseTask', function(){
+    pause:        taggedTask('pauseTask', function(){
         return {end: events.unpause.take(1)};
       }),
 
     //Game Objectives
-    read:        taggedTask('dialogue', function(lines){
+    read:         taggedTask('dialogue', function(lines){
         return dialogueController(events.layers.dialogue, env, lines);
       }),
-    mail:        taggedTask('mail', function(){
+    mail:         taggedTask('mail', function(){
         return mailController(events.layers.desk);
       }),
-    cutscene:    taggedTask('fakeTask', fakeTask),
-    card:        taggedTask('card', function(shape_name){
+    cutscene:     taggedTask('fakeTask', fakeTask),
+    card:         taggedTask('card', function(shape_name){
         var shape = shapes[shape_name];
         var card  = {name: shape_name, shape: shape};
         return cardController(events.layers.desk, card);
       }),
-    rollCredits: taggedTask('credits', function(){
+    rollCredits:  taggedTask('credits', function(){
         return creditsController(events.layers.credits);
       })
   };

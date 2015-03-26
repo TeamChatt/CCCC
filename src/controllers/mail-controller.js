@@ -1,7 +1,8 @@
 'use strict';
 
-var Bacon          = require('baconjs');
-var lineController = require('./tasks/line-controller');
+var Bacon                  = require('baconjs');
+var lineController         = require('./tasks/line-controller');
+var letterRevealController = require('./tasks/letter-reveal-controller');
 
 var P2 = require('../../lib/engine/core/vector').P2;
 
@@ -17,6 +18,11 @@ function mailController(events){
   //Cut along the line
   function openLetter(){
     var initial = {type: 'line', controller: lineController(events, ENVELOPE_LINE)};
+    return transition(initial)
+      .then('.controller.end', readLetter);
+  }
+  function readLetter(){
+    var initial = {type: 'letterReveal', controller: letterRevealController(events)};
     return transition(initial)
       //TODO: then let the player read what their penpal wrote
       .then('.controller.end', function(){ return Bacon.never(); });

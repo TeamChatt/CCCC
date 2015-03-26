@@ -1,6 +1,6 @@
 'use strict';
 
-var Bacon   = require('baconjs');
+var Bacon = require('baconjs');
 
 var stage         = require('./stage');
 var resize        = require('./resize');
