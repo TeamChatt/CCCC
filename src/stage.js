@@ -34,6 +34,8 @@ function desk($layer){
 
   $layer.paper             = $layer.find('.card_paper');
   $layer.card              = $layer.find('.card_shape');
+  $layer.card_front        = $layer.find('.card-face--front');
+  $layer.card_back         = $layer.find('.card-face--back');
   $layer.template_target   = $layer.find('.template_target');
   $layer.original_template = $layer.find('.template--original');
   $layer.work_template     = $layer.find('.template--work');

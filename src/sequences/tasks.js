@@ -8,6 +8,8 @@ var cutoutController       = require('../controllers/tasks/cutout-controller');
 var dragTemplateController = require('../controllers/tasks/drag-template-controller');
 var creditsController      = require('../controllers/credits-controller');
 
+var shapes = require('./shapes');
+
 
 function tasks(events, env){
   function fakeTask(){
@@ -38,7 +40,8 @@ function tasks(events, env){
     startCut:     taggedTask('fakeTask', fakeTask),
     finishCut:    taggedTask('fakeTask', fakeTask),
     
-    cut: taggedTask('cutout', function(shape){
+    cut: taggedTask('cutout', function(shape_name){
+        var shape = shapes[shape_name];
         return cutoutController(events.layers.desk, shape);
       }),
     pause: taggedTask('pauseTask', function(){
@@ -53,8 +56,10 @@ function tasks(events, env){
         return mailController(events.layers.desk);
       }),
     cutscene:    taggedTask('fakeTask', fakeTask),
-    card:        taggedTask('card', function(shape){
-        return cardController(events.layers.desk, shape);
+    card:        taggedTask('card', function(shape_name){
+        var shape = shapes[shape_name];
+        var card  = {name: shape_name, shape: shape};
+        return cardController(events.layers.desk, card);
       }),
     rollCredits: taggedTask('credits', function(){
         return creditsController(events.layers.credits);

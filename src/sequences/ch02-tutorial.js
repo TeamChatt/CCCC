@@ -13,9 +13,6 @@ var lines_08 = require('../../include/script/ch02-tutorial/pt08');
 var lines_09 = require('../../include/script/ch02-tutorial/pt09');
 var lines_10 = require('../../include/script/ch02-tutorial/pt10');
 
-var work_shape     = require('../../include/shapes/nye');
-var original_shape = require('../../include/shapes/original_01');
-
 
 function tutorialSequence(events, env){
   var t = tasks(events, env);
@@ -37,13 +34,13 @@ function tutorialSequence(events, env){
     t.pause(),
     //Task 5:
     t.read(lines_06),
-    t.cut(work_shape),
+    t.cut('tutorial_01'),
     //Task 6:
     t.read(lines_07),
     t.dragTemplate(),
     //Task 7:
     t.read(lines_08),
-    t.cut(original_shape),
+    t.card('original_01'), //TODO: which card?
     //All done!
     t.read(lines_09),
     t.cutscene(),

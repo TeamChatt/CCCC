@@ -4,14 +4,15 @@ var Bacon = require('baconjs');
 
 
 //Controller
-function cardRevealController(events){
+function cardRevealController(events, card_name){
   var continue_ = Bacon.later(2000, {})
     .flatMap(function(){
       return events.cardClick;
     });
 
   return {
-    end: continue_.take(1)
+    name: Bacon.constant(card_name),
+    end:  continue_.take(1),
   };
 }
 

@@ -7,8 +7,9 @@ var cardRevealController   = require('./tasks/card-reveal-controller');
 
 
 //Controller
-function cardController(events, shape){
-  var task = dragTemplate(3).toProperty();
+function cardController(events, card){
+  var task  = dragTemplate(3).toProperty();
+  var shape = card.shape;
 
   //Drag template, then cutout shape, rinse, repeat
   function dragTemplate(n){
@@ -27,7 +28,7 @@ function cardController(events, shape){
       .then('.controller.failure', function(){ return cutout(n); });
   }
   function cardReveal(){
-    var initial = {type: 'cardReveal', controller: cardRevealController(events)};
+    var initial = {type: 'cardReveal', controller: cardRevealController(events, card.name)};
     return transition(initial)
       .then('.controller.end', function(){ return Bacon.never(); });
   }

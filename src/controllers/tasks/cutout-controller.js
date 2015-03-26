@@ -9,7 +9,7 @@ var SUCCESS_THRESHOLD = 0.5;
 
 //Controller
 function cutoutController(events, shape){
-  var path_controller = pathController(events);
+  var path_controller = pathController(events, shape[0]);
 
   var final_path = path_controller.pathEnd
     .map(path_controller.path);

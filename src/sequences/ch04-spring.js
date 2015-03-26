@@ -12,9 +12,9 @@ function springSequence(events, env){
 
   return [
     t.read(lines_01),
-    t.mail(),          //TODO: import message
+    t.mail(),               //TODO: import message
     t.read(lines_02),
-    t.cutscene(),      //TODO: work card
+    t.card('original_01'),  //TODO: which card?
     t.read(lines_03)
   ];
 }

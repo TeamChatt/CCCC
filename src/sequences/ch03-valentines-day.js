@@ -9,20 +9,17 @@ var lines_04 = require('../../include/script/ch03-valentines-day/pt04');
 var lines_05 = require('../../include/script/ch03-valentines-day/pt05');
 var lines_06 = require('../../include/script/ch03-valentines-day/pt06');
 
-var work_shape     = require('../../include/shapes/original_01'); //TODO
-var original_shape = require('../../include/shapes/original_01'); //TODO
-
 
 function valentinesSequence(events, env){
   var t = tasks(events, env);
 
   return [
     t.read(lines_01),
-    t.card(work_shape),
+    t.card('original_01'), //TODO: which card?
     t.read(lines_02),
-    t.card(original_shape),
+    t.card('original_01'), //TODO: which card?
     t.read(lines_03),
-    t.cutscene(),      //TODO: Work card
+    t.card('original_01'),  //TODO: Work card
     t.read(lines_04),
     t.mail(),          //TODO: import the message
     t.read(lines_05),
