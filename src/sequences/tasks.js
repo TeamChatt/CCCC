@@ -53,7 +53,7 @@ function tasks(events, env){
         return dialogueController(events.layers.dialogue, env, lines);
       }),
     mail:         taggedTask('mail', function(){
-        return mailController(events.layers.desk);
+        return mailController(events.layers.mail);
       }),
     cutscene:     taggedTask('fakeTask', fakeTask),
     card:         taggedTask('card', function(shape_name){

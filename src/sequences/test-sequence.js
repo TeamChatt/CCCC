@@ -8,6 +8,9 @@ function testSequence(events, env){
   var t = tasks(events, env);
 
   return [
+    //Mail
+    t.mail(),
+
     //Original cards
     t.card('original_01'),
     t.card('original_02'),

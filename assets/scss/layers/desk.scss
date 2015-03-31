@@ -16,6 +16,9 @@
   .cut_end {
     opacity: 0.2;
   }
+  .cut_target {
+    opacity: 0.2;
+  }
 
   &.is-dragging {
     .cut_end {
@@ -37,23 +40,8 @@
 
 
 //Target Shape
-.card_target {
-  fill:    none;
-  opacity: 0;
-  transition: opacity 0.75s;
-
-  stroke:           $black;
-  stroke-dasharray: 10;
-  stroke-width:     3;
-}
 .card_overlap {
   fill: transparentize($magenta, 0.8);
-}
-
-.desk[data-task="cutout"]{
-  .card_target {
-    opacity: 0.2;
-  }
 }
 
 

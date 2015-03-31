@@ -12,6 +12,9 @@ function lineView(layer, controller){
   //Reset path
   layer.cut.attr('d',  '');
 
+  //Set task type
+  layer.attr('data-task', 'cutout');
+
   controller.line
     .map(pathString)
     .onValue(function(points){
@@ -20,7 +23,7 @@ function lineView(layer, controller){
 
   controller.target
     .onValue(function(line){
-      layer.target.attr('d', pathString([line.start, line.end]));
+      layer.cut_target.attr('d', pathString([line.start, line.end]));
     });
 
 

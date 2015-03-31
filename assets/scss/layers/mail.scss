@@ -24,9 +24,12 @@
 }
 
 //UI-Hints
-.mail{
+.mail[data-task="cutout"]{
   .cut_start,
   .cut_end {
+    opacity: 0.2;
+  }
+  .cut_target {
     opacity: 0.2;
   }
 

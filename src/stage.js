@@ -31,10 +31,10 @@ function desk($layer){
 
   //Cut  
   $layer.cut        = $layer.find('.cut_path');
+  $layer.cut_target = $layer.find('.cut_target');
   $layer.cut_start  = $layer.find('.cut_start');
   $layer.cut_end    = $layer.find('.cut_end');
   //Card
-  $layer.target     = $layer.find('.card_target');
   $layer.overlap    = $layer.find('.card_overlap');
   $layer.card       = $layer.find('.card_shape');
   $layer.card_front = $layer.find('.card-face--front');
@@ -48,9 +48,9 @@ function desk($layer){
   $layer.reset = function(){
     $layer.attr('data-task', '');
 
-    $layer.cut     .attr('d', '');
-    $layer.target  .attr('d', '');
-    $layer.overlap .attr('d', '');
+    $layer.cut         .attr('d', '');
+    $layer.cut_target  .attr('d', '');
+    $layer.overlap     .attr('d', '');
 
     $layer.paper             .toggleClass('is-hidden', true);
     $layer.template_target   .toggleClass('is-hidden', true);
@@ -78,10 +78,14 @@ function mail($layer){
   $layer.penpal_envelope = $layer.find('.envelope--penpal');
   $layer.friend_envelope = $layer.find('.envelope--friend');
   $layer.cut             = $layer.find('.cut_path');
+  $layer.cut_target      = $layer.find('.cut_target');
   $layer.cut_start       = $layer.find('.cut_start');
   $layer.cut_end         = $layer.find('.cut_end');
 
   $layer.reset = function(){
+    $layer.cut         .attr('d', '');
+    $layer.cut_target  .attr('d', '');
+
     $layer.penpal_envelope   .toggleClass('is-hidden', true);
     $layer.friend_envelope   .toggleClass('is-hidden', true);
   };

@@ -19,7 +19,7 @@ function cutoutView(layer, controller){
   pathView(layer, controller.path);
   
   //Reset shapes
-  layer.target.attr('d',  '');
+  layer.cut_target.attr('d',  '');
   layer.overlap.attr('d', '');
 
   //Set task type
@@ -28,7 +28,7 @@ function cutoutView(layer, controller){
   controller.target
     .map(toPath)
     .map(pathString)
-    .onValue(layer.target, 'attr', 'd');
+    .onValue(layer.cut_target, 'attr', 'd');
 
   controller.overlap
     .map(toPath)

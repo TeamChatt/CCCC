@@ -43,6 +43,15 @@
     animation-timing-function: ease-in-out;
   }
 }
+.cut_target {
+  fill:    none;
+  opacity: 0;
+  transition: opacity 0.75s;
+
+  stroke:           $black;
+  stroke-dasharray: 10;
+  stroke-width:     3;
+}
 
 //Animation
 @keyframes pulse {
