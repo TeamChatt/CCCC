@@ -15,11 +15,11 @@ function valentinesSequence(events, env){
 
   return [
     t.read(lines_01),
-    t.card('original_01'), //TODO: which card?
+    t.card('valentines2'), //TODO: is this the right card?
     t.read(lines_02),
-    t.card('original_01'), //TODO: which card?
+    t.card('original_01'), //TODO: is this the right card?
     t.read(lines_03),
-    t.card('original_01'),  //TODO: Work card
+    t.card('mardi_gras'),  //TODO: is this the right card?
     t.read(lines_04),
     t.mail(),          //TODO: import the message
     t.read(lines_05),

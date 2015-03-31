@@ -14,7 +14,7 @@ function springSequence(events, env){
     t.read(lines_01),
     t.mail(),               //TODO: import message
     t.read(lines_02),
-    t.card('original_01'),  //TODO: which card?
+    t.card('original_02'),  //TODO: is this the right card?
     t.read(lines_03)
   ];
 }

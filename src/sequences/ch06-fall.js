@@ -13,14 +13,14 @@ function fallSequence(events, env){
 
   return [
     t.read(lines_01),
-    t.card('original_01'),      //TODO: which card?
+    t.card('original_01'),      //TODO: is this the right card?
     t.read(lines_02),
-    t.card('original_01'),      //TODO: timer. which card?
+    t.card('original_01'),      //TODO: timer. is this the right card?
     t.read(lines_03),
-    t.card('original_01'),      //TODO: which card?
+    t.card('original_01'),      //TODO: is this the right card?
     t.read(lines_04),
-    t.card('original_01'),      //TODO: which card?
-    t.card('original_01')       //TODO: which card?
+    t.card('christmas'),        //TODO: is this the right card?
+    t.card('original_01')       //TODO: is this the right card?
   ];
 }
 

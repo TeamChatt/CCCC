@@ -14,7 +14,7 @@ function cardRevealView(layer, controller){
   controller
     .name
     .map(function(name){
-      return '/images/card-' + name + '.svg';
+      return '/images/cards/' + name + '.svg';
     })
     .onValue(function(path){
       layer.card_front.attr('xlink:href', path);

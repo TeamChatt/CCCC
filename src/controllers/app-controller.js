@@ -47,7 +47,7 @@ function validateState(state){
   assert(typeof state === 'object');
   //Chapter should be a number in bounds
   assert(typeof state.chapter === 'number');
-  assert(state.chapter >= 0 && state.chapter <= 7);
+  assert(state.chapter >= 0 && state.chapter <= 8);
   //Name, pronoun, and interest should be strings
   assert(typeof state.player_info.name     === 'string');
   assert(typeof state.player_info.pronoun  === 'string');

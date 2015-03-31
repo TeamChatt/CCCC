@@ -29,29 +29,29 @@
 }
 .dialogue_portrait[data-speaker="Cap’n Cutout"] {
   &[data-expression="default"]{
-    background: url("/images/cc-default.svg");
+    background: url("/images/portrait/cc-default.svg");
   }
   &[data-expression="questioning"]{
-    background: url("/images/cc-questioning.svg");
+    background: url("/images/portrait/cc-questioning.svg");
   }
   &[data-expression="sad"]{
-    background: url("/images/cc-sad.svg");
+    background: url("/images/portrait/cc-sad.svg");
   }
   &[data-expression="silly"]{
-    background: url("/images/cc-silly.svg");
+    background: url("/images/portrait/cc-silly.svg");
   }
 }
 .dialogue_portrait[data-speaker="Alma"] {
   &[data-expression="default"]{
-    background: url("/images/alma-default.svg"); 
+    background: url("/images/portrait/alma-default.svg"); 
   }
   &[data-expression="laughing"]{
-    background: url("/images/alma-laughing.svg"); 
+    background: url("/images/portrait/alma-laughing.svg"); 
   }
   &[data-expression="questioning"]{
-    background: url("/images/alma-questioning.svg"); 
+    background: url("/images/portrait/alma-questioning.svg"); 
   }
   &[data-expression="sad"]{
-    background: url("/images/alma-sad.svg"); 
+    background: url("/images/portrait/alma-sad.svg"); 
   }
 }

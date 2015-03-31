@@ -11,6 +11,8 @@ var ch06 = require('./ch06-fall');
 var ch07 = require('./ch07-winter');
 var ch08 = require('./ch08-visit');
 
+var test = require('./test-sequence');
+
 
 function gameSequence(events, env){
   function chapter(sequence){
@@ -29,7 +31,8 @@ function gameSequence(events, env){
     chapter(ch05),
     chapter(ch06),
     chapter(ch07),
-    chapter(ch08)
+    chapter(ch08),
+    chapter(test)
   ];
 }
 

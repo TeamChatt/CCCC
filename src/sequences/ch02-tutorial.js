@@ -34,13 +34,13 @@ function tutorialSequence(events, env){
     t.pause(),
     //Task 5:
     t.read(lines_06),
-    t.cut('tutorial_01'),
+    t.cut('new_years'),
     //Task 6:
     t.read(lines_07),
     t.dragTemplate(),
     //Task 7:
     t.read(lines_08),
-    t.card('original_01'), //TODO: which card?
+    t.card('original_01'), //TODO: is this the right card?
     //All done!
     t.read(lines_09),
     t.cutscene(),
