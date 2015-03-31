@@ -1,0 +1,55 @@
+@import "./variables";
+@import "./mixins";
+
+
+// Cut // ---------------------------------------------------------------------
+
+.cut .cut_background {
+  fill: $white;
+}
+.cut .cut_path {
+  fill: none;
+  stroke: $black;
+  stroke-width: 4;
+}
+
+//UI Hints
+.cut_start {
+  fill: none;
+  opacity: 0;
+  transition: opacity 0.75s;
+  
+  circle {
+    transform:  scale(0,0);
+    transition: transform 0.25s ease-out;
+    
+    shape-rendering:  geometricPrecision;
+    stroke:           $black;
+    stroke-dasharray: 5;
+    stroke-width:     3;
+  }
+}
+.cut_end {
+  fill: $black;
+  opacity: 0;
+  transition: opacity 0.75s;
+  
+  circle {
+    transform:  scale(1,1);
+    transition: transform 0.25s;
+
+    shape-rendering: geometricPrecision;
+    animation: 1s pulse infinite alternate;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+//Animation
+@keyframes pulse {
+  0%   { transform: scale(1, 1);     }
+  100% { transform: scale(1.2, 1.2); }
+}
+@keyframes shrink {
+  0%   { transform: scale(1, 1);     }
+  100% { transform: scale(0.2, 0.2); }
+}

@@ -16,11 +16,14 @@ function sequenceView(stage, controller){
     .map('.type');
 
   var showEnrollment = type.map(function(t){ return t === 'enroll';   });
+  var showMail       = type.map(function(t){ return t === 'mail';     });
   var showDialogue   = type.map(function(t){ return t === 'dialogue'; });
   var showCredits    = type.map(function(t){ return t === 'credits';  });
 
   showEnrollment
     .not().onValue(stage.enrollment, 'toggleClass', 'is-hidden');
+  showMail
+    .not().onValue(stage.mail,       'toggleClass', 'is-hidden');
   showDialogue
     .not().onValue(stage.dialogue,   'toggleClass', 'is-hidden');
   showCredits
@@ -47,7 +50,7 @@ function sequenceView(stage, controller){
   scene('card')
     .onValue(cardView, stage.desk);
   scene('mail')
-    .onValue(mailView, stage.desk);
+    .onValue(mailView, stage.mail);
   scene('sequence')
     .onValue(sequenceView, stage);
 }

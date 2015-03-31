@@ -9,9 +9,6 @@ function pathString(pts){
 
 //View
 function lineView(layer, controller){
-  //Set task type
-  layer.attr('data-task', 'cutout');
-
   //Reset path
   layer.cut.attr('d',  '');
 

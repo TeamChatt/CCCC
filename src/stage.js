@@ -6,6 +6,7 @@ var $ = require('../lib/engine/core/input');
 function stage($stage){
   $stage.desk       = desk       ($stage.find('.game_layer.desk'));
   $stage.enrollment = enrollment ($stage.find('.game_layer.enrollment'));
+  $stage.mail       = mail       ($stage.find('.game_layer.mail'));
   $stage.dialogue   = dialogue   ($stage.find('.game_layer.dialogue'));
   $stage.menu       = menu       ($stage.find('.game_layer.menu'));
   $stage.hud        = hud        ($stage.find('.game_layer.hud'));
@@ -15,6 +16,7 @@ function stage($stage){
   $stage.reset = function(){
     $stage.desk       .reset();
     $stage.enrollment .reset();
+    $stage.mail       .reset();
     $stage.dialogue   .reset();
     $stage.menu       .reset();
     $stage.hud        .reset();
@@ -26,16 +28,19 @@ function stage($stage){
 }
 function desk($layer){
   $layer.background = $layer.find('.desk_background');
+
+  //Cut  
   $layer.cut        = $layer.find('.cut_path');
-  $layer.cut_start  = $layer.find('.card_cut_start');
-  $layer.cut_end    = $layer.find('.card_cut_end');
+  $layer.cut_start  = $layer.find('.cut_start');
+  $layer.cut_end    = $layer.find('.cut_end');
+  //Card
   $layer.target     = $layer.find('.card_target');
   $layer.overlap    = $layer.find('.card_overlap');
-
+  $layer.card       = $layer.find('.card_shape');
+  $layer.card_front = $layer.find('.card-face--front');
+  $layer.card_back  = $layer.find('.card-face--back');
+  //Card template
   $layer.paper             = $layer.find('.card_paper');
-  $layer.card              = $layer.find('.card_shape');
-  $layer.card_front        = $layer.find('.card-face--front');
-  $layer.card_back         = $layer.find('.card-face--back');
   $layer.template_target   = $layer.find('.template_target');
   $layer.original_template = $layer.find('.template--original');
   $layer.work_template     = $layer.find('.template--work');
@@ -65,6 +70,20 @@ function enrollment($layer){
     $layer.pronoun.prop ('checked', false);
     $layer.interest.prop('checked', false);
     $layer.button.prop('disabled', true);
+  };
+
+  return $layer;
+}
+function mail($layer){
+  $layer.penpal_envelope = $layer.find('.envelope--penpal');
+  $layer.friend_envelope = $layer.find('.envelope--friend');
+  $layer.cut             = $layer.find('.cut_path');
+  $layer.cut_start       = $layer.find('.cut_start');
+  $layer.cut_end         = $layer.find('.cut_end');
+
+  $layer.reset = function(){
+    $layer.penpal_envelope   .toggleClass('is-hidden', true);
+    $layer.friend_envelope   .toggleClass('is-hidden', true);
   };
 
   return $layer;

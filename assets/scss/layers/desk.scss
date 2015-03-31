@@ -11,44 +11,14 @@
 }
 
 //UI-Hints
-.card_cut_start {
-  fill: none;
-  opacity: 0;
-  transition: opacity 0.75s;
-  
-  circle {
-    transform:  scale(0,0);
-    transition: transform 0.25s ease-out;
-    
-    shape-rendering:  geometricPrecision;
-    stroke:           $black;
-    stroke-dasharray: 5;
-    stroke-width:     3;
-  }
-}
-.card_cut_end {
-  fill: $black;
-  opacity: 0;
-  transition: opacity 0.75s;
-  
-  circle {
-    transform:  scale(1,1);
-    transition: transform 0.25s;
-
-    shape-rendering: geometricPrecision;
-    animation: 1s pulse infinite alternate;
-    animation-timing-function: ease-in-out;
-  }
-}
-
 .desk[data-task="cutout"]{
-  .card_cut_start,
-  .card_cut_end {
+  .cut_start,
+  .cut_end {
     opacity: 0.2;
   }
 
   &.is-dragging {
-    .card_cut_end {
+    .cut_end {
       circle {
         animation: 0.25s shrink 1 forwards;
         animation-timing-function: ease-in;
@@ -57,7 +27,7 @@
   }
 
   &.is-close {
-    .card_cut_start {
+    .cut_start {
       circle {
         transform: scale(1,1);
       }
@@ -157,35 +127,18 @@
 
 
 //Masking
-#cut .cut_background {
-  fill: $white;
+.paper {
+  mask: url('#card-cut');
 }
-#cut .cut_path {
-  fill: none;
-  stroke: $black;
-  stroke-width: 4;
-}
-
 .card_paper {
   filter: url('#drop-shadow');
-}
-.paper {
-  fill: $pistachio;
-  mask: url('#cut');
 }
 .card_paper.is-hidden {
   display: none;
 }
 
 
-@keyframes pulse {
-  0%   { transform: scale(1, 1);     }
-  100% { transform: scale(1.2, 1.2); }
-}
-@keyframes shrink {
-  0%   { transform: scale(1, 1);     }
-  100% { transform: scale(0.2, 0.2); }
-}
+
 @keyframes flip {
   0%   {
     transform: translateY(0)    translateZ(0)    rotateY(0deg);
