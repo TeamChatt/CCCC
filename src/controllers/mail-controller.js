@@ -7,8 +7,8 @@ var letterRevealController = require('./tasks/letter-reveal-controller');
 var P2 = require('../../lib/engine/core/vector').P2;
 
 var ENVELOPE_LINE = {
-  start: P2(100,100),
-  end:   P2(500,100)
+  start: P2(147,160),
+  end:   P2(827,160)
 };
 
 //Controller
