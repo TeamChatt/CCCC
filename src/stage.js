@@ -56,11 +56,17 @@ function desk($layer){
     $layer.overlap     .attr('d', '');
 
     $layer.paper             .toggleClass('is-hidden', true);
-    $layer.template_target   .toggleClass('is-hidden', true);
     $layer.original_template .toggleClass('is-hidden', true);
     $layer.work_template     .toggleClass('is-hidden', true);
     $layer.original_stack    .toggleClass('is-hidden', true);
     $layer.work_stack        .toggleClass('is-hidden', true);
+
+    $layer.work_template
+      .attr('x', 760)
+      .attr('y', 460);
+    $layer.original_template
+      .attr('x', 0)
+      .attr('y', 460);
   };
 
   return $layer;

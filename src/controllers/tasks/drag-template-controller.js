@@ -26,12 +26,22 @@ var TARGET_RECT   = {
 };
 
 //Controller
-function dragTemplateController(events){
+function dragTemplateController(events, template_type){
   events.drag.onValue(function(){});
   events.dragEnd.onValue(function(){});
 
-  var startPosition = Bacon.constant(WORK_RECT);
-  
+  var rect;
+  switch(template_type){
+  case 'work':
+    rect = WORK_RECT;
+    break;
+  case 'original':
+    rect = ORIGINAL_RECT;
+    break;
+  }
+
+  var startPosition   = Bacon.constant(rect);
+
   var currentPosition = Bacon.fix(function(currentPosition){
     var start = currentPosition
       .sampledBy(events.dragStart)
@@ -44,7 +54,7 @@ function dragTemplateController(events){
         return dragRect(rect, events.drag)
           .takeUntil(events.dragEnd);
       })
-      .toProperty(WORK_RECT);
+      .toProperty(rect);
   });
 
   var templatePlaced = events.dragEnd
@@ -64,6 +74,8 @@ function dragTemplateController(events){
       )
       .toProperty(false)
       .takeUntil(templatePlaced.delay(0)),
+
+    templateType:    Bacon.constant(template_type),
 
     end:             templatePlaced
   };

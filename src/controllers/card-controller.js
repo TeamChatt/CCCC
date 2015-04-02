@@ -7,14 +7,14 @@ var cardRevealController   = require('./tasks/card-reveal-controller');
 
 
 //Controller
-function cardController(events, card){
+function cardController(events, card_type, card){
   // var task  = dragTemplate(3).toProperty();
   var task  = dragTemplate(1).toProperty();
   var shape = card.shape;
 
   //Drag template, then cutout shape, rinse, repeat
   function dragTemplate(n){
-    var initial = {type: 'dragTemplate', controller: dragTemplateController(events)};
+    var initial = {type: 'dragTemplate', controller: dragTemplateController(events, card_type)};
     return transition(initial)
       .then('.controller.end', function(){ return cutout(n); });
   }

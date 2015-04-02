@@ -11,9 +11,9 @@ function winterSequence(events, env){
 
   return [
     t.read(lines_01),
-    t.card('original_01'),      //TODO: which card?
+    t.card('original', 'original_01'),      //TODO: which card?
     t.read(lines_02),
-    t.card('original_01')       //TODO: which card?
+    t.card('original', 'original_01')       //TODO: which card?
   ];
 }
 

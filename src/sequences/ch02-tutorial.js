@@ -40,7 +40,7 @@ function tutorialSequence(events, env){
     t.dragTemplate(),
     //Task 7:
     t.read(lines_08),
-    t.card('original_01'), //TODO: is this the right card?
+    t.card('original', 'original_01'), //TODO: is this the right card?
     //All done!
     t.read(lines_09),
     t.cutscene(),

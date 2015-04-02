@@ -12,26 +12,26 @@ function testSequence(events, env){
     t.mail(),
 
     //Original cards
-    t.card('original_01'),
-    t.card('original_02'),
-    t.card('original_03'),
-    t.card('original_04'),
-    t.card('original_05'),
-    t.card('original_06'),
+    t.card('original', 'original_01'),
+    t.card('original', 'original_02'),
+    t.card('original', 'original_03'),
+    t.card('original', 'original_04'),
+    t.card('original', 'original_05'),
+    t.card('original', 'original_06'),
     
     //Work Cards
-    t.card('birthday'),
-    t.card('christmas'),
-    t.card('july_4th'),
-    t.card('mardi_gras'),
-    t.card('new_years'),
-    t.card('thanksgiving'),
-    t.card('valentines'),
+    t.card('work', 'birthday'),
+    t.card('work', 'christmas'),
+    t.card('work', 'july_4th'),
+    t.card('work', 'mardi_gras'),
+    t.card('work', 'new_years'),
+    t.card('work', 'thanksgiving'),
+    t.card('work', 'valentines'),
 
     //Airplane parts
-    t.card('airplane_01'),
-    t.card('airplane_02'),
-    t.card('airplane_03')
+    t.card('work', 'airplane_01'),
+    t.card('work', 'airplane_02'),
+    t.card('work', 'airplane_03')
   ];
 }
 

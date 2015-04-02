@@ -35,7 +35,7 @@ function tasks(events, env){
 
     //Tutorial Objectives
     dragTemplate: taggedTask('dragTemplate', function(){
-        return dragTemplateController(events.layers.desk);
+        return dragTemplateController(events.layers.desk, 'work');
       }),
     startCut:     taggedTask('fakeTask', fakeTask),
     finishCut:    taggedTask('fakeTask', fakeTask),
@@ -56,10 +56,10 @@ function tasks(events, env){
         return mailController(events.layers.mail);
       }),
     cutscene:     taggedTask('fakeTask', fakeTask),
-    card:         taggedTask('card', function(shape_name){
+    card:         taggedTask('card', function(card_type, shape_name){
         var shape = shapes[shape_name];
         var card  = {name: shape_name, shape: shape};
-        return cardController(events.layers.desk, card);
+        return cardController(events.layers.desk, card_type, card);
       }),
     rollCredits:  taggedTask('credits', function(){
         return creditsController(events.layers.credits);

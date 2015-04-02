@@ -15,15 +15,15 @@ function valentinesSequence(events, env){
 
   return [
     t.read(lines_01),
-    t.card('valentines'),  //TODO: is this the right card?
+    t.card('work',     'valentines'),  //TODO: is this the right card?
     t.read(lines_02),
-    t.card('original_01'), //TODO: is this the right card?
+    t.card('original', 'original_01'), //TODO: is this the right card?
     t.read(lines_03),
-    t.card('mardi_gras'),  //TODO: is this the right card?
+    t.card('work',     'mardi_gras'),  //TODO: is this the right card?
     t.read(lines_04),
-    t.mail(),          //TODO: import the message
+    t.mail(),                          //TODO: import the message
     t.read(lines_05),
-    t.cutscene(),      //TODO: Mail (response)
+    t.cutscene(),                      //TODO: Mail (response)
     t.read(lines_06)
   ];
 }
