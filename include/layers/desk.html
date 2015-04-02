@@ -1,6 +1,7 @@
 <div class="game_layer desk">
   <svg class="desk_background" viewBox="0 0 960 640">
     
+    <!-- Filter Effects -->
     <filter id="drop-shadow">
       <feGaussianBlur in="SourceAlpha" stdDeviation="1" />
       <feOffset dx="0" dy="2" />
@@ -21,12 +22,16 @@
                 0 0 0 1 0" />
     </filter>
     
-
+    <!-- Background -->
     <image xlink:href="/images/desk.svg" width="960" height="640"/>
-    <image xlink:href="/images/original-stack.svg" width="200" height="180" x="0"   y="460"/>
-    <image xlink:href="/images/work-stack.svg"     width="200" height="180" x="760" y="460"/>
 
+    <!-- Stacks -->
+    <image class="template-stack template-stack--original is-hidden" xlink:href="/images/original-stack.svg"
+      width="200" height="180" x="0"   y="460"/>
+    <image class="template-stack template-stack--work is-hidden"     xlink:href="/images/work-stack.svg"
+      width="200" height="180" x="760" y="460"/>
 
+    <!-- Card -->
     <g class="card">
       <g class="card_paper is-hidden">
         <image class="paper" xlink:href="/images/paper.svg" width="820" height="512" x="70"  y="64" />
@@ -34,12 +39,14 @@
       <path class="card_overlap"></path>
 
       <g class="card_shape">
-        <image class="card-face card-face--front" xlink:href="/images/card-original_06.svg" width="960" height="640" x="0" y="0"/>
-        <image class="card-face card-face--back"  xlink:href="/images/card-original_06.svg" width="960" height="640" x="0" y="0"/>
+        <image class="card-face card-face--front" xlink:href="/images/cards/original_06.svg"
+          width="960" height="640" x="0" y="0"/>
+        <image class="card-face card-face--back"  xlink:href="/images/cards/original_06.svg"
+          width="960" height="640" x="0" y="0"/>
       </g>
     </g>
 
-
+    <!-- UI hints -->
     <mask id="card-cut" class="cut" width="960" height="640">
       <rect class="cut_background" width="960" height="640"></rect>
       <path class="cut_path" d="M0,0L60,60"></path>
@@ -52,8 +59,8 @@
       <circle r="15"></circle>
     </g>
 
-
-    <rect class="template_target is-hidden" x="280" y="120" width="400" height="400"></rect>
+    <!-- Template -->
+    <rect class="template_target" x="280" y="120" width="400" height="400"></rect>
     <rect class="template template--original is-hidden" x="0" y="0" width="172" height="158"></rect>
     <rect class="template template--work     is-hidden" x="0" y="0" width="172" height="158"></rect>
 

@@ -44,6 +44,9 @@ function desk($layer){
   $layer.template_target   = $layer.find('.template_target');
   $layer.original_template = $layer.find('.template--original');
   $layer.work_template     = $layer.find('.template--work');
+  //Template stacks
+  $layer.original_stack = $layer.find('.template-stack--original');
+  $layer.work_stack     = $layer.find('.template-stack--work');
 
   $layer.reset = function(){
     $layer.attr('data-task', '');
@@ -56,6 +59,8 @@ function desk($layer){
     $layer.template_target   .toggleClass('is-hidden', true);
     $layer.original_template .toggleClass('is-hidden', true);
     $layer.work_template     .toggleClass('is-hidden', true);
+    $layer.original_stack    .toggleClass('is-hidden', true);
+    $layer.work_stack        .toggleClass('is-hidden', true);
   };
 
   return $layer;

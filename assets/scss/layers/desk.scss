@@ -45,13 +45,25 @@
 }
 
 
+//Template Stacks
+.template-stack {
+  transition: transform 0.25s;
+  transition-delay: 0.25s;
+}
+.template-stack.is-hidden {
+  transform: translateY(100%);
+}
+
+
 //Template
 .template {
   fill: $white;
+  transition: visibility 0s;
+  transition-delay: 0.5s;
+  visibility: visible;
 }
-.template.is-hidden,
-.template_target.is-hidden {
-  display: none;
+.template.is-hidden {
+  visibility: hidden;
 }
 .template_target {
   fill:       none;

@@ -5,7 +5,7 @@ require('../../lib/engine/core/util');
 var personalize = require('../personalize');
 
 
-var TEXT_SPEED = 1000/40; //Letters per second
+var TEXT_SPEED = 1000/60; //Letters per second
 
 //Controller
 function dialogueController(events, env, lines){
