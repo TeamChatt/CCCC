@@ -11,7 +11,7 @@ var autosave      = require('./sinks/autosave');
 
 //Saved game
 localStorage.progress = JSON.stringify({
-  chapter: 8,
+  chapter: 2,
   player_info: {
     name:     'Matt',
     pronoun:  'm',

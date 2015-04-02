@@ -37,6 +37,9 @@
     }
   }
 }
+.cut_target {
+  pointer-events: none;
+}
 
 
 //Target Shape
@@ -64,11 +67,13 @@
 }
 .template.is-hidden {
   visibility: hidden;
+  pointer-events: none;
 }
 .template_target {
-  fill:       none;
-  opacity:    0;
-  transition: opacity 0.75s;
+  pointer-events: none;
+  fill:           none;
+  opacity:        0;
+  transition:     opacity 0.75s;
 
   stroke:           $black;
   stroke-dasharray: 5;

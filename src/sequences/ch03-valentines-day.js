@@ -15,7 +15,7 @@ function valentinesSequence(events, env){
 
   return [
     t.read(lines_01),
-    t.card('valentines2'), //TODO: is this the right card?
+    t.card('valentines'),  //TODO: is this the right card?
     t.read(lines_02),
     t.card('original_01'), //TODO: is this the right card?
     t.read(lines_03),
