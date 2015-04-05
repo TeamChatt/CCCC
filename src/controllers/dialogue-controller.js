@@ -1,6 +1,7 @@
 'use strict';
 
 var Bacon = require('baconjs');
+var flow  = require('../flow');
 require('../../lib/engine/core/util');
 var personalize = require('../personalize');
 
@@ -12,21 +13,22 @@ function dialogueController(events, env, lines){
   env.onValue(function(){});
 
   //Show the next dialogue snippet after the current one has finished
-  var snippet = Bacon.fix(function(currentSnippet){
-      var currentLine = currentSnippet
-        .delay(0)
-        .flatMapLatest('.done')
-        .count()
-        .take(lines.length)
-        .map(function(i){ return lines[i]; });
+  var snippet = env
+    .take(1)
+    .flatMap(function(env){
+      var snippets = lines.map(function(line){
+        var personalized = personalizeDialogue(line, env);
+        return function(){
+          return snippetController(events, personalized);
+        };
+      });
 
-      var currentEnv = env.sampledBy(currentLine);
-
-      return currentLine
-        .zip(currentEnv, personalizeDialogue)
-        .map(snippetController, events)
-        .toProperty();
-    });
+      return flow.runSequence(
+        snippets,
+        function(snippet){ return snippet.done; }
+      );
+    })
+    .toProperty();
 
   var end = snippet
     .skip(lines.length - 1).take(1)

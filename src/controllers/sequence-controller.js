@@ -6,16 +6,10 @@ require('../../lib/engine/core/util');
 
 //Controller
 function sequenceController(segments, start){
-  function runSequence(seq){
-    var head = flow.sequence(seq[0]());
-    var tail = seq.slice(1);
-
-    return tail.reduce(function(initial, next){
-      return initial.then('.controller.end', next);
-    }, head);
-  }
-
-  var segment  = runSequence(segments.slice(start)).toProperty();
+  var segment  = flow.runSequence(
+      segments.slice(start),
+      '.controller.end'
+    ).toProperty();
   var progress = segment
     .skip(1)
     .count()

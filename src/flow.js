@@ -19,6 +19,16 @@ function sequence(initial){
   var first = Bacon.once(initial).delay(0);
   return wrap(first, first);
 }
+
+function runSequence(steps, done){
+  var head = sequence(steps[0]());
+  var tail = steps.slice(1);
+
+  return tail.reduce(function(initial, next){
+    return initial.then(done, next);
+  }, head);
+}
+
 function transition(initial){
   function wrap(start, current){
     current.then = function(when, next){
@@ -37,6 +47,7 @@ function transition(initial){
 
 
 module.exports = {
-  sequence:   sequence,
-  transition: transition
+  sequence:    sequence,
+  runSequence: runSequence,
+  transition:  transition
 };
