@@ -1,13 +1,13 @@
 'use strict';
 
-var Bacon = require('baconjs');
+var flow  = require('../flow');
 require('../../lib/engine/core/util');
 
 
 //Controller
 function sequenceController(segments, start){
   function runSequence(seq){
-    var head = sequence(seq[0]());
+    var head = flow.sequence(seq[0]());
     var tail = seq.slice(1);
 
     return tail.reduce(function(initial, next){
@@ -33,22 +33,6 @@ function sequenceController(segments, start){
     progress: progress,
     end:      end
   };
-}
-function sequence(initial){
-  function wrap(first, last){
-    first.then = function(when, next){
-      var becomes = last
-        .take(1)
-        .flatMap(when)
-        .map(function(){ return next(); });
-
-      return wrap(first.merge(becomes), becomes);
-    };
-    return first;
-  }
-
-  var first = Bacon.once(initial).delay(0);
-  return wrap(first, first);
 }
 
 

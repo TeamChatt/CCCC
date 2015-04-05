@@ -1,10 +1,10 @@
 'use strict';
 
 var Bacon                  = require('baconjs');
+var flow                   = require('../flow');
 var dragTemplateController = require('./tasks/drag-template-controller');
 var cutoutController       = require('./tasks/cutout-controller');
 var cardRevealController   = require('./tasks/card-reveal-controller');
-
 
 //Controller
 function cardController(events, card_type, card){
@@ -15,7 +15,7 @@ function cardController(events, card_type, card){
   //Drag template, then cutout shape, rinse, repeat
   function dragTemplate(n){
     var initial = {type: 'dragTemplate', controller: dragTemplateController(events, card_type)};
-    return transition(initial)
+    return flow.transition(initial)
       .then('.controller.end', function(){ return cutout(n); });
   }
   function cutout(n){
@@ -24,13 +24,13 @@ function cardController(events, card_type, card){
       function(){ return cardReveal(); }        :
       function(){ return dragTemplate(n-1); };
 
-    return transition(initial)
+    return flow.transition(initial)
       .then('.controller.success', next)
       .then('.controller.failure', function(){ return cutout(n); });
   }
   function cardReveal(){
     var initial = {type: 'cardReveal', controller: cardRevealController(events, card.name)};
-    return transition(initial)
+    return flow.transition(initial)
       .then('.controller.end', function(){ return Bacon.never(); });
   }
 
@@ -38,21 +38,6 @@ function cardController(events, card_type, card){
     task: task,
     end:  task.endEvent()
   };
-}
-function transition(initial){
-  function wrap(start, current){
-    current.then = function(when, next){
-      var becomes = start
-        .flatMap(when)
-        .flatMap(next);
-
-      return wrap(start, current.merge(becomes));
-    };
-    return current;
-  }
-
-  var first = Bacon.once(initial).delay(0);
-  return wrap(first, first);
 }
 
 
