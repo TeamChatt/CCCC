@@ -1,6 +1,7 @@
 'use strict';
 
 var Bacon = require('baconjs');
+var flow  = require('../../flow');
 require('../../../lib/engine/core/util');
 
 var V2    = require('../../../lib/engine/core/vector').V2;
@@ -15,27 +16,11 @@ function lineController(events, target_line){
   events.dragEnd.onValue(function(){});
 
   var startPoint   = Bacon.constant(target_line.start);
-  var endPoint     = Bacon.constant(target_line.end);
-
-  var currentPoint = Bacon.fix(function(currentPoint){
-    var start = currentPoint
-      .sampledBy(events.dragStart)
-      .zip(events.dragStart, within(START_DISTANCE))
-      .filter(function(x){ return x; })
-      .map(currentPoint.toProperty());
-
-    return start
-      .flatMapLatest(function(){
-        return events.drag
-          .map(constrain(target_line))
-          .takeUntil(events.dragEnd);
-      })
-      .toProperty(target_line.start);
-  });
+  var currentPoint = dragPoint(events, target_line.start, target_line)
+    .toProperty(target_line.start);
 
   var lineEnd = currentPoint
-    .combine(endPoint, within(0))
-    .filter(function(x){ return x; })
+    .filter(within(0), target_line.end)
     .take(1);
 
   var line = currentPoint
@@ -44,12 +29,11 @@ function lineController(events, target_line){
     .takeUntil(lineEnd);
 
   return {
-    line:         line,
-    
     startPoint:   startPoint,
     currentPoint: currentPoint
       .takeUntil(lineEnd),
-    endPoint:     endPoint,
+      
+    line:         line,
     target:       Bacon.constant(target_line),
     
     isDragging:   Bacon.mergeAll(
@@ -59,9 +43,33 @@ function lineController(events, target_line){
       .toProperty(false)
       .takeUntil(lineEnd),
     
-    lineEnd:      lineEnd,
     end:          lineEnd
   };
+}
+function dragPoint(events, point, target_line){
+  //Transitions
+  var startDrag = function(point){
+    return events.dragStart
+      .filter(within(START_DISTANCE), point);
+  };
+  var stopDrag = function(){
+    return events.dragEnd;
+  };
+
+  //States
+  var awaitingDrag = function(point){
+    return flow.switcher(Bacon.once(point))
+      .then(startDrag, dragging);
+  };
+  var dragging = function(){
+    var drag = events.drag
+      .map(constrain(target_line));
+
+    return flow.switcher(drag)
+      .then(stopDrag, awaitingDrag);
+  };
+
+  return awaitingDrag(point);
 }
 function within(distance){
   return function(p1, p2){
