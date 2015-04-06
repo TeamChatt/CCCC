@@ -1,6 +1,7 @@
 'use strict';
 
 var Bacon = require('baconjs');
+var flow  = require('../../flow');
 require('../../../lib/engine/core/util');
 
 var V2    = require('../../../lib/engine/core/vector').V2;
@@ -17,23 +18,11 @@ function pathController(events, start_point){
   events.drag.onValue(function(){});
   events.dragEnd.onValue(function(){});
 
-  var point      = P2(start_point[0], start_point[1]);
-  var startPoint = Bacon.constant(point);
+  var point        = P2(start_point[0], start_point[1]);
+  var startPoint   = Bacon.constant(point);
+  var currentPoint = dragPoint(events, point)
+    .toProperty(point);
 
-  var currentPoint = Bacon.fix(function(currentPoint){
-    var start = currentPoint
-      .sampledBy(events.dragStart)
-      .zip(events.dragStart, within(START_DISTANCE))
-      .filter(function(x){ return x; })
-      .map(currentPoint.toProperty());
-
-    return start
-      .flatMapLatest(function(pt){
-        return smoothPath(pt, events.drag)
-          .takeUntil(events.dragEnd);
-      })
-      .toProperty(point);
-  });
 
   var isClose = currentPoint
     .combine(startPoint, within(CLOSE_DISTANCE))
@@ -70,9 +59,33 @@ function pathController(events, start_point){
     pathEnd:      pathEnd
   };
 }
+function dragPoint(events, point){
+  //Transitions
+  var startDrag = function(point){
+    return events.dragStart
+      .filter(within(START_DISTANCE), point);
+  };
+  var stopDrag = function(){
+    return events.dragEnd;
+  };
+
+  //States
+  var awaitingDrag = function(point){
+    return flow.switcher(Bacon.once(point))
+      .then(startDrag, dragging);
+  };
+  var dragging = function(point){
+    var drag = smoothPath(point, events.drag)
+      .toEventStream();
+    return flow.switcher(drag)
+      .then(stopDrag, awaitingDrag);
+  };
+
+  return awaitingDrag(point);
+}
 function within(distance){
   return function(p1, p2){
-    return V2.fromTo(p1, p2).magnitude() < distance;
+    return V2.fromTo(p1, p2).magnitude() <= distance;
   };
 }
 function smoothPath(start, target){
