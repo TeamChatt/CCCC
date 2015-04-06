@@ -12,17 +12,17 @@ var TEXT_SPEED = 1000/60; //Letters per second
 function dialogueController(events, env, lines){
   env.onValue(function(){});
 
-  //Show the next dialogue snippet after the current one has finished
   var snippet = env
     .take(1)
-    .flatMap(function(env){
-      var snippets = lines.map(function(line){
+    .map(function(env){
+      return lines.map(function(line){
         var personalized = personalizeDialogue(line, env);
         return function(){
           return snippetController(events, personalized);
         };
       });
-
+    })
+    .flatMap(function(snippets){
       return flow.runSequence(
         snippets,
         function(snippet){ return snippet.done; }
@@ -32,14 +32,13 @@ function dialogueController(events, env, lines){
 
   var end = snippet
     .skip(lines.length - 1).take(1)
-    .delay(0)
     .flatMapLatest('.done');
 
   return {
-    speaker:     snippet.delay(0).flatMapLatest('.speaker'),
-    expression:  snippet.delay(0).flatMapLatest('.expression'),
-    fullText:    snippet.delay(0).flatMapLatest('.fullText'),
-    partialText: snippet.delay(0).flatMapLatest('.partialText'),
+    speaker:     snippet.flatMapLatest('.speaker'),
+    expression:  snippet.flatMapLatest('.expression'),
+    fullText:    snippet.flatMapLatest('.fullText'),
+    partialText: snippet.flatMapLatest('.partialText'),
     end:         end
   };
 }
