@@ -45,9 +45,30 @@ function transition(initial){
   return wrap(first, first);
 }
 
+function switcher(initial){
+  function wrap(start, current){
+    current.then = function(when, next){
+      var change  = start
+        .delay(0)
+        .flatMapLatest(when)
+        .take(1);
+      var becomes = change
+        .flatMap(next);
+
+      becomes.onValue(function(){});
+
+      return wrap(start, current.takeUntil(change).concat(becomes));
+    };
+    return current;
+  }
+
+  return wrap(initial, initial);
+}
+
 
 module.exports = {
   sequence:    sequence,
   runSequence: runSequence,
+  switcher:    switcher,
   transition:  transition
 };

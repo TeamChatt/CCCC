@@ -1,6 +1,7 @@
 'use strict';
 
 var Bacon = require('baconjs');
+var flow  = require('../../flow');
 require('../../../lib/engine/core/util');
 
 var V2    = require('../../../lib/engine/core/vector').V2;
@@ -40,31 +41,17 @@ function dragTemplateController(events, template_type){
     break;
   }
 
-  var startPosition   = Bacon.constant(rect);
+  var currentPosition = dragTemplate(events, rect).toProperty(rect);
 
-  var currentPosition = Bacon.fix(function(currentPosition){
-    var start = currentPosition
-      .sampledBy(events.dragStart)
-      .zip(events.dragStart, withinRect)
-      .filter(function(x){ return x; })
-      .map(currentPosition.toProperty());
-
-    return start
-      .flatMapLatest(function(rect){
-        return dragRect(rect, events.drag)
-          .takeUntil(events.dragEnd);
-      })
-      .toProperty(rect);
-  });
-
-  var templatePlaced = events.dragEnd
-    .map(TARGET_RECT)
-    .zip(currentPosition.map(centerPoint).sampledBy(events.dragEnd), withinRect)
-    .filter(function(x){ return x; })
+  var templatePlaced = currentPosition
+    .sampledBy(events.dragEnd)
+    .map(function(rect){
+      return P2(rect.x + rect.w/2, rect.y + rect.h/2); //Center point
+    })
+    .filter(withinRect, TARGET_RECT)
     .take(1);
 
   return {
-    startPosition:   startPosition,
     currentPosition: currentPosition
       .takeUntil(templatePlaced),
     
@@ -80,8 +67,29 @@ function dragTemplateController(events, template_type){
     end:             templatePlaced
   };
 }
-function centerPoint(rect){
-  return P2(rect.x + rect.w/2, rect.y + rect.h/2);
+function dragTemplate(events, rect){
+  //Transitions
+  var startDrag = function(rect){
+    return events.dragStart
+      .filter(withinRect, rect)
+      .map(rect);
+  };
+  var stopDrag = function(rect){
+    return events.dragEnd
+      .map(rect);
+  };
+
+  //States
+  var awaitingDrag = function(rect){
+    return flow.switcher(Bacon.once(rect))
+      .then(startDrag, dragging);
+  };
+  var dragging = function(rect){
+    return flow.switcher(dragRect(rect, events.drag))
+      .then(stopDrag, awaitingDrag);
+  };
+
+  return awaitingDrag(rect);
 }
 function withinRect(rect, pt){
   var x_min = rect.x;
